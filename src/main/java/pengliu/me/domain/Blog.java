@@ -1,5 +1,7 @@
 package pengliu.me.domain;
 
+import pengliu.me.common.BlogStatus;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -17,7 +19,7 @@ public class Blog
     private String content;
     private Timestamp updateTime;
     private Timestamp createTime;
-    private String status;
+    private BlogStatus status;
     private Integer showCount;
     private User user;
     private Category category;
@@ -99,12 +101,13 @@ public class Blog
 
     @Basic
     @Column(name = "status", nullable = false)
-    public String getStatus()
+    @Enumerated(EnumType.STRING)
+    public BlogStatus getStatus()
     {
         return status;
     }
 
-    public void setStatus(String status)
+    public void setStatus(BlogStatus status)
     {
         this.status = status;
     }
