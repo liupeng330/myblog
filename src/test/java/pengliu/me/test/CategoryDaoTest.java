@@ -4,20 +4,27 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.unitils.UnitilsJUnit4;
+import org.unitils.core.Unitils;
+import org.unitils.dbunit.annotation.DataSet;
+import org.unitils.spring.annotation.SpringApplicationContext;
+import org.unitils.spring.annotation.SpringBean;
+import org.unitils.spring.annotation.SpringBeanByType;
 import pengliu.me.dao.CategoryDao;
 
 /**
  * Created by peng on 4/10/16.
  */
-public class CategoryDaoTest extends BaseDaoTest
+@SpringApplicationContext( {"applicationContext.xml" })
+public class CategoryDaoTest extends UnitilsJUnit4
 {
+    @SpringBeanByType
     private CategoryDao categoryDao;
 
     @Before
     public void init()
     {
-        this.categoryDao = new CategoryDao();
-        this.categoryDao.setSessionFactory(this.sessionFactory);
+        System.out.println("In init method");
     }
 
     @After
@@ -27,6 +34,7 @@ public class CategoryDaoTest extends BaseDaoTest
     }
 
     @Test
+    @DataSet("category.create.xls")
     public void testCreateCategory()
     {
         Assert.assertNotNull(this.categoryDao);
