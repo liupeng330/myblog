@@ -65,9 +65,9 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
     }
 
     //保存实体
-    public Serializable save(T entity)
+    public void persist(T entity)
     {
-        return getSessionFactory().getCurrentSession().save(entity);
+        getSessionFactory().getCurrentSession().persist(entity);
     }
 
     //更新实体

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  * Created by peng on 16-4-8.
  */
 @Entity
+@Table(name = "comment", schema = "myblog", catalog = "")
 public class Comment
 {
     private Integer id;

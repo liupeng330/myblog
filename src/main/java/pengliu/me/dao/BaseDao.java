@@ -9,7 +9,7 @@ public interface BaseDao<T>
     T get(Serializable id);
 
     //保存实体
-    Serializable save(T entity);
+    void persist(T entity);
 
     //更新实体
     void update(T entity);

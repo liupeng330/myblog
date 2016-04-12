@@ -9,6 +9,7 @@ import java.util.Set;
  * Created by peng on 16-4-8.
  */
 @Entity
+@Table(name = "category", schema = "myblog", catalog = "")
 public class Category
 {
     private Integer id;

@@ -4,7 +4,6 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="8d8bb9bc-da3d-413f-9984-2a8f1399cfe0" />
           <unit-entry name="sessionFactory" value="dataSource" />
         </datasource-map>
         <naming-strategy-map />
@@ -71,17 +70,17 @@
     <orderEntry type="library" scope="TEST" name="Maven: commons-lang:commons-lang:2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: commons-collections:commons-collections:3.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: ognl:ognl:2.6.9" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.unitils:unitils-dbunit:3.4.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.unitils:unitils-database:3.4.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.dbunit:dbunit:2.4.9" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: xmlunit:xmlunit:1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.unitils:unitils-test:3.4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: asm:asm:3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: asm:asm-attrs:2.2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: cglib:cglib:2.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.unitils:unitils-database:3.4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.unitils:unitils-dbmaintainer:3.4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.slf4j:slf4j-api:1.6.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.slf4j:slf4j-nop:1.6.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.dbunit:dbunit:2.4.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.unitils:unitils-dbunit:3.4.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: xmlunit:xmlunit:1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.unitils:unitils-easymock:3.4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymock:2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymockclassextension:2.3" level="project" />

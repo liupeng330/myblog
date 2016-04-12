@@ -18,7 +18,7 @@ public class CategoryDao extends BaseDaoHibernate4<Category>
         category.setName(name);
         category.setCreateTime(Common.getTimeStampNow());
         category.setUpdateTime(Common.getTimeStampNow());
-        this.save(category);
+        this.persist(category);
     }
 
     public void updateCategoryNameById(Integer id, String newName)

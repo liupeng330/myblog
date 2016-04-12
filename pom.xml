@@ -106,19 +106,25 @@
         <dependency>
             <groupId>org.unitils</groupId>
             <artifactId>unitils</artifactId>
-            <version>3.4.2</version>
+            <version>${org.unitils.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.unitils</groupId>
             <artifactId>unitils-core</artifactId>
-            <version>3.4.2</version>
+            <version>${org.unitils.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-dbunit</artifactId>
+            <version>${org.unitils.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.unitils</groupId>
             <artifactId>unitils-test</artifactId>
-            <version>3.4.2</version>
+            <version>${org.unitils.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

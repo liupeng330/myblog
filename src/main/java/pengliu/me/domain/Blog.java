@@ -11,6 +11,7 @@ import java.util.Set;
  * Created by peng on 16-4-8.
  */
 @Entity
+@Table(name = "blog", schema = "myblog", catalog = "")
 public class Blog
 {
     private Integer id;
