@@ -8,17 +8,23 @@
 </head>
 <body>
 <%@ include file="top.jsp" %>
-
-<table border="1px" width="100%"
-    <c:forEach var="category" items="${allCategories}">
+    <a href="/management/category/create.html">创建</a><br/>
+    <table border="1px" width="100%">
         <tr>
-            <td>${category.id}</td>
-            <td>${category.name}</td>
-            <td>${category.createTime}</td>
-            <td>${category.updateTime}</td>
+            <td>标示</td>
+            <td>分类名</td>
+            <td>创建时间</td>
+            <td>更改时间</td>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach var="category" items="${allCategories}">
+            <tr>
+                <td>${category.id}</td>
+                <td>${category.name}</td>
+                <td>${category.createTime}</td>
+                <td>${category.updateTime}</td>
+            </tr>
+        </c:forEach>
+    </table>
 
 <%@ include file="bottom.jsp" %>
 </body>

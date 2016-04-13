@@ -1,5 +1,7 @@
 package pengliu.me.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import java.util.List;
 @Controller
 public class CategoryController
 {
+    private Logger logger = Logger.getLogger(CategoryController.class);
+
     @Autowired
     private CategoryService categoryService;
 
@@ -27,5 +31,30 @@ public class CategoryController
         modelAndView.addObject("allCategories", categories);
         modelAndView.setViewName("/categoryManager");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/management/category/update", method = RequestMethod.POST)
+    public ModelAndView updateCategory(Integer id, String newName)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/management/category/create", method = RequestMethod.GET)
+    public String goToCreateCategoryPage(String name)
+    {
+        return "/categoryCreateAndUpdate";
+    }
+
+    @RequestMapping(value = "/management/category/create", method = RequestMethod.POST)
+    public String createCategory(String name)
+    {
+        this.logger.info("Start to create category " + name);
+        this.categoryService.createCategoryByName(name);
+
+        String target = "/management/category/listAll.html";
+        this.logger.info("Redirect to " + target);
+
+        return "redirect:" + target;
     }
 }
