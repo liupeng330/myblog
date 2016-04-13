@@ -13,7 +13,7 @@
     <div style="color:red">${errorMsg}</div>
 </c:if>
 
-<form:form method="POST" commandName="user" action="/management/user/login">
+<form:form method="POST" commandName="user" action="/management/user/login.html">
 <table border="1px">
         <tr>
             <td width="20%">用户名</td>
