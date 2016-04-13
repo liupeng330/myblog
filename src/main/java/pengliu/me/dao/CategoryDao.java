@@ -25,6 +25,7 @@ public class CategoryDao extends BaseDaoHibernate4<Category>
     {
         Category category = this.get(id);
         category.setName(newName);
+        category.setUpdateTime(Common.getTimeStampNow());
     }
 
     public void deleteCategoryById(Integer id)
