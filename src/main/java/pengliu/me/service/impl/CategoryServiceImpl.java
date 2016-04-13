@@ -37,6 +37,6 @@ public class CategoryServiceImpl implements CategoryService
 
     public List<Category> getAllCategories()
     {
-        return this.getAllCategories();
+        return this.categoryDao.getAllCategories();
     }
 }
