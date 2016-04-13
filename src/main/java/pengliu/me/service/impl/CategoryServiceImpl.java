@@ -25,14 +25,19 @@ public class CategoryServiceImpl implements CategoryService
         this.categoryDao.createCategoryByName(name);
     }
 
+    public Category findCategoryById(Integer id)
+    {
+        return this.categoryDao.get(id);
+    }
+
     public void updateCategoryNameById(Integer id, String newName)
     {
-        this.updateCategoryNameById(id, newName);
+        this.categoryDao.updateCategoryNameById(id, newName);
     }
 
     public void deleteCategoryById(Integer id)
     {
-        this.deleteCategoryById(id);
+        this.categoryDao.deleteCategoryById(id);
     }
 
     public List<Category> getAllCategories()

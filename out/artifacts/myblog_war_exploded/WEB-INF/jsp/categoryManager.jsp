@@ -11,10 +11,11 @@
     <a href="/management/category/create.html">创建</a><br/>
     <table border="1px" width="100%">
         <tr>
-            <td>标示</td>
+            <td>id</td>
             <td>分类名</td>
             <td>创建时间</td>
             <td>更改时间</td>
+            <td>操作列</td>
         </tr>
         <c:forEach var="category" items="${allCategories}">
             <tr>
@@ -22,6 +23,8 @@
                 <td>${category.name}</td>
                 <td>${category.createTime}</td>
                 <td>${category.updateTime}</td>
+                <td><a href="/management/category/delete/${category.id}.html">删除</a> &nbsp;
+                <a href="/management/category/update/${category.id}.html">更新</a></td>
             </tr>
         </c:forEach>
     </table>
