@@ -13,7 +13,7 @@
     <div style="color:red">${errorMsg}</div>
 </c:if>
 
-<form:form method="POST" commandName="user" action="customer/signup">
+<form:form method="POST" commandName="user" action="/management/user/login">
 <table border="1px">
         <tr>
             <td width="20%">用户名</td>
@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td width="20%">密码</td>
-            <td width="80%"><form:input path="password" /></td>
+            <td width="80%"><form:input path="password" type="password" /></td>
         </tr>
         <tr>
             <td colspan="2">
