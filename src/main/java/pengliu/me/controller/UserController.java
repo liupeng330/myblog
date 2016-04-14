@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.domain.User;
 import pengliu.me.service.UserService;
+import pengliu.me.utils.Common;
 
 import javax.servlet.http.HttpServletRequest;
 

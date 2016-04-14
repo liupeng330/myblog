@@ -27,6 +27,9 @@ public class Blog
     private Set<Tag> tags = new HashSet<Tag>();
     private Set<Comment> comments = new HashSet<Comment>();
 
+    private Integer categoryId;
+    private Integer[] tagIds;
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -206,5 +209,27 @@ public class Blog
     public void setComments(Set<Comment> comments)
     {
         this.comments = comments;
+    }
+
+    @Transient
+    public Integer getCategoryId()
+    {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId)
+    {
+        this.categoryId = categoryId;
+    }
+
+    @Transient
+    public Integer[] getTagIds()
+    {
+        return tagIds;
+    }
+
+    public void setTagIds(Integer[] tagIds)
+    {
+        this.tagIds = tagIds;
     }
 }
