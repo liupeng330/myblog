@@ -8,4 +8,5 @@ import pengliu.me.domain.User;
 public interface UserService
 {
     boolean canLogin(User user);
+    void updateLoginTime(String name);
 }
