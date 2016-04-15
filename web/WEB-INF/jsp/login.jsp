@@ -31,8 +31,5 @@
         </tr>
     </table>
 </form:form>
-
-<%@ include file="bottom.jsp" %>
-
 </body>
 </html>

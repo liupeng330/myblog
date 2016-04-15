@@ -37,7 +37,5 @@
         <br/>
     </c:forEach>
     </div>
-<p>Test Test Test</p>
-<%@ include file="bottom.jsp" %>
 </body>
 </html>

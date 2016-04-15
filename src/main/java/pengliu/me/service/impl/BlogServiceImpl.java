@@ -77,6 +77,7 @@ public class BlogServiceImpl implements BlogService
             blogVo.setShowCount(blog.getShowCount());
             blogVo.setUserName(blog.getUser().getName());
             blogVo.setCategoryName(blog.getCategory().getName());
+            blogVo.setStatus(blog.getStatus().toString());
 
             List<String> tagNams = new ArrayList<String>();
             for(Tag tag: blog.getTags())

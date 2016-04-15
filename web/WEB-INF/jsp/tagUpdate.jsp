@@ -28,7 +28,5 @@
     </table>
     <input type="hidden" name="id" value="${tag.id}"/>
 </form>
-
-<%@ include file="bottom.jsp" %>
 </body>
 </html>

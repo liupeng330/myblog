@@ -46,9 +46,5 @@
         <input type="reset" value="重置"><br/>
     </form>
 </div>
-
-<div id="bottom-panel">
-    <%@ include file="bottom.jsp" %>
-</div>
 </body>
 </html>

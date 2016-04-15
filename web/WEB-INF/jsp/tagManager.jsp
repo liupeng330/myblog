@@ -28,7 +28,5 @@
         </tr>
     </c:forEach>
 </table>
-
-<%@ include file="bottom.jsp" %>
 </body>
 </html>

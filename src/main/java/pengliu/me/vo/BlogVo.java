@@ -18,6 +18,7 @@ public class BlogVo
     private Integer showCount;
     private String userName;
     private String categoryName;
+    private String status;
     private Set<String> tagNames = new HashSet<String>();
 
     public Integer getId()
@@ -118,5 +119,15 @@ public class BlogVo
     public void setTagNames(Set<String> tagNames)
     {
         this.tagNames = tagNames;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
     }
 }

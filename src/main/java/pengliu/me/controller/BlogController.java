@@ -90,6 +90,8 @@ public class BlogController
         {
             this.logger.error("Admin user doesn't exist!!!");
             modelAndView.addObject("errorMsg", ex.getMessage());
+            modelAndView.addObject("allCategories", this.categoryService.getAllCategories());
+            modelAndView.addObject("allTags", this.tagService.getAllTags());
             modelAndView.setViewName("blogCreate");
             return modelAndView;
         }
