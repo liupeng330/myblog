@@ -1,6 +1,7 @@
 package pengliu.me.service;
 
 import pengliu.me.domain.User;
+import pengliu.me.exception.UserNotExistException;
 
 import java.sql.Timestamp;
 
@@ -10,5 +11,6 @@ import java.sql.Timestamp;
 public interface UserService
 {
     boolean canLogin(User user);
-    void updateLoginTime(String name);
+    void updateLoginTime(String name) throws UserNotExistException;
+    User getAdminUser() throws UserNotExistException;
 }

@@ -29,6 +29,7 @@ public class Blog
 
     private Integer categoryId;
     private Integer[] tagIds;
+    private String statusInString;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -162,7 +163,7 @@ public class Blog
         return result;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "blog_tag",
             joinColumns = {@JoinColumn(name = "blog_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", nullable = false, updatable = false)})
@@ -176,7 +177,7 @@ public class Blog
         this.tags = tags;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
     public User getUser()
     {
@@ -188,7 +189,7 @@ public class Blog
         this.user = user;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "category_id", nullable = false)
     public Category getCategory()
     {
@@ -231,5 +232,16 @@ public class Blog
     public void setTagIds(Integer[] tagIds)
     {
         this.tagIds = tagIds;
+    }
+
+    @Transient
+    public String getStatusInString()
+    {
+        return statusInString;
+    }
+
+    public void setStatusInString(String statusInString)
+    {
+        this.statusInString = statusInString;
     }
 }

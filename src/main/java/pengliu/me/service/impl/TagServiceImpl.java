@@ -7,6 +7,7 @@ import pengliu.me.dao.TagDao;
 import pengliu.me.domain.Tag;
 import pengliu.me.service.TagService;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,5 +44,10 @@ public class TagServiceImpl implements TagService
     public List<Tag> getAllTags()
     {
         return this.tagDao.getAllTags();
+    }
+
+    public List<Tag> findTagsByIds(Integer... id)
+    {
+        return this.tagDao.getList("id", Arrays.asList(id));
     }
 }

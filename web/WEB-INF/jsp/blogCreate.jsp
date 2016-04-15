@@ -11,9 +11,13 @@
     <%@ include file="top.jsp" %>
 </div>
 <br/>
+
 <div id="content-pane">
+    <c:if test="${!empty errorMsg}">
+        <div style="color:red">${errorMsg}</div>
+    </c:if>
     <form action="<c:url value="/blog/create.html"/>" method="post">
-        标题: &nbsp; <input  type="text" name="title"/><br/>
+        标题: &nbsp; <input  type="text" name="title" width="80%"/><br/>
 
         摘要: <br/>
         <textarea rows="4" cols="20" name="summary" style="width:80%;"></textarea><br/><br/>
@@ -21,14 +25,21 @@
         内容: <br/>
         <textarea rows="4" cols="20" name="content" style="width:80%;"></textarea><br/><br/>
 
+        分类：&nbsp;
         <c:forEach var="category" items="${allCategories}">
             <input type="radio" name="categoryId" value="${category.id}"/>${category.name} &nbsp;
         </c:forEach>
         <br/><br/>
 
+        标签：&nbsp;
         <c:forEach var="tag" items="${allTags}">
             <input type="checkbox" name="tagIds" value="${tag.id}"/>${tag.name} &nbsp;
         </c:forEach>
+        <br/><br/>
+
+        <input type="radio" name="statusInString" value="PUBLISHED"/>发布 &nbsp;
+        <input type="radio" name="statusInString" value="DRAFT"/>草稿 &nbsp;
+        <input type="radio" name="statusInString" value="DELETED"/>删除 &nbsp;
         <br/><br/>
 
         <input type="submit" value="保存">&nbsp;

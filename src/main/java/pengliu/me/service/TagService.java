@@ -11,6 +11,7 @@ public interface TagService
 {
     void createTagByName(String name);
     Tag findTagById(Integer id);
+    List<Tag> findTagsByIds(Integer... id);
     void updateTagNameById(Integer id, String newName);
     void deleteTagById(Integer id);
     List<Tag> getAllTags();

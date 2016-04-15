@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.domain.User;
+import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.UserService;
 import pengliu.me.utils.Common;
 
@@ -42,7 +43,17 @@ public class UserController
 
         if(this.userService.canLogin(user))
         {
-            this.userService.updateLoginTime(user.getName());
+            try
+            {
+                this.userService.updateLoginTime(user.getName());
+            }
+            catch (UserNotExistException ex)
+            {
+                this.logger.error("");
+                modelAndView.addObject("errorMsg", ex.getMessage());
+                modelAndView.setViewName("login");
+                return modelAndView;
+            }
 
             this.logger.info(String.format("将user'%s'加入到session中", user.getName()));
             request.getSession().setAttribute(CommonConstant.USER_CONTEXT, user);
