@@ -54,9 +54,18 @@ public class BlogServiceImpl implements BlogService
 
     public List<BlogVo> getAllPublishedBlogs()
     {
-        List<Blog> publishedBlogs =  this.blogDao.getAllPublishedBlogs();
+        return this.populateAllBlogsToVo(this.blogDao.getAllPublishedBlogs());
+    }
+
+    public List<BlogVo> getAllBlogs()
+    {
+        return this.populateAllBlogsToVo(this.blogDao.getAllBlogs());
+    }
+
+    private List<BlogVo> populateAllBlogsToVo(List<Blog> blogsFromDB)
+    {
         List<BlogVo> blogVos = new ArrayList<BlogVo>();
-        for(Blog blog: publishedBlogs)
+        for(Blog blog: blogsFromDB)
         {
             BlogVo blogVo = new BlogVo();
             blogVo.setId(blog.getId());
@@ -80,4 +89,11 @@ public class BlogServiceImpl implements BlogService
         }
         return blogVos;
     }
+
+
+    public void deleteBlogById(Integer id)
+    {
+        this.blogDao.deleteBlogById(id);
+    }
+
 }

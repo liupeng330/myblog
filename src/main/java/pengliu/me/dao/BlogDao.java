@@ -12,7 +12,12 @@ import java.util.List;
 @Repository
 public class BlogDao extends BaseDaoHibernate4<Blog>
 {
-    public List<Blog> getAllBlogsByStatus(BlogStatus status)
+    public List<Blog> getAllBlogs()
+    {
+        return this.findAll();
+    }
+
+    private List<Blog> getAllBlogsByStatus(BlogStatus status)
     {
         List<Blog> blogs = this.getList("status", status);
         return blogs;
@@ -21,5 +26,10 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
     public List<Blog> getAllPublishedBlogs()
     {
         return this.getAllBlogsByStatus(BlogStatus.PUBLISHED);
+    }
+
+    public void deleteBlogById(Integer id)
+    {
+        this.delete(this.get(id));
     }
 }

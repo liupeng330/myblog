@@ -163,7 +163,7 @@ public class Blog
         return result;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY)//, cascade = CascadeType.REMOVE)
     @JoinTable(name = "blog_tag",
             joinColumns = {@JoinColumn(name = "blog_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", nullable = false, updatable = false)})
@@ -177,7 +177,7 @@ public class Blog
         this.tags = tags;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)//, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
     public User getUser()
     {
@@ -189,7 +189,7 @@ public class Blog
         this.user = user;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)//, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "category_id", nullable = false)
     public Category getCategory()
     {

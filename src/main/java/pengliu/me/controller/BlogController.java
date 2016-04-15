@@ -5,6 +5,7 @@ import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,6 +95,24 @@ public class BlogController
         }
 
         modelAndView.setViewName("redirect:/blog.html");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteBlog(@PathVariable Integer id)
+    {
+        this.logger.info("Start to delete blog for id: " + id);
+        this.blogService.deleteBlogById(id);
+        return "redirect:/blog/listAll.html";
+    }
+
+    @RequestMapping(value = "listAll", method = RequestMethod.GET)
+    public ModelAndView listAllBlogs()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("allBlogs", this.blogService.getAllBlogs());
+        modelAndView.setViewName("blogManager");
+
         return modelAndView;
     }
 }

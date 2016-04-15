@@ -15,4 +15,6 @@ public interface BlogService
 {
     void createBlog(Blog blog, Category category, List<Tag> tags) throws UserNotExistException;
     List<BlogVo> getAllPublishedBlogs();
+    List<BlogVo> getAllBlogs();
+    void deleteBlogById(Integer id);
 }

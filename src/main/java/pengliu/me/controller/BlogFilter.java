@@ -16,7 +16,7 @@ public class BlogFilter implements Filter
     private static final String FILTERED_REQUEST = "@@session_context_filtered_request";
 
     // ① 需要登录才可访问的URI资源
-    private static final String[] NEED_TO_LOGIN_URI = { "/management/category", "/management/tag" };
+    private static final String[] NEED_TO_LOGIN_URI = { "/management/category", "/management/tag", "/blog/listAll", "/blog/create", "/blog/delete" };
 
     public void init(FilterConfig filterConfig) throws ServletException
     {
