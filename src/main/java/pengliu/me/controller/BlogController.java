@@ -2,11 +2,14 @@ package pengliu.me.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
 import pengliu.me.exception.BlogNotExistException;
@@ -19,6 +22,8 @@ import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,9 +43,6 @@ public class BlogController
 
     @Autowired
     private TagService tagService;
-
-    @Autowired
-    private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showMainPage()
@@ -65,15 +67,27 @@ public class BlogController
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView createBlog(BlogVo blogVo)
+    public ModelAndView createBlog(
+            @RequestParam("title") String title,
+            @RequestParam("summary") String summary,
+            @RequestParam("content") String content,
+            @RequestParam("categoryVo") Integer categoryId,
+            @RequestParam("tagVos") Integer[] tagIds,
+            @RequestParam("status") String status)
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        this.logger.info("Get category by blogVo's category id");
-        Category category = this.categoryService.findCategoryPoById(blogVo.getCategoryId());
+        this.logger.info("Get category by category id");
+        Category category = this.categoryService.findCategoryPoById(categoryId);
 
-        this.logger.info("Get tags by blogVo's tag ids");
-        List<Tag> tags = this.tagService.findTagsPoByIds(blogVo.getTagIds());
+        this.logger.info("Get tags by tag ids");
+        List<Tag> tags = this.tagService.findTagsPoByIds(tagIds);
+
+        BlogVo blogVo = new BlogVo();
+        blogVo.setTitle(title);
+        blogVo.setSummary(summary);
+        blogVo.setContent(content);
+        blogVo.setStatus(status);
 
         try
         {

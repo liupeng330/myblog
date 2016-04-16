@@ -28,15 +28,13 @@ public class Transfer
         blogVo.setCreateTime(blog.getCreateTime());
         blogVo.setShowCount(blog.getShowCount());
         blogVo.setUserName(blog.getUser().getName());
-        blogVo.setCategoryName(blog.getCategory().getName());
         blogVo.setStatus(blog.getStatus().toString());
-
-        List<String> tagNams = new ArrayList<String>();
-        for(Tag tag: blog.getTags())
-        {
-            tagNams.add(tag.getName());
-        }
-        blogVo.setTagNames(new HashSet<String>(tagNams));
+        blogVo.setCategoryVo(
+                Transfer.transferCategoryPoToVo(blog.getCategory()));
+        blogVo.setTagVos(
+                new HashSet<TagVo>(
+                    Transfer.transferTagListPoToVo(
+                            new ArrayList<Tag>(blog.getTags()))));
 
         return blogVo;
     }
@@ -57,6 +55,17 @@ public class Transfer
         }
 
         return blog;
+    }
+
+    public static CategoryVo transferCategoryPoToVo(Category category)
+    {
+        CategoryVo vo = new CategoryVo();
+        vo.setId(category.getId());
+        vo.setName(category.getName());
+        vo.setCreateTime(category.getCreateTime());
+        vo.setUpdateTime(category.getUpdateTime());
+
+        return vo;
     }
 
     public static List<TagVo> transferTagListPoToVo(List<Tag> tags)

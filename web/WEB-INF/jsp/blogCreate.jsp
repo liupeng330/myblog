@@ -27,13 +27,13 @@
 
         分类：&nbsp;
         <c:forEach var="category" items="${allCategories}">
-            <input type="radio" name="categoryId" value="${category.id}"/>${category.name} &nbsp;
+            <input type="radio" name="categoryVo" value="${category.id}"/>${category.name} &nbsp;
         </c:forEach>
         <br/><br/>
 
         标签：&nbsp;
         <c:forEach var="tag" items="${allTags}">
-            <input type="checkbox" name="tagIds" value="${tag.id}"/>${tag.name} &nbsp;
+            <input type="checkbox" name="tagVos" value="${tag.id}"/>${tag.name} &nbsp;
         </c:forEach>
         <br/><br/>
 

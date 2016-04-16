@@ -23,12 +23,12 @@
             </div>
             <ul class="postmetadata">
                 <li class="icon_cat">
-                    <strong>Categories: </strong>${blog.categoryName}
+                    <strong>Categories: </strong>${blog.categoryVo.name}
                 </li>
                 <li class="icon_bullet">
                     <strong>Tags: </strong>
-                    <c:forEach var="tag" items="${blog.tagNames}">
-                        ${tag}&nbsp;
+                    <c:forEach var="tag" items="${blog.tagVos}">
+                        ${tag.name}&nbsp;
                     </c:forEach>
                 </li>
             </ul>

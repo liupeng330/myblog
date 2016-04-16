@@ -17,14 +17,9 @@ public class BlogVo
     private Timestamp createTime;
     private Integer showCount;
     private String userName;
-
-    private String categoryName;
-    private Integer categoryId;
-
     private String status;
-
-    private Set<String> tagNames = new HashSet<String>();
-    private Integer[] tagIds;
+    private CategoryVo categoryVo;
+    private Set<TagVo> tagVos = new HashSet<TagVo>();
 
     public Integer getId()
     {
@@ -106,26 +101,6 @@ public class BlogVo
         this.userName = userName;
     }
 
-    public String getCategoryName()
-    {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName)
-    {
-        this.categoryName = categoryName;
-    }
-
-    public Set<String> getTagNames()
-    {
-        return tagNames;
-    }
-
-    public void setTagNames(Set<String> tagNames)
-    {
-        this.tagNames = tagNames;
-    }
-
     public String getStatus()
     {
         return status;
@@ -136,19 +111,19 @@ public class BlogVo
         this.status = status;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public CategoryVo getCategoryVo() {
+        return categoryVo;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryVo(CategoryVo categoryVo) {
+        this.categoryVo = categoryVo;
     }
 
-    public Integer[] getTagIds() {
-        return tagIds;
+    public Set<TagVo> getTagVos() {
+        return tagVos;
     }
 
-    public void setTagIds(Integer[] tagIds) {
-        this.tagIds = tagIds;
+    public void setTagVos(Set<TagVo> tagVos) {
+        this.tagVos = tagVos;
     }
 }
