@@ -11,6 +11,7 @@ import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
 import pengliu.me.service.impl.CategoryServiceImpl;
 import pengliu.me.utils.Common;
+import pengliu.me.vo.CategoryVo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,17 +36,17 @@ public class MockitoSampleTest
     @Test
     public void testMockInterface()
     {
-        Category category = new Category();
+        CategoryVo category = new CategoryVo();
         category.setName("my new category");
         category.setCreateTime(Common.getTimeStampNow());
         category.setUpdateTime(Common.getTimeStampNow());
-        List<Category> mockResult = new ArrayList<Category>();
+        List<CategoryVo> mockResult = new ArrayList<CategoryVo>();
         mockResult.add(category);
 
         //模拟getAllCategories接口，使其返回上面构造的category对象
         when(this.mockCategoryService.getAllCategories()).thenReturn(mockResult);
 
-        List<Category> myMockResult = this.mockCategoryService.getAllCategories();
+        List<CategoryVo> myMockResult = this.mockCategoryService.getAllCategories();
         assertEquals(1, mockResult.size());
         assertEquals(category, mockResult.get(0));
 

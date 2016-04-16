@@ -20,13 +20,13 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 20px;
+            height: 22px;
             border: 1px solid #73AD21;
         }
         div.content
         {
             position: absolute;
-            top: 20px;
+            top: 22px;
             left: 0;
             width: 100%;
             border: 1px solid #73AD21;

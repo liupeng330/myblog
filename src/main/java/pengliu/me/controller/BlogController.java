@@ -1,31 +1,25 @@
 package pengliu.me.controller;
 
-import com.sun.org.apache.bcel.internal.generic.MONITORENTER;
-import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pengliu.me.common.BlogStatus;
-import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
-import pengliu.me.domain.User;
+import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.BlogService;
 import pengliu.me.service.CategoryService;
 import pengliu.me.service.TagService;
 import pengliu.me.service.UserService;
-import pengliu.me.utils.Common;
 import pengliu.me.vo.BlogVo;
+import pengliu.me.vo.CategoryVo;
+import pengliu.me.vo.TagVo;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by peng on 16-4-14.
@@ -60,7 +54,7 @@ public class BlogController
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ModelAndView goToBlogManagePage()
+    public ModelAndView goToCreateBlogPage()
     {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("allCategories", this.categoryService.getAllCategories());
@@ -71,20 +65,20 @@ public class BlogController
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView createBlog(Blog blog)
+    public ModelAndView createBlog(BlogVo blogVo)
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        this.logger.info("Get category by blog's category id");
-        Category category = this.categoryService.findCategoryById(blog.getCategoryId());
+        this.logger.info("Get category by blogVo's category id");
+        Category category = this.categoryService.findCategoryPoById(blogVo.getCategoryId());
 
-        this.logger.info("Get tags by blog's tag ids");
-        List<Tag> tags = this.tagService.findTagsByIds(blog.getTagIds());
+        this.logger.info("Get tags by blogVo's tag ids");
+        List<Tag> tags = this.tagService.findTagsPoByIds(blogVo.getTagIds());
 
         try
         {
-            this.logger.info("Create blog");
-            this.blogService.createBlog(blog, category, tags);
+            this.logger.info("Create blogVo");
+            this.blogService.createBlog(blogVo, category, tags);
         }
         catch (UserNotExistException ex)
         {
@@ -103,7 +97,7 @@ public class BlogController
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBlog(@PathVariable Integer id)
     {
-        this.logger.info("Start to delete blog for id: " + id);
+        this.logger.info("Start to delete blogVo for id: " + id);
         this.blogService.deleteBlogById(id);
         return "redirect:/blog/listAll.html";
     }
@@ -115,6 +109,25 @@ public class BlogController
         modelAndView.addObject("allBlogs", this.blogService.getAllBlogs());
         modelAndView.setViewName("blogManager");
 
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "update", method = RequestMethod.GET)
+    public ModelAndView goToUpdateBlogPage(Integer id)
+    {
+        ModelAndView modelAndView = this.goToCreateBlogPage();
+        modelAndView.setViewName("blogUpdate");
+
+        BlogVo blogVo = null;
+        try
+        {
+            blogVo = this.blogService.getBlogById(id);
+        }
+        catch (BlogNotExistException ex)
+        {
+
+        }
+        modelAndView.addObject("blog", blogVo);
         return modelAndView;
     }
 }

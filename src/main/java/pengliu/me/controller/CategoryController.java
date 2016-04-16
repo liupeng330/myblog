@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
+import pengliu.me.vo.CategoryVo;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
@@ -31,7 +32,7 @@ public class CategoryController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<Category> categories = this.categoryService.getAllCategories();
+        List<CategoryVo> categories = this.categoryService.getAllCategories();
         modelAndView.addObject("allCategories", categories);
         modelAndView.setViewName("/categoryManager");
 
@@ -43,7 +44,7 @@ public class CategoryController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        Category category = this.categoryService.findCategoryById(id);
+        CategoryVo category = this.categoryService.findCategoryById(id);
         modelAndView.addObject("category", category);
         modelAndView.setViewName("/categoryUpdate");
 

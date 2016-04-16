@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.domain.Tag;
 import pengliu.me.service.TagService;
+import pengliu.me.vo.TagVo;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class TagController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<Tag> categories = this.tagService.getAllTags();
+        List<TagVo> categories = this.tagService.getAllTags();
         modelAndView.addObject("allTags", categories);
         modelAndView.setViewName("/tagManager");
 
@@ -41,7 +42,7 @@ public class TagController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        Tag tag = this.tagService.findTagById(id);
+        TagVo tag = this.tagService.findTagById(id);
         modelAndView.addObject("tag", tag);
         modelAndView.setViewName("/tagUpdate");
 

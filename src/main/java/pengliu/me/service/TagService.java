@@ -1,6 +1,7 @@
 package pengliu.me.service;
 
 import pengliu.me.domain.Tag;
+import pengliu.me.vo.TagVo;
 
 import java.util.List;
 
@@ -10,9 +11,10 @@ import java.util.List;
 public interface TagService
 {
     void createTagByName(String name);
-    Tag findTagById(Integer id);
-    List<Tag> findTagsByIds(Integer... id);
+    TagVo findTagById(Integer id);
+    List<TagVo> findTagsByIds(Integer... id);
     void updateTagNameById(Integer id, String newName);
     void deleteTagById(Integer id);
-    List<Tag> getAllTags();
+    List<TagVo> getAllTags();
+    List<Tag> findTagsPoByIds(Integer... id);
 }

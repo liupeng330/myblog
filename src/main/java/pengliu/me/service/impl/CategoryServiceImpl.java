@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import pengliu.me.dao.CategoryDao;
 import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
+import pengliu.me.utils.Transfer;
+import pengliu.me.vo.CategoryVo;
 
 import java.util.List;
 
@@ -25,7 +27,20 @@ public class CategoryServiceImpl implements CategoryService
         this.categoryDao.createCategoryByName(name);
     }
 
-    public Category findCategoryById(Integer id)
+    public CategoryVo findCategoryById(Integer id)
+    {
+        Category category = this.findCategoryPoById(id);
+
+        CategoryVo vo = new CategoryVo();
+        vo.setId(category.getId());
+        vo.setName(category.getName());
+        vo.setCreateTime(category.getCreateTime());
+        vo.setUpdateTime(category.getUpdateTime());
+
+        return vo;
+    }
+
+    public Category findCategoryPoById(Integer id)
     {
         return this.categoryDao.get(id);
     }
@@ -40,8 +55,8 @@ public class CategoryServiceImpl implements CategoryService
         this.categoryDao.deleteCategoryById(id);
     }
 
-    public List<Category> getAllCategories()
+    public List<CategoryVo> getAllCategories()
     {
-        return this.categoryDao.getAllCategories();
+        return Transfer.transferCategoryListPoToVo(this.categoryDao.getAllCategories());
     }
 }

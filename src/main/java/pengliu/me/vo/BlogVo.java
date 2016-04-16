@@ -17,9 +17,14 @@ public class BlogVo
     private Timestamp createTime;
     private Integer showCount;
     private String userName;
+
     private String categoryName;
+    private Integer categoryId;
+
     private String status;
+
     private Set<String> tagNames = new HashSet<String>();
+    private Integer[] tagIds;
 
     public Integer getId()
     {
@@ -129,5 +134,21 @@ public class BlogVo
     public void setStatus(String status)
     {
         this.status = status;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Integer[] getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(Integer[] tagIds) {
+        this.tagIds = tagIds;
     }
 }

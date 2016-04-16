@@ -16,14 +16,14 @@
     <c:if test="${!empty errorMsg}">
         <div style="color:red">${errorMsg}</div>
     </c:if>
-    <form action="<c:url value="/blog/create.html"/>" method="post">
-        标题: &nbsp; <input  type="text" name="title" style="width:500px"/><br/>
+    <form action="<c:url value="/blog/update.html"/>" method="post">
+        标题: &nbsp; <input  type="text" name="title" value="${blog.title}" style="width:500px"/><br/>
 
         摘要: <br/>
-        <textarea rows="4" cols="20" name="summary" style="width:80%;"></textarea><br/><br/>
+        <textarea rows="4" cols="20" name="summary" value="${blog.summary}" style="width:80%;"></textarea><br/><br/>
 
         内容: <br/>
-        <textarea rows="4" cols="20" name="content" style="width:80%;"></textarea><br/><br/>
+        <textarea rows="4" cols="20" name="content" value="${blog.content}" style="width:80%;"></textarea><br/><br/>
 
         分类：&nbsp;
         <c:forEach var="category" items="${allCategories}">
@@ -37,9 +37,9 @@
         </c:forEach>
         <br/><br/>
 
-        <input type="radio" name="status" value="PUBLISHED"/>发布 &nbsp;
-        <input type="radio" name="status" value="DRAFT"/>草稿 &nbsp;
-        <input type="radio" name="status" value="DELETED"/>删除 &nbsp;
+        <input type="radio" name="statusInString" value="PUBLISHED"/>发布 &nbsp;
+        <input type="radio" name="statusInString" value="DRAFT"/>草稿 &nbsp;
+        <input type="radio" name="statusInString" value="DELETED"/>删除 &nbsp;
         <br/><br/>
 
         <input type="submit" value="保存">&nbsp;

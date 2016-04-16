@@ -3,17 +3,20 @@ package pengliu.me.service.impl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pengliu.me.common.BlogStatus;
 import pengliu.me.dao.BlogDao;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
 import pengliu.me.domain.User;
+import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.BlogService;
 import pengliu.me.service.UserService;
 import pengliu.me.utils.Common;
+import pengliu.me.utils.Transfer;
 import pengliu.me.vo.BlogVo;
+import pengliu.me.vo.CategoryVo;
+import pengliu.me.vo.TagVo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,21 +36,17 @@ public class BlogServiceImpl implements BlogService
     @Autowired
     private BlogDao blogDao;
 
-    public void createBlog(Blog blog, Category category, List<Tag> tags) throws UserNotExistException
+    public void createBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException
     {
         this.logger.info("Get admin user");
         User user = this.userService.getAdminUser();
+        Blog blog = Transfer.transferBlogVoToPo(blogVo);
         blog.setCategory(category);
         blog.setTags(new HashSet<Tag>(tags));
         blog.setCreateTime(Common.getTimeStampNow());
         blog.setUpdateTime(Common.getTimeStampNow());
         blog.setShowCount(0);
         blog.setUser(user);
-        blog.setStatus(BlogStatus.CREATED);
-        if(blog.getStatusInString() != null)
-        {
-            blog.setStatus(BlogStatus.valueOf(blog.getStatusInString()));
-        }
 
         this.blogDao.persist(blog);
     }
@@ -55,6 +54,17 @@ public class BlogServiceImpl implements BlogService
     public List<BlogVo> getAllPublishedBlogs()
     {
         return this.populateAllBlogsToVo(this.blogDao.getAllPublishedBlogs());
+    }
+
+    public BlogVo getBlogById(Integer id) throws BlogNotExistException
+    {
+        Blog blog = this.blogDao.get(id);
+        if(blog == null)
+        {
+            throw new BlogNotExistException("Blog for id " + id + " doesn't exist!!!");
+        }
+
+        return Transfer.transferBlogPoToVo(blog);
     }
 
     public List<BlogVo> getAllBlogs()
@@ -67,30 +77,10 @@ public class BlogServiceImpl implements BlogService
         List<BlogVo> blogVos = new ArrayList<BlogVo>();
         for(Blog blog: blogsFromDB)
         {
-            BlogVo blogVo = new BlogVo();
-            blogVo.setId(blog.getId());
-            blogVo.setTitle(blog.getTitle());
-            blogVo.setSummary(blog.getSummary());
-            blogVo.setContent(blog.getContent());
-            blogVo.setUpdateTime(blog.getUpdateTime());
-            blogVo.setCreateTime(blog.getCreateTime());
-            blogVo.setShowCount(blog.getShowCount());
-            blogVo.setUserName(blog.getUser().getName());
-            blogVo.setCategoryName(blog.getCategory().getName());
-            blogVo.setStatus(blog.getStatus().toString());
-
-            List<String> tagNams = new ArrayList<String>();
-            for(Tag tag: blog.getTags())
-            {
-                tagNams.add(tag.getName());
-            }
-
-            blogVo.setTagNames(new HashSet<String>(tagNams));
-            blogVos.add(blogVo);
+            blogVos.add(Transfer.transferBlogPoToVo(blog));
         }
         return blogVos;
     }
-
 
     public void deleteBlogById(Integer id)
     {

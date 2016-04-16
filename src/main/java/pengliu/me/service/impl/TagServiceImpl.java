@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import pengliu.me.dao.TagDao;
 import pengliu.me.domain.Tag;
 import pengliu.me.service.TagService;
+import pengliu.me.utils.Transfer;
+import pengliu.me.vo.TagVo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,9 +28,17 @@ public class TagServiceImpl implements TagService
         this.tagDao.createTagByName(name);
     }
 
-    public Tag findTagById(Integer id)
+    public TagVo findTagById(Integer id)
     {
-        return this.tagDao.get(id);
+        Tag tag =  this.tagDao.get(id);
+
+        TagVo vo = new TagVo();
+        vo.setId(tag.getId());
+        vo.setName(tag.getName());
+        vo.setCreateTime(tag.getCreateTime());
+        vo.setUpdateTime(tag.getUpdateTime());
+
+        return vo;
     }
 
     public void updateTagNameById(Integer id, String newName)
@@ -41,12 +51,17 @@ public class TagServiceImpl implements TagService
         this.tagDao.deleteTagById(id);
     }
 
-    public List<Tag> getAllTags()
+    public List<TagVo> getAllTags()
     {
-        return this.tagDao.getAllTags();
+        return Transfer.transferTagListPoToVo(this.tagDao.getAllTags());
     }
 
-    public List<Tag> findTagsByIds(Integer... id)
+    public List<TagVo> findTagsByIds(Integer... id)
+    {
+        return Transfer.transferTagListPoToVo(this.findTagsPoByIds());
+    }
+
+    public List<Tag> findTagsPoByIds(Integer... id)
     {
         return this.tagDao.getList("id", Arrays.asList(id));
     }

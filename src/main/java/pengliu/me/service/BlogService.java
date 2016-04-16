@@ -3,8 +3,11 @@ package pengliu.me.service;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
+import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.vo.BlogVo;
+import pengliu.me.vo.CategoryVo;
+import pengliu.me.vo.TagVo;
 
 import java.util.List;
 
@@ -13,7 +16,8 @@ import java.util.List;
  */
 public interface BlogService
 {
-    void createBlog(Blog blog, Category category, List<Tag> tags) throws UserNotExistException;
+    void createBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
+    BlogVo getBlogById(Integer id) throws BlogNotExistException;
     List<BlogVo> getAllPublishedBlogs();
     List<BlogVo> getAllBlogs();
     void deleteBlogById(Integer id);
