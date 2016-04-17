@@ -20,26 +20,26 @@
         标题: &nbsp; <input  type="text" name="title" value="${blog.title}" style="width:500px"/><br/>
 
         摘要: <br/>
-        <textarea rows="4" cols="20" name="summary" value="${blog.summary}" style="width:80%;"></textarea><br/><br/>
+        <textarea rows="4" cols="20" name="summary" style="width:80%;">${blog.summary}</textarea><br/><br/>
 
         内容: <br/>
-        <textarea rows="4" cols="20" name="content" value="${blog.content}" style="width:80%;"></textarea><br/><br/>
+        <textarea rows="4" cols="20" name="content" style="width:80%;">${blog.content}</textarea><br/><br/>
 
         分类：&nbsp;
         <c:forEach var="category" items="${allCategories}">
-            <input type="radio" name="categoryId" value="${category.id}"/>${category.name} &nbsp;
+          <input type="radio" name="categoryId" value="${category.id}" <c:if test='${category.checked}'>checked</c:if> /> ${category.name} &nbsp;
         </c:forEach>
         <br/><br/>
 
         标签：&nbsp;
         <c:forEach var="tag" items="${allTags}">
-            <input type="checkbox" name="tagIds" value="${tag.id}"/>${tag.name} &nbsp;
+            <input type="checkbox" name="tagIds" value="${tag.id}" <c:if test='${tag.checked}'>checked</c:if> />${tag.name} &nbsp;
         </c:forEach>
         <br/><br/>
 
-        <input type="radio" name="statusInString" value="PUBLISHED"/>发布 &nbsp;
-        <input type="radio" name="statusInString" value="DRAFT"/>草稿 &nbsp;
-        <input type="radio" name="statusInString" value="DELETED"/>删除 &nbsp;
+        状态: &nbsp;
+        <input type="radio" name="status" value="PUBLISHED" <c:if test='${blog.status == "PUBLISHED"}'>checked</c:if> />发布 &nbsp;
+        <input type="radio" name="status" value="DRAFT" <c:if test='${blog.status == "DRAFT"}'>checked</c:if> />草稿 &nbsp;
         <br/><br/>
 
         <input type="submit" value="保存">&nbsp;

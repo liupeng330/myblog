@@ -25,6 +25,7 @@ import pengliu.me.vo.TagVo;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by peng on 16-4-14.
@@ -126,11 +127,16 @@ public class BlogController
         return modelAndView;
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.GET)
-    public ModelAndView goToUpdateBlogPage(Integer id)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public ModelAndView goToUpdateBlogPage(@PathVariable Integer id)
     {
-        ModelAndView modelAndView = this.goToCreateBlogPage();
-        modelAndView.setViewName("blogUpdate");
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<CategoryVo> categoryVos = this.categoryService.getAllCategories();
+        modelAndView.addObject("allCategories", categoryVos);
+
+        List<TagVo> tagVos = this.tagService.getAllTags();
+        modelAndView.addObject("allTags", tagVos);
 
         BlogVo blogVo = null;
         try
@@ -142,6 +148,26 @@ public class BlogController
 
         }
         modelAndView.addObject("blog", blogVo);
+
+        CategoryVo checkedCategoryVo = blogVo.getCategoryVo();
+        for(CategoryVo categoryVo: categoryVos)
+        {
+            if(categoryVo.equals(checkedCategoryVo))
+            {
+                categoryVo.setChecked(true);
+            }
+        }
+
+        Set<TagVo> checkedTagVos = blogVo.getTagVos();
+        for(TagVo tagVo: tagVos)
+        {
+            if(checkedTagVos.contains(tagVo))
+            {
+                tagVo.setChecked(true);
+            }
+        }
+
+        modelAndView.setViewName("blogUpdate");
         return modelAndView;
     }
 }

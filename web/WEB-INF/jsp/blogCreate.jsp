@@ -39,7 +39,6 @@
 
         <input type="radio" name="status" value="PUBLISHED"/>发布 &nbsp;
         <input type="radio" name="status" value="DRAFT"/>草稿 &nbsp;
-        <input type="radio" name="status" value="DELETED"/>删除 &nbsp;
         <br/><br/>
 
         <input type="submit" value="保存">&nbsp;

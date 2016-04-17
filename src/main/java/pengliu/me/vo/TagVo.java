@@ -13,6 +13,29 @@ public class TagVo
     private Timestamp updateTime;
     private boolean isChecked;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TagVo tagVo = (TagVo) o;
+
+        if (id != null ? !id.equals(tagVo.id) : tagVo.id != null) return false;
+        if (name != null ? !name.equals(tagVo.name) : tagVo.name != null) return false;
+        if (createTime != null ? !createTime.equals(tagVo.createTime) : tagVo.createTime != null) return false;
+        return updateTime != null ? updateTime.equals(tagVo.updateTime) : tagVo.updateTime == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
+        result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
+        return result;
+    }
+
     public Integer getId() {
         return id;
     }
