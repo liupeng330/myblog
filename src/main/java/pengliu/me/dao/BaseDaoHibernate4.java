@@ -59,6 +59,16 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
         return this.find("from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=?", columnValue);
     }
 
+    public List<T> getOrderedList(String columnName, Serializable columnValue, String orderByColumnName, boolean desc)
+    {
+        String hql = "from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=? order by en." + orderByColumnName;
+        if(desc)
+        {
+            hql += " desc";
+        }
+        return this.find(hql, columnValue);
+    }
+
     public <U> List<T> getList(String columnName, List<U> columnValues)
     {
         return this.findByList("from " + entityClass.getSimpleName() + " en where en." + columnName + " in (:lst)", "lst", columnValues);

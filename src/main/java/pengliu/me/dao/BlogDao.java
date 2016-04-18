@@ -19,7 +19,7 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
 
     private List<Blog> getAllBlogsByStatus(BlogStatus status)
     {
-        List<Blog> blogs = this.getList("status", status);
+        List<Blog> blogs = this.getOrderedList("status", status, "createTime", true);
         return blogs;
     }
 
