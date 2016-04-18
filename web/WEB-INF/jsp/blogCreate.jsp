@@ -37,6 +37,7 @@
         </c:forEach>
         <br/><br/>
 
+        状态: &nbsp;
         <input type="radio" name="status" value="PUBLISHED"/>发布 &nbsp;
         <input type="radio" name="status" value="DRAFT"/>草稿 &nbsp;
         <br/><br/>

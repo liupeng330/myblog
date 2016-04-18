@@ -40,6 +40,9 @@
     </div>
 
     <div class="content">
+        <c:if test="${!empty errorMsg}">
+            <div style="color:red">${errorMsg}</div>
+        </c:if>
         <a href="/blog/create.html">创建博客</a> &nbsp;
         <a href="/management/category/listAll.html">分类管理</a> &nbsp;
         <a href="/management/tag/listAll.html">标签管理</a> &nbsp;

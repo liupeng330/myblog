@@ -27,13 +27,13 @@
 
         分类：&nbsp;
         <c:forEach var="category" items="${allCategories}">
-          <input type="radio" name="categoryId" value="${category.id}" <c:if test='${category.checked}'>checked</c:if> /> ${category.name} &nbsp;
+          <input type="radio" name="categoryVo" value="${category.id}" <c:if test='${category.checked}'>checked</c:if> /> ${category.name} &nbsp;
         </c:forEach>
         <br/><br/>
 
         标签：&nbsp;
         <c:forEach var="tag" items="${allTags}">
-            <input type="checkbox" name="tagIds" value="${tag.id}" <c:if test='${tag.checked}'>checked</c:if> />${tag.name} &nbsp;
+            <input type="checkbox" name="tagVos" value="${tag.id}" <c:if test='${tag.checked}'>checked</c:if> />${tag.name} &nbsp;
         </c:forEach>
         <br/><br/>
 
@@ -42,8 +42,12 @@
         <input type="radio" name="status" value="DRAFT" <c:if test='${blog.status == "DRAFT"}'>checked</c:if> />草稿 &nbsp;
         <br/><br/>
 
-        <input type="submit" value="保存">&nbsp;
-        <input type="reset" value="重置"><br/>
+        创建时间：&nbsp; ${blog.createTime} <br/>
+        更新时间：&nbsp; ${blog.updateTime}
+
+        <input type="hidden" name="id" value="${blog.id}" /> <br/>
+        <input type="submit" value="更新" />&nbsp;
+        <input type="reset" value="重置" /><br/>
     </form>
 </div>
 </body>

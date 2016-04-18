@@ -38,17 +38,37 @@ public class BlogServiceImpl implements BlogService
 
     public void createBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException
     {
+        this.saveOrUpdateBlog(blogVo, category, tags, false);
+    }
+
+    public void updateBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException
+    {
+        this.saveOrUpdateBlog(blogVo, category, tags, true);
+    }
+
+    private void saveOrUpdateBlog(BlogVo blogVo, Category category, List<Tag> tags, boolean isUpdate) throws UserNotExistException
+    {
         this.logger.info("Get admin user");
         User user = this.userService.getAdminUser();
         Blog blog = Transfer.transferBlogVoToPo(blogVo);
         blog.setCategory(category);
         blog.setTags(new HashSet<Tag>(tags));
-        blog.setCreateTime(Common.getTimeStampNow());
+        if(!isUpdate)
+        {
+            blog.setCreateTime(Common.getTimeStampNow());
+        }
         blog.setUpdateTime(Common.getTimeStampNow());
         blog.setShowCount(0);
         blog.setUser(user);
 
-        this.blogDao.persist(blog);
+        if(isUpdate)
+        {
+            this.blogDao.update(blog);
+        }
+        else
+        {
+            this.blogDao.persist(blog);
+        }
     }
 
     public List<BlogVo> getAllPublishedBlogs()

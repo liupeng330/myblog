@@ -42,6 +42,7 @@ public class Transfer
     public static Blog transferBlogVoToPo(BlogVo blogVo)
     {
         Blog blog = new Blog();
+        blog.setId(blogVo.getId());
         blog.setTitle(blogVo.getTitle());
         blog.setSummary(blogVo.getSummary());
         blog.setContent(blogVo.getContent());

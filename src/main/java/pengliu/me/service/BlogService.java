@@ -17,6 +17,7 @@ import java.util.List;
 public interface BlogService
 {
     void createBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
+    void updateBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
     BlogVo getBlogById(Integer id) throws BlogNotExistException;
     List<BlogVo> getAllPublishedBlogs();
     List<BlogVo> getAllBlogs();

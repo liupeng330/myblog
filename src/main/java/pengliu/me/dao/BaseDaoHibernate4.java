@@ -73,7 +73,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
     //更新实体
     public void update(T entity)
     {
-        getSessionFactory().getCurrentSession().saveOrUpdate(entity);
+        getSessionFactory().getCurrentSession().update(entity);
     }
 
     //删除实体

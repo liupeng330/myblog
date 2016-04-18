@@ -76,37 +76,7 @@ public class BlogController
             @RequestParam("tagVos") Integer[] tagIds,
             @RequestParam("status") String status)
     {
-        ModelAndView modelAndView = new ModelAndView();
-
-        this.logger.info("Get category by category id");
-        Category category = this.categoryService.findCategoryPoById(categoryId);
-
-        this.logger.info("Get tags by tag ids");
-        List<Tag> tags = this.tagService.findTagsPoByIds(tagIds);
-
-        BlogVo blogVo = new BlogVo();
-        blogVo.setTitle(title);
-        blogVo.setSummary(summary);
-        blogVo.setContent(content);
-        blogVo.setStatus(status);
-
-        try
-        {
-            this.logger.info("Create blogVo");
-            this.blogService.createBlog(blogVo, category, tags);
-        }
-        catch (UserNotExistException ex)
-        {
-            this.logger.error("Admin user doesn't exist!!!");
-            modelAndView.addObject("errorMsg", ex.getMessage());
-            modelAndView.addObject("allCategories", this.categoryService.getAllCategories());
-            modelAndView.addObject("allTags", this.tagService.getAllTags());
-            modelAndView.setViewName("blogCreate");
-            return modelAndView;
-        }
-
-        modelAndView.setViewName("redirect:/blog.html");
-        return modelAndView;
+        return this.saveOrUpdateBlog(null, title, summary, content, categoryId, tagIds, status, false);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -145,7 +115,10 @@ public class BlogController
         }
         catch (BlogNotExistException ex)
         {
-
+            modelAndView.addObject("errorMsg", ex.getMessage());
+            modelAndView.addObject("allBlogs", this.blogService.getAllBlogs());
+            modelAndView.setViewName("blogManager");
+            return modelAndView;
         }
         modelAndView.addObject("blog", blogVo);
 
@@ -168,6 +141,92 @@ public class BlogController
         }
 
         modelAndView.setViewName("blogUpdate");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ModelAndView updateBlog(
+            @RequestParam("id") Integer id,
+            @RequestParam("title") String title,
+            @RequestParam("summary") String summary,
+            @RequestParam("content") String content,
+            @RequestParam("categoryVo") Integer categoryId,
+            @RequestParam("tagVos") Integer[] tagIds,
+            @RequestParam("status") String status)
+    {
+        return this.saveOrUpdateBlog(id, title, summary, content, categoryId, tagIds, status, true);
+    }
+
+    private ModelAndView saveOrUpdateBlog(
+            Integer id,
+            String title,
+            String summary,
+            String content,
+            Integer categoryId,
+            Integer[] tagIds,
+            String status,
+            boolean isUpdate)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+
+        this.logger.info("Get category by category id");
+        Category category = this.categoryService.findCategoryPoById(categoryId);
+
+        this.logger.info("Get tags by tag ids");
+        List<Tag> tags = this.tagService.findTagsPoByIds(tagIds);
+
+        BlogVo blogVo = new BlogVo();
+        if(isUpdate)
+        {
+            try
+            {
+                blogVo = this.blogService.getBlogById(id);
+            }
+            catch (BlogNotExistException ex)
+            {
+                modelAndView.setViewName("blogUpdate");
+                modelAndView.addObject("errorMsg", ex.getMessage());
+                return modelAndView;
+            }
+        }
+
+        blogVo.setTitle(title);
+        blogVo.setSummary(summary);
+        blogVo.setContent(content);
+        blogVo.setStatus(status);
+
+        try
+        {
+            if(isUpdate)
+            {
+                this.logger.info("Update blogVo");
+                this.blogService.updateBlog(blogVo, category, tags);
+            }
+            else
+            {
+                this.logger.info("Create blogVo");
+                this.blogService.createBlog(blogVo, category, tags);
+            }
+        }
+        catch (UserNotExistException ex)
+        {
+            this.logger.error("Admin user doesn't exist!!!");
+            modelAndView.addObject("errorMsg", ex.getMessage());
+            modelAndView.addObject("allCategories", this.categoryService.getAllCategories());
+            modelAndView.addObject("allTags", this.tagService.getAllTags());
+
+            if(isUpdate)
+            {
+                modelAndView.setViewName("blogUpdate");
+            }
+            else
+            {
+                modelAndView.setViewName("blogCreate");
+            }
+            return modelAndView;
+        }
+
+        modelAndView.setViewName("redirect:/blog.html");
         return modelAndView;
     }
 }
