@@ -1,6 +1,7 @@
 package pengliu.me.service;
 
 import pengliu.me.domain.Category;
+import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface CategoryService
     void updateCategoryNameById(Integer id, String newName);
     void deleteCategoryById(Integer id);
     List<CategoryVo> getAllCategories();
+    List<BlogVo> getAllPublishedBlogsByCategoryId(Integer id);
 }

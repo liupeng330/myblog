@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
+import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by peng on 4/12/16.
  */
 @Controller
-@RequestMapping("/management/category")
+@RequestMapping
 public class CategoryController
 {
     private Logger logger = Logger.getLogger(CategoryController.class);
@@ -27,7 +28,23 @@ public class CategoryController
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
+    public ModelAndView getBlogsByCategory(@PathVariable Integer categoryId)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+
+        CategoryVo categoryVo = this.categoryService.findCategoryById(categoryId);
+        modelAndView.addObject("category", categoryVo.getName());
+
+
+        List<BlogVo> blogVos = this.categoryService.getAllPublishedBlogsByCategoryId(categoryId);
+        modelAndView.addObject("allBlogs", blogVos);
+        modelAndView.setViewName("/blogDisplayByCategory");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/management/category/listAll", method = RequestMethod.GET)
     public ModelAndView listAllCategories()
     {
         ModelAndView modelAndView = new ModelAndView();
@@ -39,7 +56,7 @@ public class CategoryController
         return modelAndView;
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/management/category/update/{id}", method = RequestMethod.GET)
     public ModelAndView gotToUpdateCategoryPage(@PathVariable Integer id)
     {
         ModelAndView modelAndView = new ModelAndView();
@@ -51,7 +68,7 @@ public class CategoryController
         return modelAndView;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/management/category/update", method = RequestMethod.POST)
     public String updateCategory(Integer id, String newName)
     {
         ModelAndView modelAndView = new ModelAndView();
@@ -62,13 +79,13 @@ public class CategoryController
         return "redirect:" + target;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/management/category/create", method = RequestMethod.GET)
     public String goToCreateCategoryPage(String name)
     {
         return "/categoryCreate";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/management/category/create", method = RequestMethod.POST)
     public String createCategory(String name)
     {
         this.logger.info("Start to create category " + name);
@@ -80,7 +97,7 @@ public class CategoryController
         return "redirect:" + target;
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/management/category/delete/{id}", method = RequestMethod.GET)
     public String deleteCategory(@PathVariable Integer id)
     {
         this.categoryService.deleteCategoryById(id);

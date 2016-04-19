@@ -229,4 +229,13 @@ public class BlogController
         modelAndView.setViewName("redirect:/blog.html");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public ModelAndView showBlog(@PathVariable Integer id)
+    {
+        ModelAndView modelAndView = this.goToUpdateBlogPage(id);
+        modelAndView.setViewName("blogDisplay");
+
+        return modelAndView;
+    }
 }

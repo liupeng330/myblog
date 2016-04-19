@@ -14,6 +14,7 @@
 <body>
 <%@ include file="top.jsp" %>
 <div id="content">
+    <h1>分类： ${category}</h1>
     <c:forEach var="blog" items="${allBlogs}">
         <div class="post">
             <h2><a href="/blog/show/${blog.id}.html">${blog.title}</a></h2>
@@ -36,6 +37,6 @@
         <br/>
         <br/>
     </c:forEach>
-    </div>
+</div>
 </body>
 </html>
