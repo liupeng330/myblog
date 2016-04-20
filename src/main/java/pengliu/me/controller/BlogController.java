@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.common.CommonConstant;
+import pengliu.me.dao.Page;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
@@ -46,11 +48,15 @@ public class BlogController
     private TagService tagService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView showMainPage()
+    public ModelAndView showMainPage(@RequestParam(value = "pageNo", required = false) Integer pageNo)
     {
         ModelAndView modelAndView = new ModelAndView();
-        List<BlogVo> publishedBlogs = this.blogService.getAllPublishedBlogs();
-        modelAndView.addObject("allBlogs", publishedBlogs);
+        if(pageNo == null)
+        {
+            pageNo = 1;
+        }
+        Page<BlogVo> publishedBlogs = this.blogService.getAllPagedPublishedBlogs(pageNo, CommonConstant.PAGE_SIZE);
+        modelAndView.addObject("pageResult", publishedBlogs);
         modelAndView.setViewName("main");
 
         return modelAndView;

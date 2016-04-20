@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pengliu.me.dao.BlogDao;
+import pengliu.me.dao.Page;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
@@ -71,9 +72,9 @@ public class BlogServiceImpl implements BlogService
         }
     }
 
-    public List<BlogVo> getAllPublishedBlogs()
+    public Page<BlogVo> getAllPagedPublishedBlogs(int pageNo, int pageSize)
     {
-        return this.populateAllBlogsToVo(this.blogDao.getAllPublishedBlogs());
+        return this.populateAllPagedBlogsPoToVo(this.blogDao.getAllPagedPublishedBlogs(pageNo, pageSize));
     }
 
     public BlogVo getBlogById(Integer id) throws BlogNotExistException
@@ -89,10 +90,10 @@ public class BlogServiceImpl implements BlogService
 
     public List<BlogVo> getAllBlogs()
     {
-        return this.populateAllBlogsToVo(this.blogDao.getAllBlogs());
+        return this.populateAllBlogsPoToVo(this.blogDao.getAllBlogs());
     }
 
-    private List<BlogVo> populateAllBlogsToVo(List<Blog> blogsFromDB)
+    private List<BlogVo> populateAllBlogsPoToVo(List<Blog> blogsFromDB)
     {
         List<BlogVo> blogVos = new ArrayList<BlogVo>();
         for(Blog blog: blogsFromDB)
@@ -100,6 +101,20 @@ public class BlogServiceImpl implements BlogService
             blogVos.add(Transfer.transferBlogPoToVo(blog));
         }
         return blogVos;
+    }
+
+    private Page<BlogVo> populateAllPagedBlogsPoToVo(Page<Blog> poPaged)
+    {
+        List<BlogVo> blogVos = new ArrayList<BlogVo>();
+        for(Blog blog: poPaged.getCurrentPageData())
+        {
+            blogVos.add(Transfer.transferBlogPoToVo(blog));
+        }
+        Page<BlogVo> pagedVos = new Page<BlogVo>(poPaged.getStartIndex(),
+                poPaged.getTotalCount(),
+                poPaged.getPageSize(),
+                blogVos);
+        return pagedVos;
     }
 
     public void deleteBlogById(Integer id)

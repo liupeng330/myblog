@@ -1,5 +1,6 @@
 package pengliu.me.service;
 
+import pengliu.me.dao.Page;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
@@ -19,7 +20,7 @@ public interface BlogService
     void createBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
     void updateBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
     BlogVo getBlogById(Integer id) throws BlogNotExistException;
-    List<BlogVo> getAllPublishedBlogs();
+    Page<BlogVo> getAllPagedPublishedBlogs(int pageNo, int pageSize);
     List<BlogVo> getAllBlogs();
     void deleteBlogById(Integer id);
     void plusBlogViewCount(Integer id);

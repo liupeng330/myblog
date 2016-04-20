@@ -59,7 +59,10 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
         return this.find("from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=?", columnValue);
     }
 
-    public List<T> getOrderedList(String columnName, Serializable columnValue, String orderByColumnName, boolean desc)
+    public List<T> getOrderedList(String columnName,
+                                  Serializable columnValue,
+                                  String orderByColumnName,
+                                  boolean desc)
     {
         String hql = "from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=? order by en." + orderByColumnName;
         if(desc)
@@ -67,6 +70,22 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
             hql += " desc";
         }
         return this.find(hql, columnValue);
+    }
+
+    public Page<T> getPagedOrderedList(String columnName,
+                                       Serializable columnValue,
+                                       String orderByColumnName,
+                                       boolean desc,
+                                       int pageNo,
+                                       int pageSize)
+    {
+        String hql = "from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=? order by en." + orderByColumnName;
+        if(desc)
+        {
+            hql += " desc";
+        }
+
+        return this.pagedQuery(hql, pageNo, pageSize, columnValue);
     }
 
     public <U> List<T> getList(String columnName, List<U> columnValues)
@@ -173,7 +192,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
      *
      * @param pageNo 页号,从1开始.
      */
-    public Page pagedQuery(String hql, int pageNo, int pageSize, Object... values) {
+    public Page<T> pagedQuery(String hql, int pageNo, int pageSize, Object... values) {
         Assert.hasText(hql);
         Assert.isTrue(pageNo >= 1, "pageNo should start from 1");
         // Count查询
@@ -182,13 +201,13 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
         long totalCount = (Long) countlist.get(0);
 
         if (totalCount < 1)
-            return new Page();
+            return new Page<T>();
         // 实际查询返回分页对象
         int startIndex = Page.getStartIndexOfPage(pageNo, pageSize);
         Query query = createQuery(hql, values);
-        List list = query.setFirstResult(startIndex).setMaxResults(pageSize).list();
+        List<T> list = query.setFirstResult(startIndex).setMaxResults(pageSize).list();
 
-        return new Page(startIndex, totalCount, pageSize, list);
+        return new Page<T>(startIndex, totalCount, pageSize, list);
     }
 
     /**

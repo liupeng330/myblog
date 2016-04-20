@@ -17,15 +17,14 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
         return this.findAll();
     }
 
-    private List<Blog> getAllBlogsByStatus(BlogStatus status)
+    private Page<Blog> getAllPagedBlogsByStatus(BlogStatus status, int pageNo, int pageSize)
     {
-        List<Blog> blogs = this.getOrderedList("status", status, "createTime", true);
-        return blogs;
+        return this.getPagedOrderedList("status", status, "createTime", true, pageNo, pageSize);
     }
 
-    public List<Blog> getAllPublishedBlogs()
+    public Page<Blog> getAllPagedPublishedBlogs(int pageNo, int pageSize)
     {
-        return this.getAllBlogsByStatus(BlogStatus.PUBLISHED);
+        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, pageNo, pageSize);
     }
 
     public void deleteBlogById(Integer id)

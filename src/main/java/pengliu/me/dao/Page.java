@@ -8,7 +8,7 @@ import java.util.List;
  * 分页对象. 包含当前页数据及分页信息如总记录数.
  *
  */
-public class Page implements Serializable {
+public class Page<T> implements Serializable {
 
     private static int DEFAULT_PAGE_SIZE = 20;
 
@@ -16,7 +16,7 @@ public class Page implements Serializable {
 
     private long startIndex; // 当前页第一条数据在List中的位置,从0开始
 
-    private List currentPageData; // 当前页中存放的记录,类型一般为List
+    private List<T> currentPageData; // 当前页中存放的记录,类型一般为List
 
     private long totalCount; // 总记录数
 
@@ -24,22 +24,22 @@ public class Page implements Serializable {
      * 构造方法，只构造空页.
      */
     public Page() {
-        this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList());
+        this(0, 0, DEFAULT_PAGE_SIZE, new ArrayList<T>());
     }
 
     /**
      * 默认构造方法.
      *
      * @param startIndex	 本页数据在数据库中的起始位置
-     * @param totalSize 数据库中总记录条数
+     * @param totalCount 数据库中总记录条数
      * @param pageSize  本页容量
      * @param currentPageData	  本页包含的数据
      */
-    public Page(long startIndex, long totalSize, int pageSize, List currentPageData) {
+    public Page(long startIndex, long totalCount, int pageSize, List<T> currentPageData) {
         this.pageSize = pageSize;
-        this.startIndex = startIndex;
-        this.totalCount = totalSize;
-        this.currentPageData = currentPageData;
+        this.setStartIndex(startIndex);
+        this.setTotalCount(totalCount);
+        this.setCurrentPageData(currentPageData);
     }
 
     /**
@@ -53,10 +53,10 @@ public class Page implements Serializable {
      * 取总页数.
      */
     public long getTotalPageCount() {
-        if (totalCount % pageSize == 0)
-            return totalCount / pageSize;
+        if (getTotalCount() % pageSize == 0)
+            return getTotalCount() / pageSize;
         else
-            return totalCount / pageSize + 1;
+            return getTotalCount() / pageSize + 1;
     }
 
     /**
@@ -69,7 +69,7 @@ public class Page implements Serializable {
     /**
      * 取当前页中的记录.
      */
-    public List getCurrentPageData() {
+    public List<T> getCurrentPageData() {
         return currentPageData;
     }
 
@@ -77,7 +77,7 @@ public class Page implements Serializable {
      * 取该页当前页码,页码从1开始.
      */
     public long getCurrentPageNo() {
-        return startIndex / pageSize + 1;
+        return getStartIndex() / pageSize + 1;
     }
 
     /**
@@ -112,5 +112,25 @@ public class Page implements Serializable {
      */
     public static int getStartIndexOfPage(int pageNo, int pageSize) {
         return (pageNo - 1) * pageSize;
+    }
+
+    public void setCurrentPageData(List<T> currentPageData)
+    {
+        this.currentPageData = currentPageData;
+    }
+
+    public long getStartIndex()
+    {
+        return startIndex;
+    }
+
+    public void setStartIndex(long startIndex)
+    {
+        this.startIndex = startIndex;
+    }
+
+    public void setTotalCount(long totalCount)
+    {
+        this.totalCount = totalCount;
     }
 }
