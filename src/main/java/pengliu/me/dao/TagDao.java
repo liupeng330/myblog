@@ -2,7 +2,7 @@ package pengliu.me.dao;
 
 import org.springframework.stereotype.Repository;
 import pengliu.me.domain.Tag;
-import pengliu.me.utils.Common;
+import pengliu.me.utils.CommonUtil;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class TagDao extends BaseDaoHibernate4<Tag>
     {
         Tag tag = new Tag();
         tag.setName(name);
-        tag.setCreateTime(Common.getTimeStampNow());
-        tag.setUpdateTime(Common.getTimeStampNow());
+        tag.setCreateTime(CommonUtil.getTimeStampNow());
+        tag.setUpdateTime(CommonUtil.getTimeStampNow());
         this.persist(tag);
     }
 
@@ -25,7 +25,7 @@ public class TagDao extends BaseDaoHibernate4<Tag>
     {
         Tag tag = this.get(id);
         tag.setName(newName);
-        tag.setUpdateTime(Common.getTimeStampNow());
+        tag.setUpdateTime(CommonUtil.getTimeStampNow());
     }
 
     public void deleteTagById(Integer id)

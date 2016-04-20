@@ -1,5 +1,6 @@
 package pengliu.me.service;
 
+import pengliu.me.dao.Page;
 import pengliu.me.domain.Tag;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.TagVo;
@@ -18,5 +19,5 @@ public interface TagService
     void deleteTagById(Integer id);
     List<TagVo> getAllTags();
     List<Tag> findTagsPoByIds(Integer... id);
-    List<BlogVo> getAllPagedPublishedBlogsByTagId(Integer id);
+    Page<BlogVo> getAllPagedPublishedBlogsByTagId(Integer id, int pageNo, int pageSize);
 }

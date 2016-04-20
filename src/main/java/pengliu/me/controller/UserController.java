@@ -10,7 +10,6 @@ import pengliu.me.common.CommonConstant;
 import pengliu.me.domain.User;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.UserService;
-import pengliu.me.utils.Common;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -2,7 +2,7 @@ package pengliu.me.dao;
 
 import org.springframework.stereotype.Repository;
 import pengliu.me.domain.Category;
-import pengliu.me.utils.Common;
+import pengliu.me.utils.CommonUtil;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class CategoryDao extends BaseDaoHibernate4<Category>
     {
         Category category = new Category();
         category.setName(name);
-        category.setCreateTime(Common.getTimeStampNow());
-        category.setUpdateTime(Common.getTimeStampNow());
+        category.setCreateTime(CommonUtil.getTimeStampNow());
+        category.setUpdateTime(CommonUtil.getTimeStampNow());
         this.persist(category);
     }
 
@@ -25,7 +25,7 @@ public class CategoryDao extends BaseDaoHibernate4<Category>
     {
         Category category = this.get(id);
         category.setName(newName);
-        category.setUpdateTime(Common.getTimeStampNow());
+        category.setUpdateTime(CommonUtil.getTimeStampNow());
     }
 
     public void deleteCategoryById(Integer id)

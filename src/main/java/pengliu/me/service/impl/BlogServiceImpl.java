@@ -13,11 +13,9 @@ import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.BlogService;
 import pengliu.me.service.UserService;
-import pengliu.me.utils.Common;
-import pengliu.me.utils.Transfer;
+import pengliu.me.utils.CommonUtil;
+import pengliu.me.utils.TransferUtil;
 import pengliu.me.vo.BlogVo;
-import pengliu.me.vo.CategoryVo;
-import pengliu.me.vo.TagVo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -51,14 +49,14 @@ public class BlogServiceImpl implements BlogService
     {
         this.logger.info("Get admin user");
         User user = this.userService.getAdminUser();
-        Blog blog = Transfer.transferBlogVoToPo(blogVo);
+        Blog blog = TransferUtil.transferBlogVoToPo(blogVo);
         blog.setCategory(category);
         blog.setTags(new HashSet<Tag>(tags));
         if(!isUpdate)
         {
-            blog.setCreateTime(Common.getTimeStampNow());
+            blog.setCreateTime(CommonUtil.getTimeStampNow());
         }
-        blog.setUpdateTime(Common.getTimeStampNow());
+        blog.setUpdateTime(CommonUtil.getTimeStampNow());
         blog.setShowCount(0);
         blog.setUser(user);
 
@@ -85,7 +83,7 @@ public class BlogServiceImpl implements BlogService
             throw new BlogNotExistException("Blog for id " + id + " doesn't exist!!!");
         }
 
-        return Transfer.transferBlogPoToVo(blog);
+        return TransferUtil.transferBlogPoToVo(blog);
     }
 
     public List<BlogVo> getAllBlogs()
@@ -98,7 +96,7 @@ public class BlogServiceImpl implements BlogService
         List<BlogVo> blogVos = new ArrayList<BlogVo>();
         for(Blog blog: blogsFromDB)
         {
-            blogVos.add(Transfer.transferBlogPoToVo(blog));
+            blogVos.add(TransferUtil.transferBlogPoToVo(blog));
         }
         return blogVos;
     }
@@ -108,7 +106,7 @@ public class BlogServiceImpl implements BlogService
         List<BlogVo> blogVos = new ArrayList<BlogVo>();
         for(Blog blog: poPaged.getCurrentPageData())
         {
-            blogVos.add(Transfer.transferBlogPoToVo(blog));
+            blogVos.add(TransferUtil.transferBlogPoToVo(blog));
         }
         Page<BlogVo> pagedVos = new Page<BlogVo>(poPaged.getStartIndex(),
                 poPaged.getTotalCount(),

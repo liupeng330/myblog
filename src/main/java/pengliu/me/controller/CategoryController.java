@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
@@ -29,12 +30,17 @@ public class CategoryController
     private CategoryService categoryService;
 
     @RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
-    public ModelAndView getBlogsByCategory(@PathVariable Integer categoryId)
+    public ModelAndView getBlogsByCategory(@PathVariable Integer categoryId,
+                                           @RequestParam(value = "pageNo", required = false) Integer pageNo)
     {
         ModelAndView modelAndView = new ModelAndView();
+        if(pageNo == null)
+        {
+            pageNo = 1;
+        }
 
         CategoryVo categoryVo = this.categoryService.findCategoryById(categoryId);
-        modelAndView.addObject("category", categoryVo.getName());
+        modelAndView.addObject("category", categoryVo);
 
 
         List<BlogVo> blogVos = this.categoryService.getAllPublishedBlogsByCategoryId(categoryId);

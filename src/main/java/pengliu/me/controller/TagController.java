@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.common.CommonConstant;
 import pengliu.me.dao.Page;
 import pengliu.me.domain.Tag;
 import pengliu.me.service.TagService;
@@ -32,12 +33,16 @@ public class TagController
     public ModelAndView getBlogsByCategory(@PathVariable Integer tagId, @RequestParam(value = "pageNo", required = false) Integer pageNo)
     {
         ModelAndView modelAndView = new ModelAndView();
+        if(pageNo == null)
+        {
+            pageNo = 1;
+        }
 
         TagVo tagVo = this.tagService.findTagById(tagId);
-        modelAndView.addObject("tag", tagVo.getName());
+        modelAndView.addObject("tag", tagVo);
 
-//        Page<BlogVo> publishedBlogs = this.tagService.getAllPagedPublishedBlogsByTagId(tagId);
-//        modelAndView.addObject("pageResult", publishedBlogs);
+        Page<BlogVo> publishedBlogs = this.tagService.getAllPagedPublishedBlogsByTagId(tagId, pageNo, CommonConstant.PAGE_SIZE);
+        modelAndView.addObject("pageResult", publishedBlogs);
         modelAndView.setViewName("/main");
 
         return modelAndView;

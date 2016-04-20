@@ -1,16 +1,14 @@
 package pengliu.me.test;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
-import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
 import pengliu.me.service.impl.CategoryServiceImpl;
-import pengliu.me.utils.Common;
+import pengliu.me.utils.CommonUtil;
 import pengliu.me.vo.CategoryVo;
 
 import java.util.ArrayList;
@@ -38,8 +36,8 @@ public class MockitoSampleTest
     {
         CategoryVo category = new CategoryVo();
         category.setName("my new category");
-        category.setCreateTime(Common.getTimeStampNow());
-        category.setUpdateTime(Common.getTimeStampNow());
+        category.setCreateTime(CommonUtil.getTimeStampNow());
+        category.setUpdateTime(CommonUtil.getTimeStampNow());
         List<CategoryVo> mockResult = new ArrayList<CategoryVo>();
         mockResult.add(category);
 

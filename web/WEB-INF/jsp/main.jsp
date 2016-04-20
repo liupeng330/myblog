@@ -9,8 +9,8 @@
 <body>
 <%@ include file="top.jsp" %>
 <div id="content">
-    <c:if test="${!empty category}"><h1>分类： ${category}</h1></c:if>
-    <c:if test="${!empty tag}"><h1>标签： ${tag}</h1></c:if>
+    <c:if test="${!empty category}"><h1>分类： ${category.name}</h1></c:if>
+    <c:if test="${!empty tag}"><h1>标签： ${tag.name}</h1></c:if>
     <c:forEach var="blog" items="${pageResult.currentPageData}">
         <div class="post">
             <h2><a href="/blog/show/${blog.id}.html">${blog.title}</a></h2>
@@ -34,41 +34,14 @@
         <br/>
     </c:forEach>
 </div>
-
-
-<myblog:PageBar
-        pageUrl="/blog.html"
-        pageAttrKey="pageResult"/>
-
-<!--
-<div style="background-color:#DDDDDD">
-    共${pageResult.totalPageCount}页，第${pageResult.currentPageNo}页
-    <c:if test="${pageResult.currentPageNo <=1}">
-        首页&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${pageResult.currentPageNo >1 }">
-        <a href="/blog.html?pageNo=1">首页</a>&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${pageResult.hasPreviousPage}">
-        <a href="/blog.html?pageNo=${pageResult.currentPageNo - 1}">上一页</a>&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${!pageResult.hasPreviousPage}">
-        上一页&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${pageResult.hasNextPage}">
-        <a href="/blog.html?pageNo=${pageResult.currentPageNo + 1}">下一页</a>&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${!pageResult.hasNextPage}">
-        下一页&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${pageResult.currentPageNo >= pageResult.totalPageCount}">
-        末页&nbsp;&nbsp;
-    </c:if>
-    <c:if test="${pageResult.currentPageNo < pageResult.totalPageCount}">
-        <a href="/blog.html?pageNo=${pageResult.totalPageCount }">末页</a>&nbsp;&nbsp;
-    </c:if>
-</div>
--->
-
+<c:if test="${!empty category}">
+    <myblog:PageBar pageUrl="/category/${category.id}.html" pageAttrKey="pageResult"/>
+</c:if>
+<c:if test="${!empty tag}">
+    <myblog:PageBar pageUrl="/tag/${tag.id}.html" pageAttrKey="pageResult"/>
+</c:if>
+<c:if test="${empty tag and empty category}">
+    <myblog:PageBar pageUrl="/blog.html" pageAttrKey="pageResult"/>
+</c:if>
 </body>
 </html>

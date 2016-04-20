@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by peng on 4/16/16.
  */
-public class Transfer
+public class TransferUtil
 {
     public static BlogVo transferBlogPoToVo(Blog blog)
     {
@@ -30,10 +30,10 @@ public class Transfer
         blogVo.setUserName(blog.getUser().getName());
         blogVo.setStatus(blog.getStatus().toString());
         blogVo.setCategoryVo(
-                Transfer.transferCategoryPoToVo(blog.getCategory()));
+                TransferUtil.transferCategoryPoToVo(blog.getCategory()));
         blogVo.setTagVos(
                 new HashSet<TagVo>(
-                    Transfer.transferTagListPoToVo(
+                    TransferUtil.transferTagListPoToVo(
                             new ArrayList<Tag>(blog.getTags()))));
 
         return blogVo;
@@ -56,6 +56,17 @@ public class Transfer
         }
 
         return blog;
+    }
+
+    public static List<BlogVo> transferBlogPosToVos(List<Blog> blogPos)
+    {
+        List<BlogVo> blogVos = new ArrayList<BlogVo>();
+        for(Blog blog: blogPos)
+        {
+            blogVos.add(TransferUtil.transferBlogPoToVo(blog));
+        }
+
+        return blogVos;
     }
 
     public static CategoryVo transferCategoryPoToVo(Category category)

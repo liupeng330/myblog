@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pengliu.me.common.UserStatus;
 import pengliu.me.domain.User;
-import pengliu.me.utils.Common;
+import pengliu.me.utils.CommonUtil;
 
 
 /**
@@ -22,7 +22,7 @@ public class DaoTest
             tx = session.beginTransaction();
 
             User user = new User();
-            user.setLastLoginTime(Common.getTimeStampNow());
+            user.setLastLoginTime(CommonUtil.getTimeStampNow());
             user.setName("liupeng");
             user.setPassword("123");
             user.setStatus(UserStatus.ACTIVE);

@@ -3,12 +3,13 @@ package pengliu.me.service.impl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pengliu.me.common.BlogStatus;
+import pengliu.me.dao.Page;
 import pengliu.me.dao.TagDao;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Tag;
 import pengliu.me.service.TagService;
-import pengliu.me.utils.Transfer;
+import pengliu.me.utils.CommonUtil;
+import pengliu.me.utils.TransferUtil;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.TagVo;
 
@@ -18,7 +19,7 @@ import java.util.*;
  * Created by peng on 16-4-14.
  */
 @Service
-public class TagServiceImpl implements TagService
+public class TagServiceImpl extends BaseService implements TagService
 {
     private Logger logger = Logger.getLogger(TagServiceImpl.class);
 
@@ -59,12 +60,12 @@ public class TagServiceImpl implements TagService
 
     public List<TagVo> getAllTags()
     {
-        return Transfer.transferTagListPoToVo(this.tagDao.getAllTags());
+        return TransferUtil.transferTagListPoToVo(this.tagDao.getAllTags());
     }
 
     public List<TagVo> findTagsByIds(Integer... id)
     {
-        return Transfer.transferTagListPoToVo(this.findTagsPoByIds());
+        return TransferUtil.transferTagListPoToVo(this.findTagsPoByIds());
     }
 
     public List<Tag> findTagsPoByIds(Integer... id)
@@ -72,15 +73,15 @@ public class TagServiceImpl implements TagService
         return this.tagDao.getList("id", Arrays.asList(id));
     }
 
-    public List<BlogVo> getAllPagedPublishedBlogsByTagId(Integer id)
+    public Page<BlogVo> getAllPagedPublishedBlogsByTagId(Integer id, int pageNo, int pageSize)
     {
         Tag tag = this.findTagPoById(id);
         List<BlogVo> resultBlogVos = new ArrayList<BlogVo>();
         if(tag != null)
         {
-            resultBlogVos = Blog.getPublishedAndSortedBlogVos(new ArrayList<Blog>(tag.getBlogs()));
+            resultBlogVos =  this.sortAndTransferBlogPoToVoList(tag.getBlogs());
         }
 
-        return resultBlogVos;
+        return CommonUtil.pagedList(resultBlogVos, pageNo, pageSize);
     }
 }

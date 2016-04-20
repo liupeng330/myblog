@@ -7,7 +7,7 @@ import pengliu.me.dao.UserDao;
 import pengliu.me.domain.User;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.UserService;
-import pengliu.me.utils.Common;
+import pengliu.me.utils.CommonUtil;
 
 /**
  * Created by peng on 16-4-13.
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService
         User returnedUser = userDao.findUserByName(name);
         if(returnedUser != null)
         {
-            returnedUser.setLastLoginTime(Common.getTimeStampNow());
+            returnedUser.setLastLoginTime(CommonUtil.getTimeStampNow());
             this.userDao.persist(returnedUser);
             return;
         }
