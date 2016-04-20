@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.dao.Page;
 import pengliu.me.domain.Tag;
 import pengliu.me.service.TagService;
 import pengliu.me.vo.BlogVo;
@@ -27,16 +29,15 @@ public class TagController
     private TagService tagService;
 
     @RequestMapping(value = "/tag/{tagId}", method = RequestMethod.GET)
-    public ModelAndView getBlogsByCategory(@PathVariable Integer tagId)
+    public ModelAndView getBlogsByCategory(@PathVariable Integer tagId, @RequestParam(value = "pageNo", required = false) Integer pageNo)
     {
         ModelAndView modelAndView = new ModelAndView();
 
         TagVo tagVo = this.tagService.findTagById(tagId);
         modelAndView.addObject("tag", tagVo.getName());
 
-
-        List<BlogVo> blogVos = this.tagService.getAllPublishedBlogsByTagId(tagId);
-        modelAndView.addObject("allBlogs", blogVos);
+//        Page<BlogVo> publishedBlogs = this.tagService.getAllPagedPublishedBlogsByTagId(tagId);
+//        modelAndView.addObject("pageResult", publishedBlogs);
         modelAndView.setViewName("/main");
 
         return modelAndView;

@@ -18,5 +18,5 @@ public interface TagService
     void deleteTagById(Integer id);
     List<TagVo> getAllTags();
     List<Tag> findTagsPoByIds(Integer... id);
-    List<BlogVo> getAllPublishedBlogsByTagId(Integer id);
+    List<BlogVo> getAllPagedPublishedBlogsByTagId(Integer id);
 }

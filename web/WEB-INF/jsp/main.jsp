@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="myblog" tagdir="/WEB-INF/tags" %>
+
 <html>
 <head>
     <title>My Blog!!</title>
@@ -33,6 +35,12 @@
     </c:forEach>
 </div>
 
+
+<myblog:PageBar
+        pageUrl="/blog.html"
+        pageAttrKey="pageResult"/>
+
+<!--
 <div style="background-color:#DDDDDD">
     共${pageResult.totalPageCount}页，第${pageResult.currentPageNo}页
     <c:if test="${pageResult.currentPageNo <=1}">
@@ -60,6 +68,7 @@
         <a href="/blog.html?pageNo=${pageResult.totalPageCount }">末页</a>&nbsp;&nbsp;
     </c:if>
 </div>
+-->
 
 </body>
 </html>

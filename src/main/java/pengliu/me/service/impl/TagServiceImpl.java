@@ -72,7 +72,7 @@ public class TagServiceImpl implements TagService
         return this.tagDao.getList("id", Arrays.asList(id));
     }
 
-    public List<BlogVo> getAllPublishedBlogsByTagId(Integer id)
+    public List<BlogVo> getAllPagedPublishedBlogsByTagId(Integer id)
     {
         Tag tag = this.findTagPoById(id);
         List<BlogVo> resultBlogVos = new ArrayList<BlogVo>();
