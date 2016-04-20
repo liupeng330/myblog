@@ -235,7 +235,7 @@ public class BlogController
     {
         ModelAndView modelAndView = this.goToUpdateBlogPage(id);
         modelAndView.setViewName("blogDisplay");
-
+        this.blogService.plusBlogViewCount(id);
         return modelAndView;
     }
 }

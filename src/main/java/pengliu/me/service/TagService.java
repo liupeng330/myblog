@@ -1,6 +1,7 @@
 package pengliu.me.service;
 
 import pengliu.me.domain.Tag;
+import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.TagVo;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface TagService
     void deleteTagById(Integer id);
     List<TagVo> getAllTags();
     List<Tag> findTagsPoByIds(Integer... id);
+    List<BlogVo> getAllPublishedBlogsByTagId(Integer id);
 }

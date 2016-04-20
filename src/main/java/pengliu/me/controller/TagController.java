@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.domain.Tag;
 import pengliu.me.service.TagService;
+import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.TagVo;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by peng on 16-4-14.
  */
 @Controller
-@RequestMapping("/management/tag")
+@RequestMapping
 public class TagController
 {
     private Logger logger = Logger.getLogger(TagController.class);
@@ -25,7 +26,23 @@ public class TagController
     @Autowired
     private TagService tagService;
 
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/tag/{tagId}", method = RequestMethod.GET)
+    public ModelAndView getBlogsByCategory(@PathVariable Integer tagId)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+
+        TagVo tagVo = this.tagService.findTagById(tagId);
+        modelAndView.addObject("tag", tagVo.getName());
+
+
+        List<BlogVo> blogVos = this.tagService.getAllPublishedBlogsByTagId(tagId);
+        modelAndView.addObject("allBlogs", blogVos);
+        modelAndView.setViewName("/main");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/management/tag/listAll", method = RequestMethod.GET)
     public ModelAndView listAllTags()
     {
         ModelAndView modelAndView = new ModelAndView();
@@ -37,7 +54,7 @@ public class TagController
         return modelAndView;
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/management/tag/update/{id}", method = RequestMethod.GET)
     public ModelAndView gotToUpdateTagPage(@PathVariable Integer id)
     {
         ModelAndView modelAndView = new ModelAndView();
@@ -49,7 +66,7 @@ public class TagController
         return modelAndView;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/management/tag/update", method = RequestMethod.POST)
     public String updateTag(Integer id, String newName)
     {
         ModelAndView modelAndView = new ModelAndView();
@@ -60,13 +77,13 @@ public class TagController
         return "redirect:" + target;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/management/tag/create", method = RequestMethod.GET)
     public String goToCreateTagPage(String name)
     {
         return "tagCreate";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/management/tag/create", method = RequestMethod.POST)
     public String createTag(String name)
     {
         this.logger.info("Start to create tag " + name);
@@ -78,7 +95,7 @@ public class TagController
         return "redirect:" + target;
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/management/tag/delete/{id}", method = RequestMethod.GET)
     public String deleteTag(@PathVariable Integer id)
     {
         this.tagService.deleteTagById(id);

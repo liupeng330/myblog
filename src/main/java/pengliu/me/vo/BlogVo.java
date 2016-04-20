@@ -2,6 +2,7 @@ package pengliu.me.vo;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -126,4 +127,5 @@ public class BlogVo
     public void setTagVos(Set<TagVo> tagVos) {
         this.tagVos = tagVos;
     }
+
 }

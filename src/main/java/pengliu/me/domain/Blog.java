@@ -1,11 +1,12 @@
 package pengliu.me.domain;
 
 import pengliu.me.common.BlogStatus;
+import pengliu.me.utils.Transfer;
+import pengliu.me.vo.BlogVo;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by peng on 16-4-8.
@@ -206,5 +207,34 @@ public class Blog
     public void setComments(Set<Comment> comments)
     {
         this.comments = comments;
+    }
+
+    public static List<BlogVo> getPublishedAndSortedBlogVos(List<Blog> blogs)
+    {
+        List<BlogVo> resultBlogVos = new ArrayList<BlogVo>();
+        for(Blog blog: blogs)
+        {
+            if(blog.getStatus() == BlogStatus.PUBLISHED)
+            {
+                resultBlogVos.add(Transfer.transferBlogPoToVo(blog));
+            }
+        }
+        Collections.sort(resultBlogVos, new Comparator<BlogVo>()
+        {
+            public int compare(BlogVo o1, BlogVo o2)
+            {
+                int ret = o1.getCreateTime().compareTo(o2.getCreateTime());
+                if(ret > 0)
+                {
+                    return -1;
+                }
+                if(ret < 0)
+                {
+                    return 1;
+                }
+                return ret;
+            }
+        });
+        return resultBlogVos;
     }
 }

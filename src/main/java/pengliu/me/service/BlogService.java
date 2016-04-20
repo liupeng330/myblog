@@ -22,4 +22,5 @@ public interface BlogService
     List<BlogVo> getAllPublishedBlogs();
     List<BlogVo> getAllBlogs();
     void deleteBlogById(Integer id);
+    void plusBlogViewCount(Integer id);
 }

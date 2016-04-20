@@ -13,6 +13,8 @@ import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -55,15 +57,8 @@ public class CategoryServiceImpl implements CategoryService
         List<BlogVo> resultBlogVos = new ArrayList<BlogVo>();
         if(category != null)
         {
-            for(Blog blog: category.getBlogs())
-            {
-                if(blog.getStatus() == BlogStatus.PUBLISHED)
-                {
-                    resultBlogVos.add(Transfer.transferBlogPoToVo(blog));
-                }
-            }
+            resultBlogVos = Blog.getPublishedAndSortedBlogVos(new ArrayList<Blog>(category.getBlogs()));
         }
-
         return resultBlogVos;
     }
 

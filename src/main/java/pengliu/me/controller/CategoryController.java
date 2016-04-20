@@ -39,7 +39,7 @@ public class CategoryController
 
         List<BlogVo> blogVos = this.categoryService.getAllPublishedBlogsByCategoryId(categoryId);
         modelAndView.addObject("allBlogs", blogVos);
-        modelAndView.setViewName("/blogDisplayByCategory");
+        modelAndView.setViewName("/main");
 
         return modelAndView;
     }

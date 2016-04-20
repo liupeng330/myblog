@@ -107,4 +107,10 @@ public class BlogServiceImpl implements BlogService
         this.blogDao.deleteBlogById(id);
     }
 
+    public void plusBlogViewCount(Integer id)
+    {
+        Blog blog = this.blogDao.get(id);
+        blog.setShowCount(blog.getShowCount() + 1);
+    }
+
 }
