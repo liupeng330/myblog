@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.dao.Page;
 import pengliu.me.domain.Tag;
+import pengliu.me.exception.HasBlogRelatedException;
 import pengliu.me.service.TagService;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.TagVo;
@@ -104,7 +105,14 @@ public class TagController
     @RequestMapping(value = "/management/tag/delete/{id}", method = RequestMethod.GET)
     public String deleteTag(@PathVariable Integer id)
     {
-        this.tagService.deleteTagById(id);
+        try
+        {
+            this.tagService.deleteTagById(id);
+        }
+        catch (HasBlogRelatedException ex)
+        {
+
+        }
         String target = "/management/tag/listAll.html";
         this.logger.info("Redirect to " + target);
 

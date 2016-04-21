@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.dao.Page;
 import pengliu.me.domain.Category;
+import pengliu.me.exception.HasBlogRelatedException;
 import pengliu.me.service.CategoryService;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
@@ -106,7 +107,14 @@ public class CategoryController
     @RequestMapping(value = "/management/category/delete/{id}", method = RequestMethod.GET)
     public String deleteCategory(@PathVariable Integer id)
     {
-        this.categoryService.deleteCategoryById(id);
+        try
+        {
+            this.categoryService.deleteCategoryById(id);
+        }
+        catch (HasBlogRelatedException ex)
+        {
+
+        }
         String target = "/management/category/listAll.html";
         this.logger.info("Redirect to " + target);
 

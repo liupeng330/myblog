@@ -1,13 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>标签管理页</title>
-</head>
-<body>
-<%@ include file="top.jspf" %>
+<%@ include file="header.jspf" %>
+
+<c:if test="${!empty errorMsg}">
+    <div style="color:red">${errorMsg}</div>
+</c:if>
 <a href="<c:url value="/management/tag/create.html"/>">创建</a><br/>
 <table border="1px" width="100%">
     <tr>
@@ -28,5 +24,5 @@
         </tr>
     </c:forEach>
 </table>
-</body>
-</html>
+
+<%@ include file="footer.jspf" %>

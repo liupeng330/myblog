@@ -1,13 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>分类管理页</title>
-</head>
-<body>
-<%@ include file="top.jspf" %>
+<%@ include file="header.jspf" %>
 
 <form action="<c:url value="/management/category/create.html"/>" method="post">
     <table border="1px"  width="100%">
@@ -22,5 +14,6 @@
             </td>
         </tr>
     </table>
-</body>
-</html>
+</form>
+
+<%@ include file="footer.jspf" %>

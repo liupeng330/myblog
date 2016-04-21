@@ -1,0 +1,45 @@
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="myblog" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="mytest" tagdir="/WEB-INF/tags" %>
+
+<html>
+<head>
+    <title>My Blog!!</title>
+    <style>
+        .nav {
+            display: inline-block;
+            background-color: #00B2EE;
+            border: 1px solid #000000;
+            border-width: 1px 0px;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        .nav li {
+            list-style-type: none;
+            width: 14.28%;
+            float: left;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <ul id="navList" class="nav">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li>
+            <a href="<c:url value="/management/user/login.html"/>">登陆</a></td> &nbsp;
+        </li>
+        <li>
+            <a href="<c:url value="/blog/listAll.html"/>">管理</a></td>
+        </li>
+    </ul>
+</div>

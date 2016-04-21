@@ -7,6 +7,7 @@ import pengliu.me.dao.CategoryDao;
 import pengliu.me.dao.Page;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
+import pengliu.me.exception.HasBlogRelatedException;
 import pengliu.me.service.CategoryService;
 import pengliu.me.utils.CommonUtil;
 import pengliu.me.utils.TransferUtil;
@@ -66,8 +67,14 @@ public class CategoryServiceImpl extends BaseService implements CategoryService
         this.categoryDao.updateCategoryNameById(id, newName);
     }
 
-    public void deleteCategoryById(Integer id)
+    public void deleteCategoryById(Integer id) throws HasBlogRelatedException
     {
+        Category category = this.categoryDao.get(id);
+        if(category.getBlogs() != null && category.getBlogs().size() > 0)
+        {
+            throw new HasBlogRelatedException(
+                    String.format("Category %s has blog related, can not be deleted!!", id));
+        }
         this.categoryDao.deleteCategoryById(id);
     }
 

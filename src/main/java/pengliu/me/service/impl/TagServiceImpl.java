@@ -7,6 +7,7 @@ import pengliu.me.dao.Page;
 import pengliu.me.dao.TagDao;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Tag;
+import pengliu.me.exception.HasBlogRelatedException;
 import pengliu.me.service.TagService;
 import pengliu.me.utils.CommonUtil;
 import pengliu.me.utils.TransferUtil;
@@ -53,8 +54,14 @@ public class TagServiceImpl extends BaseService implements TagService
         this.tagDao.updateTagNameById(id, newName);
     }
 
-    public void deleteTagById(Integer id)
+    public void deleteTagById(Integer id) throws HasBlogRelatedException
     {
+        Tag tag = this.tagDao.get(id);
+        if(tag.getBlogs()!=null && tag.getBlogs().size() > 0)
+        {
+            throw new HasBlogRelatedException(
+                    String.format("Tag %s has blog related, can not be deleted!!", id));
+        }
         this.tagDao.deleteTagById(id);
     }
 
