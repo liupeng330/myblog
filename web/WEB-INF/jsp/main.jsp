@@ -9,8 +9,12 @@
 <body>
 <%@ include file="top.jsp" %>
 <div id="content">
-    <c:if test="${!empty category}"><h1>分类： ${category.name}</h1></c:if>
-    <c:if test="${!empty tag}"><h1>标签： ${tag.name}</h1></c:if>
+    <c:if test="${!empty category}">
+        <h1>分类： ${category.name}</h1>
+    </c:if>
+    <c:if test="${!empty tag}">
+        <h1>标签： ${tag.name}</h1>
+    </c:if>
     <c:forEach var="blog" items="${pageResult.currentPageData}">
         <div class="post">
             <h2><a href="/blog/show/${blog.id}.html">${blog.title}</a></h2>

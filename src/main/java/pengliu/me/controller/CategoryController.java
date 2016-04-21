@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.common.CommonConstant;
+import pengliu.me.dao.Page;
 import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -42,9 +43,8 @@ public class CategoryController
         CategoryVo categoryVo = this.categoryService.findCategoryById(categoryId);
         modelAndView.addObject("category", categoryVo);
 
-
-        List<BlogVo> blogVos = this.categoryService.getAllPublishedBlogsByCategoryId(categoryId);
-        modelAndView.addObject("allBlogs", blogVos);
+        Page<BlogVo> blogVos = this.categoryService.getAllPagedPublishedBlogsByCategoryId(categoryId, pageNo, CommonConstant.PAGE_SIZE);
+        modelAndView.addObject("pageResult", blogVos);
         modelAndView.setViewName("/main");
 
         return modelAndView;

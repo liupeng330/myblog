@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pengliu.me.dao.CategoryDao;
+import pengliu.me.dao.Page;
 import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.service.CategoryService;
@@ -49,14 +50,15 @@ public class CategoryServiceImpl extends BaseService implements CategoryService
         return this.categoryDao.get(id);
     }
 
-    public List<BlogVo> getAllPublishedBlogsByCategoryId(Integer id)
+    public Page<BlogVo> getAllPagedPublishedBlogsByCategoryId(Integer id, int pageNo, int pageSize)
     {
         Category category = this.findCategoryPoById(id);
+        List<BlogVo> resultBlogVos = new ArrayList<BlogVo>();
         if(category != null)
         {
-            return this.sortAndTransferBlogPoToVoList(category.getBlogs());
+            resultBlogVos = this.sortAndTransferBlogPoToVoList(category.getBlogs());
         }
-        return null;
+        return CommonUtil.pagedList(resultBlogVos, pageNo, pageSize);
     }
 
     public void updateCategoryNameById(Integer id, String newName)

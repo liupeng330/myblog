@@ -29,7 +29,7 @@ public class CommonUtil
 
         // 实际查询返回分页对象
         int startIndex = Page.getStartIndexOfPage(pageNo, pageSize);
-        List<T> pageList = unpagedObjects.subList(startIndex, startIndex + pageSize -1);
+        List<T> pageList = unpagedObjects.subList(startIndex, startIndex + pageSize);
 
         return new Page<T>(startIndex, unpagedObjects.size(), pageSize, pageList);
     }
