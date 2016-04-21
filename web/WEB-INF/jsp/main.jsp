@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="myblog" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="mytest" tagdir="/WEB-INF/tags" %>
 
 <html>
 <head>
@@ -47,5 +48,7 @@
 <c:if test="${empty tag and empty category}">
     <myblog:PageBar pageUrl="/blog.html" pageAttrKey="pageResult"/>
 </c:if>
+
+<%--<myblog:mytest myattr="${pageResult.currentPageData}"/>--%>
 </body>
 </html>
