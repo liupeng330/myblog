@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="top.jsp" %>
-    <a href="/management/category/create.html">创建</a><br/>
+    <a href="<c:url value="/management/category/create.html"/>">创建</a><br/>
     <table border="1px" width="100%">
         <tr>
             <td>id</td>
@@ -23,8 +23,8 @@
                 <td>${category.name}</td>
                 <td>${category.createTime}</td>
                 <td>${category.updateTime}</td>
-                <td><a href="/management/category/delete/${category.id}.html">删除</a> &nbsp;
-                <a href="/management/category/update/${category.id}.html">更新</a></td>
+                <td><a href="<c:url value="/management/category/delete/${category.id}.html"/>">删除</a> &nbsp;
+                <a href="<c:url value="/management/category/update/${category.id}.html"/>">更新</a></td>
             </tr>
         </c:forEach>
     </table>

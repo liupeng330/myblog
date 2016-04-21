@@ -18,19 +18,19 @@
     </c:if>
     <c:forEach var="blog" items="${pageResult.currentPageData}">
         <div class="post">
-            <h2><a href="/blog/show/${blog.id}.html">${blog.title}</a></h2>
+            <h2><a href="<c:url value="/blog/show/${blog.id}.html"/>">${blog.title}</a></h2>
             <small>${blog.updateTime} by ${blog.userName} ${blog.showCount}</small>
             <div class="entry">
-                <strong>摘要： </strong> ${blog.summary}&nbsp;&nbsp;<a href="/blog/show/${blog.id}.html">阅读全文</a>
+                <strong>摘要： </strong> ${blog.summary}&nbsp;&nbsp;<a href="<c:url value="/blog/show/${blog.id}.html"/>">阅读全文</a>
             </div>
             <ul class="postmetadata">
                 <li class="icon_cat">
-                    <strong>Categories: </strong><a href="/category/${blog.categoryVo.id}.html">${blog.categoryVo.name}</a>
+                    <strong>Categories: </strong><a href="<c:url value="/category/${blog.categoryVo.id}.html"/>">${blog.categoryVo.name}</a>
                 </li>
                 <li class="icon_bullet">
                     <strong>Tags: </strong>
                     <c:forEach var="tag" items="${blog.tagVos}">
-                        <a href="/tag/${tag.id}.html">${tag.name}</a>&nbsp;
+                        <a href="<c:url value="/tag/${tag.id}.html"/>">${tag.name}</a>&nbsp;
                     </c:forEach>
                 </li>
             </ul>

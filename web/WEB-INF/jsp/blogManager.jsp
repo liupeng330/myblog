@@ -43,9 +43,9 @@
         <c:if test="${!empty errorMsg}">
             <div style="color:red">${errorMsg}</div>
         </c:if>
-        <a href="/blog/create.html">创建博客</a> &nbsp;
-        <a href="/management/category/listAll.html">分类管理</a> &nbsp;
-        <a href="/management/tag/listAll.html">标签管理</a> &nbsp;
+        <a href="<c:url value="/blog/create.html" />" >创建博客</a> &nbsp;
+        <a href="<c:url value="/management/category/listAll.html" />" >分类管理</a> &nbsp;
+        <a href="<c:url value="/management/tag/listAll.html" />" >标签管理</a> &nbsp;
 
         <table border="1px" width="100%">
             <tr>
@@ -67,8 +67,8 @@
                     <td>${blog.userName}</td>
                     <td>${blog.showCount}</td>
                     <td>${blog.status}</td>
-                    <td><a href="/blog/delete/${blog.id}.html">物理删除</a> &nbsp;
-                        <a href="/blog/update/${blog.id}.html">更新</a></td>
+                    <td><a href="<c:url value="/blog/delete/${blog.id}.html"/>">物理删除</a> &nbsp;
+                        <a href="<c:url value="/blog/update/${blog.id}.html"/>">更新</a></td>
                 </tr>
             </c:forEach>
         </table>
