@@ -7,7 +7,7 @@
     <title>管理员登陆页</title>
 </head>
 <body>
-<%@ include file="top.jsp" %>
+<%@ include file="top.jspf" %>
 
 <c:if test="${!empty errorMsg}">
     <div style="color:red">${errorMsg}</div>

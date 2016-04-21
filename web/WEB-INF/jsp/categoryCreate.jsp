@@ -7,7 +7,7 @@
     <title>分类管理页</title>
 </head>
 <body>
-<%@ include file="top.jsp" %>
+<%@ include file="top.jspf" %>
 
 <form action="<c:url value="/management/category/create.html"/>" method="post">
     <table border="1px"  width="100%">

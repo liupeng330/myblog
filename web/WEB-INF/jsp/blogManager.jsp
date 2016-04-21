@@ -36,7 +36,7 @@
 <body>
 <div class="all">
     <div class="top">
-        <%@ include file="top.jsp" %>
+        <%@ include file="top.jspf" %>
     </div>
 
     <div class="content">

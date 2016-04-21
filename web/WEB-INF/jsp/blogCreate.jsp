@@ -8,7 +8,7 @@
 </head>
 <body>
 <div id="top-panel">
-    <%@ include file="top.jsp" %>
+    <%@ include file="top.jspf" %>
 </div>
 <br/>
 

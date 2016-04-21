@@ -11,6 +11,7 @@ import pengliu.me.vo.TagVo;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by peng on 4/16/16.
@@ -31,10 +32,7 @@ public class TransferUtil
         blogVo.setStatus(blog.getStatus().toString());
         blogVo.setCategoryVo(
                 TransferUtil.transferCategoryPoToVo(blog.getCategory()));
-        blogVo.setTagVos(
-                new HashSet<TagVo>(
-                    TransferUtil.transferTagListPoToVo(
-                            new ArrayList<Tag>(blog.getTags()))));
+        blogVo.setTagVos(TransferUtil.transferTagSetPoToVo(blog.getTags()));
 
         return blogVo;
     }
@@ -96,6 +94,11 @@ public class TransferUtil
         }
 
         return tagVos;
+    }
+
+    public static Set<TagVo> transferTagSetPoToVo(Set<Tag> tags)
+    {
+        return new HashSet<TagVo>(transferTagListPoToVo(new ArrayList(tags)));
     }
 
     public static List<CategoryVo> transferCategoryListPoToVo(List<Category> categories)

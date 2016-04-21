@@ -12,7 +12,7 @@
     <title>My Blog!!</title>
 </head>
 <body>
-<%@ include file="top.jsp" %>
+<%@ include file="top.jspf" %>
 <div id="content">
     <div class="post">
         <h2>${blog.title}</h2>

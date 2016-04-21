@@ -7,7 +7,7 @@
     <title>标签管理页</title>
 </head>
 <body>
-<%@ include file="top.jsp" %>
+<%@ include file="top.jspf" %>
 <a href="<c:url value="/management/tag/create.html"/>">创建</a><br/>
 <table border="1px" width="100%">
     <tr>
