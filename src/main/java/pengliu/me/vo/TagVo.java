@@ -12,6 +12,7 @@ public class TagVo
     private Timestamp createTime;
     private Timestamp updateTime;
     private boolean isChecked;
+    private Integer blogCount;
 
     @Override
     public boolean equals(Object o) {
@@ -74,5 +75,15 @@ public class TagVo
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getBlogCount()
+    {
+        return blogCount;
+    }
+
+    public void setBlogCount(Integer blogCount)
+    {
+        this.blogCount = blogCount;
     }
 }

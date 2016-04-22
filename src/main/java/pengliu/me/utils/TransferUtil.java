@@ -87,6 +87,7 @@ public class TransferUtil
             tagVo.setId(tag.getId());
             tagVo.setName(tag.getName());
             tagVo.setChecked(false);
+            tagVo.setBlogCount(tag.getBlogs().size());
             tagVo.setCreateTime(tag.getCreateTime());
             tagVo.setUpdateTime(tag.getUpdateTime());
 
@@ -110,6 +111,7 @@ public class TransferUtil
             categoryVo.setId(cat.getId());
             categoryVo.setName(cat.getName());
             categoryVo.setChecked(false);
+            categoryVo.setBlogCount(cat.getBlogs().size());
             categoryVo.setCreateTime(cat.getCreateTime());
             categoryVo.setUpdateTime(cat.getUpdateTime());
 
