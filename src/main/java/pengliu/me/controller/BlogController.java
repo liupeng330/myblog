@@ -57,8 +57,14 @@ public class BlogController
         }
         Page<BlogVo> publishedBlogs = this.blogService.getAllPagedPublishedBlogs(pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", publishedBlogs);
-        modelAndView.setViewName("main");
 
+        List<TagVo> tags = this.tagService.getAllTags();
+        modelAndView.addObject("allTags", tags);
+
+        List<CategoryVo> categories = this.categoryService.getAllCategories();
+        modelAndView.addObject("allCategories", categories);
+
+        modelAndView.setViewName("main");
         return modelAndView;
     }
 
