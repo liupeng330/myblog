@@ -34,18 +34,13 @@ import java.util.Set;
  */
 @Controller
 @RequestMapping("/blog")
-public class BlogController
+public class BlogController extends BaseController
 {
     private Logger logger = Logger.getLogger(BlogController.class);
 
     @Autowired
     private BlogService blogService;
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private TagService tagService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showMainPage(@RequestParam(value = "pageNo", required = false) Integer pageNo)
@@ -58,12 +53,7 @@ public class BlogController
         Page<BlogVo> publishedBlogs = this.blogService.getAllPagedPublishedBlogs(pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", publishedBlogs);
 
-        List<TagVo> tags = this.tagService.getAllTags();
-        modelAndView.addObject("allTags", tags);
-
-        List<CategoryVo> categories = this.categoryService.getAllCategories();
-        modelAndView.addObject("allCategories", categories);
-
+        addAllTagAndCategoriesToModelAndView(modelAndView);
         modelAndView.setViewName("main");
         return modelAndView;
     }
@@ -72,8 +62,7 @@ public class BlogController
     public ModelAndView goToCreateBlogPage()
     {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("allCategories", this.categoryService.getAllCategories());
-        modelAndView.addObject("allTags", this.tagService.getAllTags());
+        addAllTagAndCategoriesToModelAndView(modelAndView);
         modelAndView.setViewName("blogCreate");
 
         return modelAndView;
@@ -114,10 +103,10 @@ public class BlogController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<CategoryVo> categoryVos = this.categoryService.getAllCategories();
+        List<CategoryVo> categoryVos = this.getCategoryService().getAllCategories();
         modelAndView.addObject("allCategories", categoryVos);
 
-        List<TagVo> tagVos = this.tagService.getAllTags();
+        List<TagVo> tagVos = this.getTagService().getAllTags();
         modelAndView.addObject("allTags", tagVos);
 
         BlogVo blogVo = null;
@@ -182,10 +171,10 @@ public class BlogController
         ModelAndView modelAndView = new ModelAndView();
 
         this.logger.info("Get category by category id");
-        Category category = this.categoryService.findCategoryPoById(categoryId);
+        Category category = this.getCategoryService().findCategoryPoById(categoryId);
 
         this.logger.info("Get tags by tag ids");
-        List<Tag> tags = this.tagService.findTagsPoByIds(tagIds);
+        List<Tag> tags = this.getTagService().findTagsPoByIds(tagIds);
 
         BlogVo blogVo = new BlogVo();
         if(isUpdate)
@@ -224,8 +213,7 @@ public class BlogController
         {
             this.logger.error("Admin user doesn't exist!!!");
             modelAndView.addObject("errorMsg", ex.getMessage());
-            modelAndView.addObject("allCategories", this.categoryService.getAllCategories());
-            modelAndView.addObject("allTags", this.tagService.getAllTags());
+            addAllTagAndCategoriesToModelAndView(modelAndView);
 
             if(isUpdate)
             {

@@ -26,12 +26,9 @@ import java.util.List;
  */
 @Controller
 @RequestMapping
-public class TagController
+public class TagController extends BaseController
 {
     private Logger logger = Logger.getLogger(TagController.class);
-
-    @Autowired
-    private TagService tagService;
 
     @RequestMapping(value = "/tag/{tagId}", method = RequestMethod.GET)
     public ModelAndView getBlogsByCategory(@PathVariable Integer tagId, @RequestParam(value = "pageNo", required = false) Integer pageNo)
@@ -42,11 +39,12 @@ public class TagController
             pageNo = 1;
         }
 
-        TagVo tagVo = this.tagService.findTagById(tagId);
+        TagVo tagVo = this.getTagService().findTagById(tagId);
         modelAndView.addObject("tag", tagVo);
 
-        Page<BlogVo> publishedBlogs = this.tagService.getAllPagedPublishedBlogsByTagId(tagId, pageNo, CommonConstant.PAGE_SIZE);
+        Page<BlogVo> publishedBlogs = this.getTagService().getAllPagedPublishedBlogsByTagId(tagId, pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", publishedBlogs);
+        addAllTagAndCategoriesToModelAndView(modelAndView);
         modelAndView.setViewName("/main");
 
         return modelAndView;
@@ -57,7 +55,7 @@ public class TagController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<TagVo> categories = this.tagService.getAllTags();
+        List<TagVo> categories = this.getTagService().getAllTags();
         modelAndView.addObject("allTags", categories);
         modelAndView.addObject("errorMsg", errorMsg);
         modelAndView.setViewName("/tagManager");
@@ -70,7 +68,7 @@ public class TagController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        TagVo tag = this.tagService.findTagById(id);
+        TagVo tag = this.getTagService().findTagById(id);
         modelAndView.addObject("tag", tag);
         modelAndView.setViewName("/tagUpdate");
 
@@ -81,7 +79,7 @@ public class TagController
     public String updateTag(Integer id, String newName)
     {
         ModelAndView modelAndView = new ModelAndView();
-        this.tagService.updateTagNameById(id, newName);
+        this.getTagService().updateTagNameById(id, newName);
         String target = "/management/tag/listAll.html";
         this.logger.info("Redirect to " + target);
 
@@ -98,7 +96,7 @@ public class TagController
     public String createTag(String name)
     {
         this.logger.info("Start to create tag " + name);
-        this.tagService.createTagByName(name);
+        this.getTagService().createTagByName(name);
 
         String target = "/management/tag/listAll.html";
         this.logger.info("Redirect to " + target);
@@ -112,7 +110,7 @@ public class TagController
         String target = "/management/tag/listAll.html";
         try
         {
-            this.tagService.deleteTagById(id);
+            this.getTagService().deleteTagById(id);
         }
         catch (HasBlogRelatedException ex)
         {

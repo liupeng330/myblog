@@ -26,12 +26,9 @@ import java.util.List;
  */
 @Controller
 @RequestMapping
-public class CategoryController
+public class CategoryController extends BaseController
 {
     private Logger logger = Logger.getLogger(CategoryController.class);
-
-    @Autowired
-    private CategoryService categoryService;
 
     @RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
     public ModelAndView getBlogsByCategory(@PathVariable Integer categoryId,
@@ -43,11 +40,12 @@ public class CategoryController
             pageNo = 1;
         }
 
-        CategoryVo categoryVo = this.categoryService.findCategoryById(categoryId);
+        CategoryVo categoryVo = this.getCategoryService().findCategoryById(categoryId);
         modelAndView.addObject("category", categoryVo);
 
-        Page<BlogVo> blogVos = this.categoryService.getAllPagedPublishedBlogsByCategoryId(categoryId, pageNo, CommonConstant.PAGE_SIZE);
+        Page<BlogVo> blogVos = this.getCategoryService().getAllPagedPublishedBlogsByCategoryId(categoryId, pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", blogVos);
+        addAllTagAndCategoriesToModelAndView(modelAndView);
         modelAndView.setViewName("/main");
 
         return modelAndView;
@@ -58,7 +56,7 @@ public class CategoryController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<CategoryVo> categories = this.categoryService.getAllCategories();
+        List<CategoryVo> categories = this.getCategoryService().getAllCategories();
         modelAndView.addObject("allCategories", categories);
         modelAndView.addObject("errorMsg", errorMsg);
         modelAndView.setViewName("/categoryManager");
@@ -71,7 +69,7 @@ public class CategoryController
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        CategoryVo category = this.categoryService.findCategoryById(id);
+        CategoryVo category = this.getCategoryService().findCategoryById(id);
         modelAndView.addObject("category", category);
         modelAndView.setViewName("/categoryUpdate");
 
@@ -81,8 +79,7 @@ public class CategoryController
     @RequestMapping(value = "/management/category/update", method = RequestMethod.POST)
     public String updateCategory(Integer id, String newName)
     {
-        ModelAndView modelAndView = new ModelAndView();
-        this.categoryService.updateCategoryNameById(id, newName);
+        this.getCategoryService().updateCategoryNameById(id, newName);
         String target = "/management/category/listAll.html";
         this.logger.info("Redirect to " + target);
 
@@ -99,7 +96,7 @@ public class CategoryController
     public String createCategory(String name)
     {
         this.logger.info("Start to create category " + name);
-        this.categoryService.createCategoryByName(name);
+        this.getCategoryService().createCategoryByName(name);
 
         String target = "/management/category/listAll.html";
         this.logger.info("Redirect to " + target);
@@ -113,7 +110,7 @@ public class CategoryController
         String target = "/management/category/listAll.html";
         try
         {
-            this.categoryService.deleteCategoryById(id);
+            this.getCategoryService().deleteCategoryById(id);
         }
         catch (HasBlogRelatedException ex)
         {

@@ -32,8 +32,8 @@
                 <br/>
             </c:forEach>
         </td>
-        <td valign="top" width="25%">
-            right banner
+        <td valign="top" width="20%">
+            <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}"/>
         </td>
     </tr>
 </table>
