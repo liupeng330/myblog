@@ -17,6 +17,8 @@ import pengliu.me.service.CategoryService;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -52,12 +54,13 @@ public class CategoryController
     }
 
     @RequestMapping(value = "/management/category/listAll", method = RequestMethod.GET)
-    public ModelAndView listAllCategories()
+    public ModelAndView listAllCategories(@RequestParam(value = "errorMsg", required = false) String errorMsg)
     {
         ModelAndView modelAndView = new ModelAndView();
 
         List<CategoryVo> categories = this.categoryService.getAllCategories();
         modelAndView.addObject("allCategories", categories);
+        modelAndView.addObject("errorMsg", errorMsg);
         modelAndView.setViewName("/categoryManager");
 
         return modelAndView;
@@ -105,19 +108,26 @@ public class CategoryController
     }
 
     @RequestMapping(value = "/management/category/delete/{id}", method = RequestMethod.GET)
-    public String deleteCategory(@PathVariable Integer id)
+    public void deleteCategory(HttpServletResponse response, @PathVariable Integer id)
     {
+        String target = "/management/category/listAll.html";
         try
         {
             this.categoryService.deleteCategoryById(id);
         }
         catch (HasBlogRelatedException ex)
         {
-
+            this.logger.error(ex.getMessage());
+            target += "?errorMsg='" + ex.getMessage() + "'";
         }
-        String target = "/management/category/listAll.html";
         this.logger.info("Redirect to " + target);
-
-        return "redirect:" + target;
+        try
+        {
+            response.sendRedirect(target);
+        }
+        catch (IOException ex)
+        {
+            this.logger.error(ex.getMessage());
+        }
     }
 }

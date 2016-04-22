@@ -16,6 +16,9 @@ import pengliu.me.service.TagService;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.TagVo;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -50,12 +53,13 @@ public class TagController
     }
 
     @RequestMapping(value = "/management/tag/listAll", method = RequestMethod.GET)
-    public ModelAndView listAllTags()
+    public ModelAndView listAllTags(@RequestParam(value = "errorMsg", required = false) String errorMsg)
     {
         ModelAndView modelAndView = new ModelAndView();
 
         List<TagVo> categories = this.tagService.getAllTags();
         modelAndView.addObject("allTags", categories);
+        modelAndView.addObject("errorMsg", errorMsg);
         modelAndView.setViewName("/tagManager");
 
         return modelAndView;
@@ -103,19 +107,26 @@ public class TagController
     }
 
     @RequestMapping(value = "/management/tag/delete/{id}", method = RequestMethod.GET)
-    public String deleteTag(@PathVariable Integer id)
+    public void deleteTag(HttpServletResponse response,  @PathVariable Integer id)
     {
+        String target = "/management/tag/listAll.html";
         try
         {
             this.tagService.deleteTagById(id);
         }
         catch (HasBlogRelatedException ex)
         {
-
+            this.logger.error(ex.getMessage());
+            target += "?errorMsg='" + ex.getMessage() + "'";
         }
-        String target = "/management/tag/listAll.html";
         this.logger.info("Redirect to " + target);
-
-        return "redirect:" + target;
+        try
+        {
+            response.sendRedirect(target);
+        }
+        catch (IOException ex)
+        {
+            this.logger.error(ex.getMessage());
+        }
     }
 }
