@@ -1,3 +1,4 @@
+<%@ tag import="pengliu.me.domain.Blog" %>
 <%@ tag pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="allCats" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有分类" %>
@@ -7,9 +8,10 @@
 <div class="latestBlogs">
     <h3>最近的博客</h3>
     <ul>
+        <% int blogIndex = 0; %>
         <c:forEach var="blog" items="${topTenBlogs}">
             <li>
-                <a href="<c:url value="/blog/show/${blog.id}.html"/>">${blog.title}</a>
+                <a href="<c:url value="/blog/show/${blog.id}.html"/>"><%= ++blogIndex %>. ${blog.title}</a>
             </li>
         </c:forEach>
     </ul>
