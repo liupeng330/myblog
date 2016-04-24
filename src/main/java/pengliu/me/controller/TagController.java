@@ -45,6 +45,7 @@ public class TagController extends BaseController
         Page<BlogVo> publishedBlogs = this.getTagService().getAllPagedPublishedBlogsByTagId(tagId, pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", publishedBlogs);
         addAllTagAndCategoriesToModelAndView(modelAndView);
+        addTopTenBlogToModelAndView(modelAndView);
         modelAndView.setViewName("/main");
 
         return modelAndView;

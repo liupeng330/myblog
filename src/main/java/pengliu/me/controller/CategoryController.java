@@ -46,6 +46,7 @@ public class CategoryController extends BaseController
         Page<BlogVo> blogVos = this.getCategoryService().getAllPagedPublishedBlogsByCategoryId(categoryId, pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", blogVos);
         addAllTagAndCategoriesToModelAndView(modelAndView);
+        addTopTenBlogToModelAndView(modelAndView);
         modelAndView.setViewName("/main");
 
         return modelAndView;

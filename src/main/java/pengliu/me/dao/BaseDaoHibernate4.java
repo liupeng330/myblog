@@ -41,7 +41,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
     @SuppressWarnings("unchecked")
     public T get(Serializable id)
     {
-        return (T)getSessionFactory().getCurrentSession().get(this.entityClass, id);
+        return (T)getSessionFactory().getCurrentSession().get(this.getEntityClass(), id);
     }
 
     public T get(String columnName, Serializable columnValue)
@@ -56,7 +56,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
 
     public List<T> getList(String columnName, Serializable columnValue)
     {
-        return this.find("from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=?", columnValue);
+        return this.find("from " + this.getEntityClass().getSimpleName() + " en where en." + columnName + "=?", columnValue);
     }
 
     public List<T> getOrderedList(String columnName,
@@ -64,7 +64,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
                                   String orderByColumnName,
                                   boolean desc)
     {
-        String hql = "from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=? order by en." + orderByColumnName;
+        String hql = "from " + this.getEntityClass().getSimpleName() + " en where en." + columnName + "=? order by en." + orderByColumnName;
         if(desc)
         {
             hql += " desc";
@@ -79,7 +79,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
                                        int pageNo,
                                        int pageSize)
     {
-        String hql = "from " + this.entityClass.getSimpleName() + " en where en." + columnName + "=? order by en." + orderByColumnName;
+        String hql = "from " + this.getEntityClass().getSimpleName() + " en where en." + columnName + "=? order by en." + orderByColumnName;
         if(desc)
         {
             hql += " desc";
@@ -90,7 +90,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
 
     public <U> List<T> getList(String columnName, List<U> columnValues)
     {
-        return this.findByList("from " + entityClass.getSimpleName() + " en where en." + columnName + " in (:lst)", "lst", columnValues);
+        return this.findByList("from " + getEntityClass().getSimpleName() + " en where en." + columnName + " in (:lst)", "lst", columnValues);
     }
 
     //保存实体
@@ -115,7 +115,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
     public void delete(Serializable id)
     {
         getSessionFactory().getCurrentSession()
-                .createQuery("delete " + this.entityClass.getSimpleName() + " en where en.id = :id")
+                .createQuery("delete " + this.getEntityClass().getSimpleName() + " en where en.id = :id")
                 .setInteger("id", (Integer) id)
                 .executeUpdate();
     }
@@ -123,7 +123,7 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
     public void delete(String columnName, Serializable columnValue)
     {
         getSessionFactory().getCurrentSession()
-                .createQuery("delete " + this.entityClass.getSimpleName() + " en where " + columnName + " = :otherId")
+                .createQuery("delete " + this.getEntityClass().getSimpleName() + " en where " + columnName + " = :otherId")
                 .setInteger("otherId", (Integer) columnValue)
                 .executeUpdate();
     }
@@ -131,13 +131,13 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
     //获取所有实体
     public List<T> findAll()
     {
-        return find("select en from " + this.entityClass.getSimpleName() + " en");
+        return find("select en from " + this.getEntityClass().getSimpleName() + " en");
     }
 
     //获取实体总数
     public long findCount()
     {
-        List<?> l = find("select count(*) from " + this.entityClass.getSimpleName());
+        List<?> l = find("select count(*) from " + this.getEntityClass().getSimpleName());
 
         //返回查询得到的实体总数
         if(l != null && l.size() == 1)
@@ -262,5 +262,9 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
         }
         m.appendTail(sb);
         return sb.toString();
+    }
+
+    protected Class<T> getEntityClass() {
+        return entityClass;
     }
 }

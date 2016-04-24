@@ -2,6 +2,7 @@ package pengliu.me.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.service.BlogService;
 import pengliu.me.service.CategoryService;
 import pengliu.me.service.TagService;
 import pengliu.me.vo.CategoryVo;
@@ -20,6 +21,9 @@ public class BaseController
     @Autowired
     private TagService tagService;
 
+    @Autowired
+    private BlogService blogService;
+
     protected void addAllTagAndCategoriesToModelAndView(ModelAndView modelAndView)
     {
         List<TagVo> tags = this.tagService.getAllTags();
@@ -29,11 +33,24 @@ public class BaseController
         modelAndView.addObject("allCategories", categories);
     }
 
+    protected void addTopTenBlogToModelAndView(ModelAndView modelAndView)
+    {
+        modelAndView.addObject("topTenBlogs", this.getBlogService().getTopTenLatestPublicBLog());
+    }
+
     protected CategoryService getCategoryService() {
         return categoryService;
     }
 
     protected TagService getTagService() {
         return tagService;
+    }
+
+    public BlogService getBlogService() {
+        return blogService;
+    }
+
+    public void setBlogService(BlogService blogService) {
+        this.blogService = blogService;
     }
 }

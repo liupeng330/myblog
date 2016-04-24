@@ -22,6 +22,14 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
         return this.getPagedOrderedList("status", status, "createTime", true, pageNo, pageSize);
     }
 
+    public List<Blog> getTopTenLatestPublicBLog()
+    {
+        return (List<Blog>)this.getSessionFactory().getCurrentSession()
+                .createQuery("select en from " + this.getEntityClass().getSimpleName()+ " en order by en.createTime desc")
+                .setMaxResults(10)
+                .list();
+    }
+
     public Page<Blog> getAllPagedPublishedBlogs(int pageNo, int pageSize)
     {
         return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, pageNo, pageSize);

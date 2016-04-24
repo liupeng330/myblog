@@ -2,7 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="allCats" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有分类" %>
 <%@ attribute name="allTags" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
+<%@ attribute name="topTenBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 
+<div class="latestBlogs">
+    <h3>最近的博客</h3>
+    <ul>
+        <c:forEach var="blog" items="${topTenBlogs}">
+            <li>
+                <a href="<c:url value="/blog/show/${blog.id}.html"/>">${blog.title}</a>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+<br/>
 <div class="catList">
     <h3>我的分类</h3>
     <ul>

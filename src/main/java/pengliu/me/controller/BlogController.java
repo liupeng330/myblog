@@ -38,10 +38,6 @@ public class BlogController extends BaseController
 {
     private Logger logger = Logger.getLogger(BlogController.class);
 
-    @Autowired
-    private BlogService blogService;
-
-
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showMainPage(@RequestParam(value = "pageNo", required = false) Integer pageNo)
     {
@@ -50,10 +46,11 @@ public class BlogController extends BaseController
         {
             pageNo = 1;
         }
-        Page<BlogVo> publishedBlogs = this.blogService.getAllPagedPublishedBlogs(pageNo, CommonConstant.PAGE_SIZE);
+        Page<BlogVo> publishedBlogs = this.getBlogService().getAllPagedPublishedBlogs(pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", publishedBlogs);
 
         addAllTagAndCategoriesToModelAndView(modelAndView);
+        addTopTenBlogToModelAndView(modelAndView);
         modelAndView.setViewName("main");
         return modelAndView;
     }
@@ -84,7 +81,7 @@ public class BlogController extends BaseController
     public String deleteBlog(@PathVariable Integer id)
     {
         this.logger.info("Start to delete blogVo for id: " + id);
-        this.blogService.deleteBlogById(id);
+        this.getBlogService().deleteBlogById(id);
         return "redirect:/blog/listAll.html";
     }
 
@@ -92,7 +89,7 @@ public class BlogController extends BaseController
     public ModelAndView listAllBlogs()
     {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("allBlogs", this.blogService.getAllBlogs());
+        modelAndView.addObject("allBlogs", this.getBlogService().getAllBlogs());
         modelAndView.setViewName("blogManager");
 
         return modelAndView;
@@ -112,12 +109,12 @@ public class BlogController extends BaseController
         BlogVo blogVo = null;
         try
         {
-            blogVo = this.blogService.getBlogById(id);
+            blogVo = this.getBlogService().getBlogById(id);
         }
         catch (BlogNotExistException ex)
         {
             modelAndView.addObject("errorMsg", ex.getMessage());
-            modelAndView.addObject("allBlogs", this.blogService.getAllBlogs());
+            modelAndView.addObject("allBlogs", this.getBlogService().getAllBlogs());
             modelAndView.setViewName("blogManager");
             return modelAndView;
         }
@@ -181,7 +178,7 @@ public class BlogController extends BaseController
         {
             try
             {
-                blogVo = this.blogService.getBlogById(id);
+                blogVo = this.getBlogService().getBlogById(id);
             }
             catch (BlogNotExistException ex)
             {
@@ -201,12 +198,12 @@ public class BlogController extends BaseController
             if(isUpdate)
             {
                 this.logger.info("Update blogVo");
-                this.blogService.updateBlog(blogVo, category, tags);
+                this.getBlogService().updateBlog(blogVo, category, tags);
             }
             else
             {
                 this.logger.info("Create blogVo");
-                this.blogService.createBlog(blogVo, category, tags);
+                this.getBlogService().createBlog(blogVo, category, tags);
             }
         }
         catch (UserNotExistException ex)
@@ -235,7 +232,7 @@ public class BlogController extends BaseController
     {
         ModelAndView modelAndView = this.goToUpdateBlogPage(id);
         modelAndView.setViewName("blogDisplay");
-        this.blogService.plusBlogViewCount(id);
+        this.getBlogService().plusBlogViewCount(id);
         return modelAndView;
     }
 }
