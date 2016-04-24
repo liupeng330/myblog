@@ -24,11 +24,22 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
 
     public List<Blog> getTopTenLatestPublicBLog()
     {
+        return getTopTenPublicBlogByColumn("createTime");
+    }
+
+    public List<Blog> getTopTenViewCountPublicBlog()
+    {
+        return getTopTenPublicBlogByColumn("showCount");
+    }
+
+    private List<Blog> getTopTenPublicBlogByColumn(String  columName)
+    {
         return (List<Blog>)this.getSessionFactory().getCurrentSession()
-                .createQuery("select en from " + this.getEntityClass().getSimpleName()+ " en order by en.createTime desc")
+                .createQuery("select en from " + this.getEntityClass().getSimpleName()+ " en order by en."+columName+" desc")
                 .setMaxResults(10)
                 .list();
     }
+
 
     public Page<Blog> getAllPagedPublishedBlogs(int pageNo, int pageSize)
     {

@@ -80,6 +80,11 @@ public class BlogServiceImpl implements BlogService
         return this.blogDao.getTopTenLatestPublicBLog();
     }
 
+    public List<Blog> getTopTenViewCountPublicBLog()
+    {
+        return this.blogDao.getTopTenViewCountPublicBlog();
+    }
+
     public BlogVo getBlogById(Integer id) throws BlogNotExistException
     {
         Blog blog = this.blogDao.get(id);

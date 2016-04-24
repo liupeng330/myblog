@@ -36,7 +36,9 @@ public class BaseController
     protected void addTopTenBlogToModelAndView(ModelAndView modelAndView)
     {
         modelAndView.addObject("topTenBlogs", this.getBlogService().getTopTenLatestPublicBLog());
+        modelAndView.addObject("topTenViewCountBlogs", this.getBlogService().getTopTenViewCountPublicBLog());
     }
+
 
     protected CategoryService getCategoryService() {
         return categoryService;

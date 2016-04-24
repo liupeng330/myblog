@@ -33,7 +33,7 @@
             </c:forEach>
         </td>
         <td valign="top" width="20%">
-            <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}"/>
+            <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}"/>
         </td>
     </tr>
 </table>

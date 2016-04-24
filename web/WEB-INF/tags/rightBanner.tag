@@ -4,6 +4,7 @@
 <%@ attribute name="allCats" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有分类" %>
 <%@ attribute name="allTags" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="topTenBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
+<%@ attribute name="topTenViewCountBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 
 <div class="latestBlogs">
     <h3>最近的博客</h3>
@@ -34,6 +35,18 @@
         <c:forEach var="tag" items="${allTags}">
             <li>
                 <a href="<c:url value="/tag/${tag.id}.html"/>">${tag.name}</a>(${tag.blogCount})
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+<br/>
+<div class="latestBlogs">
+    <h3>阅读排行榜</h3>
+    <ul>
+        <% int blogIndexForViewCount = 0; %>
+        <c:forEach var="blog" items="${topTenViewCountBlogs}">
+            <li>
+                <a href="<c:url value="/blog/show/${blog.id}.html"/>"><%= ++blogIndexForViewCount %>. ${blog.title}(${blog.showCount})</a>
             </li>
         </c:forEach>
     </ul>

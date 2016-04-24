@@ -22,6 +22,7 @@ public interface BlogService
     BlogVo getBlogById(Integer id) throws BlogNotExistException;
     Page<BlogVo> getAllPagedPublishedBlogs(int pageNo, int pageSize);
     List<Blog> getTopTenLatestPublicBLog();
+    List<Blog> getTopTenViewCountPublicBLog();
     List<BlogVo> getAllBlogs();
     void deleteBlogById(Integer id);
     void plusBlogViewCount(Integer id);
