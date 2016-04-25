@@ -35,4 +35,12 @@
     <input type="reset" value="重置"><br/>
 </form>
 
+<form action="<c:url value="/blog/uploadImage.html"/>" method="post" enctype="multipart/form-data">
+    文件名：<input type="text" name="name">
+    <br>
+    <input type="file" name="file">
+    <br>
+    <input type="submit" value="upload"/>
+</form>
+
 <%@ include file="footer.jspf" %>
