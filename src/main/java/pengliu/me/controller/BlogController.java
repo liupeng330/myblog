@@ -1,10 +1,12 @@
 package pengliu.me.controller;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOExceptionWithCause;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +30,7 @@ import pengliu.me.vo.TagVo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -241,17 +244,49 @@ public class BlogController extends BaseController
 
     @RequestMapping(value = "/uploadImage")
     public ModelAndView updateThumb(HttpServletRequest request, @RequestParam("name") String name,
-                              @RequestParam("file")MultipartFile file) throws Exception
+                              @RequestParam("file")MultipartFile file)
     {
+        ModelAndView mav = goToCreateBlogPage();
         if(!file.isEmpty())
         {
             //获取upload文件夹得真实路径
-            String realpath = request.getSession().getServletContext().getRealPath("/resources/imgs");
-            this.logger.info(realpath);
-            File f = new File(realpath+"/"+file.getOriginalFilename());
-            //Apache的上传文件的工具类
-            FileUtils.copyInputStreamToFile(file.getInputStream(),f);
+            String realpath = request.getSession().getServletContext().getRealPath(CommonConstant.UPLOAD_PATH);
+            this.logger.info("Get saving path for image: " + realpath);
+            File f;
+            if(StringUtils.isEmpty(name))
+            {
+                f = new File(realpath + "/" + file.getOriginalFilename());
+            }
+            else
+            {
+                f = new File(realpath + "/" + name);
+            }
+
+            if(f.exists())
+            {
+                try
+                {
+                    mav.addObject("errorMsg", String.format("The file '%s' has been exist!!", f.getCanonicalPath()));
+                }
+                catch (IOException ex)
+                {
+                    mav.addObject("errorMsg", ex.getMessage());
+                }
+                return mav;
+            }
+            else
+            {
+                try
+                {
+                    //Apache的上传文件的工具类
+                    FileUtils.copyInputStreamToFile(file.getInputStream(), f);
+                }
+                catch (IOException ex)
+                {
+                    mav.addObject("errorMsg", ex.getMessage());
+                }
+            }
         }
-        return goToCreateBlogPage();
+        return mav;
     }
 }

@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 
 <%@ include file="header.jspf" %>
+<script>
+    function copyToClipboard(text)
+    {
+        window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+    }
+</script>
 
 <c:if test="${!empty errorMsg}">
     <div style="color:red">${errorMsg}</div>
@@ -42,5 +48,14 @@
     <br>
     <input type="submit" value="upload"/>
 </form>
+
+    <select name="cars" multiple>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
+    <button id="demo"
+            onclick="copyToClipboard(document.getElementsByName('cars'))">Copy to clipboard</button>
 
 <%@ include file="footer.jspf" %>

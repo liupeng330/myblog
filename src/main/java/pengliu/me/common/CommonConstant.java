@@ -26,4 +26,6 @@ public class CommonConstant
     public static final int PAGE_SIZE = 2;
 
     public static final String ADMIN_USER_NAME = "peng";
+
+    public static final String UPLOAD_PATH = "/resources/imgs";
 }
