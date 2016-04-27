@@ -6,6 +6,21 @@
     {
         window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
     }
+
+    function getSelectValues(select) {
+        var result = [];
+        var options = select && select.options;
+        var opt;
+
+        for (var i=0, iLen=options.length; i<iLen; i++) {
+            opt = options[i];
+
+            if (opt.selected) {
+                result.push("%%" + opt.text + "%%");
+            }
+        }
+        return result;
+    }
 </script>
 
 <c:if test="${!empty errorMsg}">
@@ -49,13 +64,22 @@
     <input type="submit" value="upload"/>
 </form>
 
-    <select name="cars" multiple>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-    </select>
-    <button id="demo"
-            onclick="copyToClipboard(document.getElementsByName('cars'))">Copy to clipboard</button>
+
+<select id="opts" multiple>
+    <option>opt 1 text
+    <option>opt 2 text
+    <option>opt 2 text
+    <option>opt 2 text
+    <option>opt 2 text
+    <option>opt 2 text
+    <option>opt 2 text
+    <option>opt 2 text
+    <option>opt 2 text
+    <option>opt 2 text
+</select>
+<button onclick="
+  var el = document.getElementById('opts');
+  copyToClipboard(getSelectValues(el));
+">Show selected values</button>
 
 <%@ include file="footer.jspf" %>

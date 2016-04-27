@@ -2,12 +2,14 @@ package pengliu.me.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.common.CommonConstant;
 import pengliu.me.service.BlogService;
 import pengliu.me.service.CategoryService;
 import pengliu.me.service.TagService;
 import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 /**
@@ -23,6 +25,9 @@ public class BaseController
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private ServletContext context;
 
     protected void addAllTagAndCategoriesToModelAndView(ModelAndView modelAndView)
     {
@@ -54,5 +59,10 @@ public class BaseController
 
     public void setBlogService(BlogService blogService) {
         this.blogService = blogService;
+    }
+
+    protected String getUploadImageRealPath()
+    {
+        return this.context.getRealPath(CommonConstant.UPLOAD_PATH);
     }
 }

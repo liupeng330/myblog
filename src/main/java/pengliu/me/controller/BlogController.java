@@ -20,10 +20,7 @@ import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
 import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
-import pengliu.me.service.BlogService;
-import pengliu.me.service.CategoryService;
-import pengliu.me.service.TagService;
-import pengliu.me.service.UserService;
+import pengliu.me.service.*;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
@@ -44,6 +41,9 @@ public class BlogController extends BaseController
 {
     private Logger logger = Logger.getLogger(BlogController.class);
 
+    @Autowired
+    private FileService fileService;
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView showMainPage(@RequestParam(value = "pageNo", required = false) Integer pageNo)
     {
@@ -58,6 +58,7 @@ public class BlogController extends BaseController
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
         modelAndView.setViewName("main");
+        this.fileService.getAllImageNamesFromServer();
         return modelAndView;
     }
 
@@ -250,7 +251,7 @@ public class BlogController extends BaseController
         if(!file.isEmpty())
         {
             //获取upload文件夹得真实路径
-            String realpath = request.getSession().getServletContext().getRealPath(CommonConstant.UPLOAD_PATH);
+            String realpath = getUploadImageRealPath();
             this.logger.info("Get saving path for image: " + realpath);
             File f;
             if(StringUtils.isEmpty(name))
