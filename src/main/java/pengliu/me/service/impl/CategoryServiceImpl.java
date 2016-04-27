@@ -70,6 +70,10 @@ public class CategoryServiceImpl extends BaseService implements CategoryService
     public void deleteCategoryById(Integer id) throws HasBlogRelatedException
     {
         Category category = this.categoryDao.get(id);
+        if(category == null)
+        {
+            return;
+        }
         if(category.getBlogs() != null && category.getBlogs().size() > 0)
         {
             throw new HasBlogRelatedException(

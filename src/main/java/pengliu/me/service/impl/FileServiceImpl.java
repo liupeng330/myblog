@@ -24,15 +24,15 @@ public class FileServiceImpl extends BaseService implements FileService
     {
         File basePathDir = new File(basePath);
         File[] files = basePathDir.listFiles();
+        if(files == null)
+        {
+            return new ArrayList<String>();
+        }
         Arrays.sort(files, new Comparator<File>()
         {
             public int compare(File o1, File o2)
             {
-                 if(o1.lastModified() > o2.lastModified())
-                     return 1;
-                if(o1.lastModified() < o2.lastModified())
-                    return -1;
-                return 0;
+                return o1.getName().compareTo(o2.getName());
             }
         });
 

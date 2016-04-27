@@ -33,7 +33,7 @@
     <textarea rows="4" cols="20" name="summary" style="width:80%;"></textarea><br/><br/>
 
     内容: <br/>
-    <textarea rows="4" cols="20" name="content" style="width:80%;"></textarea><br/><br/>
+    <textarea rows="15" cols="20" name="content" style="width:80%;"></textarea><br/><br/>
 
     分类：&nbsp;
     <c:forEach var="category" items="${allCategories}">
@@ -55,31 +55,25 @@
     <input type="submit" value="保存">&nbsp;
     <input type="reset" value="重置"><br/>
 </form>
-
+<br/>
+<br/>
 <form action="<c:url value="/blog/uploadImage.html"/>" method="post" enctype="multipart/form-data">
     文件名：<input type="text" name="name">
     <br>
-    <input type="file" name="file">
+    <input type="file" name="file" value="选择文件">
     <br>
-    <input type="submit" value="upload"/>
+    <input type="submit" value="上传"/>
 </form>
-
-
-<select id="opts" multiple>
-    <option>opt 1 text
-    <option>opt 2 text
-    <option>opt 2 text
-    <option>opt 2 text
-    <option>opt 2 text
-    <option>opt 2 text
-    <option>opt 2 text
-    <option>opt 2 text
-    <option>opt 2 text
-    <option>opt 2 text
+<br/>
+<br/>
+<select id="opts" multiple draggable="true" size="${fileNames.size()}">
+    <c:forEach var="name" items="${fileNames}">
+    <option>${name}
+        </c:forEach>
 </select>
 <button onclick="
-  var el = document.getElementById('opts');
-  copyToClipboard(getSelectValues(el));
-">Show selected values</button>
+      var el = document.getElementById('opts');
+      copyToClipboard(getSelectValues(el));
+    ">Show selected values</button>
 
 <%@ include file="footer.jspf" %>

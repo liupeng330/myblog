@@ -57,6 +57,10 @@ public class TagServiceImpl extends BaseService implements TagService
     public void deleteTagById(Integer id) throws HasBlogRelatedException
     {
         Tag tag = this.tagDao.get(id);
+        if(tag == null)
+        {
+            return;
+        }
         if(tag.getBlogs()!=null && tag.getBlogs().size() > 0)
         {
             throw new HasBlogRelatedException(

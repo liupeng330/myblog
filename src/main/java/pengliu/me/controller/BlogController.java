@@ -58,7 +58,6 @@ public class BlogController extends BaseController
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
         modelAndView.setViewName("main");
-        this.fileService.getAllImageNamesFromServer();
         return modelAndView;
     }
 
@@ -68,6 +67,9 @@ public class BlogController extends BaseController
         ModelAndView modelAndView = new ModelAndView();
         addAllTagAndCategoriesToModelAndView(modelAndView);
         modelAndView.setViewName("blogCreate");
+
+        List<String> fileNamesSortedByModifiedTime = this.fileService.getAllImageNamesFromServer(this.getUploadImageRealPath());
+        modelAndView.addObject("fileNames", fileNamesSortedByModifiedTime);
 
         return modelAndView;
     }
@@ -281,6 +283,8 @@ public class BlogController extends BaseController
                 {
                     //Apache的上传文件的工具类
                     FileUtils.copyInputStreamToFile(file.getInputStream(), f);
+                    //再次调用goToCreateBlogPage方法,以便重新获取刚刚上传的文件
+                    mav = goToCreateBlogPage();
                 }
                 catch (IOException ex)
                 {

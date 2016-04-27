@@ -48,6 +48,10 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
 
     public void deleteBlogById(Integer id)
     {
-        this.delete(this.get(id));
+        Blog blog = this.get(id);
+        if(blog != null)
+        {
+            this.delete(blog);
+        }
     }
 }
