@@ -41,4 +41,6 @@
 			<!--</props>-->
 		<!--</property>-->
 	<!--</bean>-->
+	
+	<!--<mvc:resources mapping="/resources/imgs/**" location="/WEB-INF/" />-->
 </beans>  

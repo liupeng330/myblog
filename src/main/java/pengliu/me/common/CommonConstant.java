@@ -27,5 +27,5 @@ public class CommonConstant
 
     public static final String ADMIN_USER_NAME = "peng";
 
-    public static final String UPLOAD_PATH = "/resources/imgs";
+    public static final String UPLOAD_PATH = "/WEB-INF/imgs";
 }
