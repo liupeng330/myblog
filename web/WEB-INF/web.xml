@@ -64,7 +64,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
-		<url-pattern>/static/*</url-pattern>
+		<url-pattern>/resources/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- 浏览器不支持put,delete等method,由该HiddenHttpMethodFilter将xxx?_method=delete 或 xxx?_method=put 转换为标准的 http delete、put 方法 -->
