@@ -16,7 +16,7 @@
             opt = options[i];
 
             if (opt.selected) {
-                result.push("%%" + opt.text + "%%");
+                result.push("<img src=\"/resources/" + opt.text + "\" height=\"100%\" />");
             }
         }
         return result;

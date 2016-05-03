@@ -42,6 +42,7 @@
 		<!--</property>-->
 	<!--</bean>-->
 
+	<!-- 静态资源的配置 -->
 	<!--<mvc:resources mapping="/imgs/**" location="/resources/" />-->
     <mvc:default-servlet-handler/>
 </beans>
