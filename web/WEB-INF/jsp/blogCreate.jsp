@@ -7,8 +7,8 @@
         window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
     }
 
-    function getSelectValues(select) {
-        var result = [];
+    function getSelectValues(select, imgHeight) {
+        var result = '';
         var options = select && select.options;
         var opt;
 
@@ -16,7 +16,7 @@
             opt = options[i];
 
             if (opt.selected) {
-                result.push("<img src=\"/resources/" + opt.text + "\" height=\"100%\" />");
+                result = result + "<img src=\"/resources/" + opt.text + "\" height=\"" + imgHeight + "%\" />" + "<br/>";
             }
         }
         return result;
@@ -71,9 +71,11 @@
     <option>${name}
         </c:forEach>
 </select>
+<input type="text" id="imgHeight" width="10px"/>%
 <button onclick="
       var el = document.getElementById('opts');
-      copyToClipboard(getSelectValues(el));
+      var imgHeight = document.getElementById('imgHeight').value;
+      copyToClipboard(getSelectValues(el, imgHeight));
     ">Show selected values</button>
 
 <%@ include file="footer.jspf" %>
