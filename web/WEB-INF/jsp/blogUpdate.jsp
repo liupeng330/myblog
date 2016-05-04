@@ -1,5 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <%@ include file="header.jspf" %>
+<script>
+    function copyToClipboard(text)
+    {
+        window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+    }
+
+    function getSelectValues(select, imgHeight) {
+        var result = '';
+        var options = select && select.options;
+        var opt;
+
+        for (var i=0, iLen=options.length; i<iLen; i++) {
+            opt = options[i];
+
+            if (opt.selected) {
+                result = result + "<img src=\"/resources/" + opt.text + "\" height=\"" + imgHeight + "%\" />" + "<br/>";
+            }
+        }
+        return result;
+    }
+</script>
 
 <c:if test="${!empty errorMsg}">
     <div style="color:red">${errorMsg}</div>
@@ -37,5 +58,28 @@
     <input type="submit" value="更新" />&nbsp;
     <input type="reset" value="重置" /><br/>
 </form>
+<br/>
+<br/>
+<form action="<c:url value="/blog/uploadImage.html"/>" method="post" enctype="multipart/form-data">
+    文件名：<input type="text" name="name">
+    <br>
+    <input type="file" name="file" value="选择文件">
+    <br>
+    <input type="submit" value="上传"/>
+    <input type="hidden" name="blogId" value="${blog.id}" />
+</form>
+<br/>
+<br/>
+<select id="opts" multiple draggable="true" size="${fileNames.size()}">
+    <c:forEach var="name" items="${fileNames}">
+    <option>${name}
+        </c:forEach>
+</select>
+<input type="text" id="imgHeight" width="10px"/>%
+<button onclick="
+      var el = document.getElementById('opts');
+      var imgHeight = document.getElementById('imgHeight').value;
+      copyToClipboard(getSelectValues(el, imgHeight));
+    ">Show selected values</button>
 
 <%@ include file="footer.jspf" %>

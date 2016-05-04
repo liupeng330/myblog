@@ -146,6 +146,8 @@ public class BlogController extends BaseController
                 tagVo.setChecked(true);
             }
         }
+        List<String> fileNamesSortedByModifiedTime = this.fileService.getAllImageNamesFromServer(this.getUploadImageRealPath());
+        modelAndView.addObject("fileNames", fileNamesSortedByModifiedTime);
 
         modelAndView.setViewName("blogUpdate");
         return modelAndView;
@@ -246,10 +248,20 @@ public class BlogController extends BaseController
     }
 
     @RequestMapping(value = "/uploadImage")
-    public ModelAndView updateThumb(HttpServletRequest request, @RequestParam("name") String name,
-                              @RequestParam("file")MultipartFile file)
+    public ModelAndView updateThumb(HttpServletRequest request,
+                                    @RequestParam("name") String name,
+                                    @RequestParam("file") MultipartFile file,
+                                    @RequestParam(value = "blogId", required = false) Integer blogId)
     {
-        ModelAndView mav = goToCreateBlogPage();
+        ModelAndView mav = null;
+        if(blogId == null)
+        {
+            mav = goToCreateBlogPage();
+        }
+        else
+        {
+            mav = goToUpdateBlogPage(blogId);
+        }
         if(!file.isEmpty())
         {
             //获取upload文件夹得真实路径
@@ -283,8 +295,15 @@ public class BlogController extends BaseController
                 {
                     //Apache的上传文件的工具类
                     FileUtils.copyInputStreamToFile(file.getInputStream(), f);
-                    //再次调用goToCreateBlogPage方法,以便重新获取刚刚上传的文件
-                    mav = goToCreateBlogPage();
+                    if(blogId == null)
+                    {
+                        //再次调用goToCreateBlogPage方法,以便重新获取刚刚上传的文件
+                        mav = goToCreateBlogPage();
+                    }
+                    else
+                    {
+                        mav = goToUpdateBlogPage(blogId);
+                    }
                 }
                 catch (IOException ex)
                 {
