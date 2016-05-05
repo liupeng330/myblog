@@ -21,6 +21,7 @@ import pengliu.me.domain.Tag;
 import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.*;
+import pengliu.me.utils.markdown.MarkdownProcessor;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
@@ -242,6 +243,12 @@ public class BlogController extends BaseController
     public ModelAndView showBlog(@PathVariable Integer id)
     {
         ModelAndView modelAndView = this.goToUpdateBlogPage(id);
+        BlogVo blogVo = (BlogVo) modelAndView.getModel().get("blog");
+        if(blogVo != null)
+        {
+            blogVo.setContent(new MarkdownProcessor().markdown(blogVo.getContent()));
+        }
+
         modelAndView.setViewName("blogDisplay");
         this.getBlogService().plusBlogViewCount(id);
         return modelAndView;
