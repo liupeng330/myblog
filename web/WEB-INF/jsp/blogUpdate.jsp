@@ -55,6 +55,11 @@
                 <input type="radio" name="status" value="DRAFT" <c:if test='${blog.status == "DRAFT"}'>checked</c:if> />草稿 &nbsp;
                 <br/><br/>
 
+                格式: &nbsp;
+                <input type="radio" name="blogFormat" value="HTML" <c:if test='${blog.format == "HTML"}'>checked</c:if> />HTML &nbsp;
+                <input type="radio" name="blogFormat" value="MarkDown" <c:if test='${blog.format == "MarkDown"}'>checked</c:if> />MarkDown &nbsp;
+                <br/><br/>
+
                 创建时间：&nbsp; ${blog.createTime} <br/>
                 更新时间：&nbsp; ${blog.updateTime}
 

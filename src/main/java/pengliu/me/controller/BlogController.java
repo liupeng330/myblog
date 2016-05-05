@@ -82,9 +82,10 @@ public class BlogController extends BaseController
             @RequestParam("content") String content,
             @RequestParam("categoryVo") Integer categoryId,
             @RequestParam("tagVos") Integer[] tagIds,
-            @RequestParam("status") String status)
+            @RequestParam("status") String status,
+            @RequestParam("blogFormat") String format)
     {
-        return this.saveOrUpdateBlog(null, title, summary, content, categoryId, tagIds, status, false);
+        return this.saveOrUpdateBlog(null, title, summary, content, categoryId, tagIds, status, false, format.equals("HTML"));
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -162,9 +163,10 @@ public class BlogController extends BaseController
             @RequestParam("content") String content,
             @RequestParam("categoryVo") Integer categoryId,
             @RequestParam("tagVos") Integer[] tagIds,
-            @RequestParam("status") String status)
+            @RequestParam("status") String status,
+            @RequestParam("blogFormat") String format)
     {
-        return this.saveOrUpdateBlog(id, title, summary, content, categoryId, tagIds, status, true);
+        return this.saveOrUpdateBlog(id, title, summary, content, categoryId, tagIds, status, true, format.equals("HTML"));
     }
 
     private ModelAndView saveOrUpdateBlog(
@@ -175,7 +177,8 @@ public class BlogController extends BaseController
             Integer categoryId,
             Integer[] tagIds,
             String status,
-            boolean isUpdate)
+            boolean isUpdate,
+            boolean isHTML)
     {
         ModelAndView modelAndView = new ModelAndView();
 
@@ -202,8 +205,18 @@ public class BlogController extends BaseController
 
         blogVo.setTitle(title);
         blogVo.setSummary(summary);
-        blogVo.setContent(content);
+        if(isHTML)
+        {
+            blogVo.setContent(content);
+            blogVo.setFormat("HTML");
+        }
+        else
+        {
+            blogVo.setContent(new MarkdownProcessor().markdown(content));
+            blogVo.setFormat("MarkDown");
+        }
         blogVo.setStatus(status);
+
 
         try
         {
@@ -243,11 +256,11 @@ public class BlogController extends BaseController
     public ModelAndView showBlog(@PathVariable Integer id)
     {
         ModelAndView modelAndView = this.goToUpdateBlogPage(id);
-        BlogVo blogVo = (BlogVo) modelAndView.getModel().get("blog");
-        if(blogVo != null)
-        {
-            blogVo.setContent(new MarkdownProcessor().markdown(blogVo.getContent()));
-        }
+//        BlogVo blogVo = (BlogVo) modelAndView.getModel().get("blog");
+//        if(blogVo != null)
+//        {
+//            blogVo.setContent(new MarkdownProcessor().markdown(blogVo.getContent()));
+//        }
 
         modelAndView.setViewName("blogDisplay");
         this.getBlogService().plusBlogViewCount(id);

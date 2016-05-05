@@ -20,6 +20,7 @@ public class BlogVo
     private String userName;
     private String status;
     private CategoryVo categoryVo;
+    private String format;
     private Set<TagVo> tagVos = new HashSet<TagVo>();
 
     public Integer getId()
@@ -128,4 +129,11 @@ public class BlogVo
         this.tagVos = tagVos;
     }
 
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
 }

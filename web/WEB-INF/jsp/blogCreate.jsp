@@ -52,8 +52,13 @@
                 <br/><br/>
 
                 状态: &nbsp;
-                <input type="radio" name="status" value="PUBLISHED"/>发布 &nbsp;
+                <input type="radio" name="status" value="PUBLISHED" checked="checked"/>发布 &nbsp;
                 <input type="radio" name="status" value="DRAFT"/>草稿 &nbsp;
+                <br/><br/>
+
+                格式: &nbsp;
+                <input type="radio" name="blogFormat" value="HTML" checked="checked"/>HTML &nbsp;
+                <input type="radio" name="blogFormat" value="MarkDown"/>MarkDown &nbsp;
                 <br/><br/>
 
                 <input type="submit" value="保存">&nbsp;

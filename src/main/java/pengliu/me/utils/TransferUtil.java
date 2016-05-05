@@ -33,6 +33,7 @@ public class TransferUtil
         blogVo.setCategoryVo(
                 TransferUtil.transferCategoryPoToVo(blog.getCategory()));
         blogVo.setTagVos(TransferUtil.transferTagSetPoToVo(blog.getTags()));
+        blogVo.setFormat(blog.getFormat());
 
         return blogVo;
     }
@@ -48,6 +49,7 @@ public class TransferUtil
         blog.setCreateTime(blogVo.getCreateTime());
         blog.setShowCount(blogVo.getShowCount());
         blog.setStatus(BlogStatus.CREATED);
+        blog.setFormat(blogVo.getFormat());
         if(blogVo.getStatus() != null)
         {
             blog.setStatus(BlogStatus.valueOf(blogVo.getStatus()));

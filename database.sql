@@ -33,6 +33,7 @@ CREATE TABLE `blog` (
   `show_count` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
+  `format` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_blog_1_idx` (`user_id`),
   KEY `fk_blog_2_idx` (`category_id`),

@@ -25,6 +25,7 @@ public class Blog
     private Integer showCount;
     private User user;
     private Category category;
+    private String format;
     private Set<Tag> tags = new HashSet<Tag>();
     private Set<Comment> comments = new HashSet<Comment>();
 
@@ -209,4 +210,13 @@ public class Blog
         this.comments = comments;
     }
 
+    @Basic
+    @Column(name = "format", nullable = false)
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
 }
