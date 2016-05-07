@@ -1,0 +1,83 @@
+html {
+    background: url("images/webBg.gif") repeat-x left top rgb(255, 255, 255); font: 12px/18px Verdana, "Lucida Grande", Geneva, Arial, sans-serif; margin: 0px; padding: 0px; text-align: center; color: rgb(51, 51, 51); font-size-adjust: none; font-stretch: normal;
+}
+body {
+    background: url("images/webBg.gif") repeat-x left top rgb(255, 255, 255); font: 12px/18px Verdana, "Lucida Grande", Geneva, Arial, sans-serif; margin: 0px; padding: 0px; text-align: center; color: rgb(51, 51, 51); font-size-adjust: none; font-stretch: normal;
+}
+a {
+    text-decoration: none;
+}
+a:link {
+    color: rgb(102, 153, 204);
+}
+a:visited {
+    color: rgb(102, 153, 204);
+}
+a:hover {
+    color: rgb(255, 51, 102);
+}
+.floatLeft {
+    float: left;
+}
+.floatRight {
+    float: right;
+}
+.clear {
+    clear: both;
+}
+.center {
+    text-align: center;
+}
+.message {
+    color: red;
+}
+.error {
+    color: red;
+}
+#messageBox {
+    padding: 5px; border: 1px solid black; border-image: none; left: 0px; width: 100px; text-align: center; bottom: 0px; color: red; font-weight: bold; display: none; position: fixed; background-color: rgb(255, 253, 208);
+}
+#invisiblePlaceHoler {
+    height: 1px; font-size: 96px; visibility: hidden;
+}
+div#container {
+    margin: 0px auto; padding: 0px 10px; width: auto; text-align: left; min-width: 960px; max-width: 1600px;
+}
+div#wrapper {
+    margin: 15px 0px; width: 100%; overflow: auto;
+}
+div#content {
+    margin-right: 465px; float: left;
+}
+div#sidebar {
+    width: 455px; margin-left: -455px; float: left;
+}
+div#header ul {
+    list-style: none; margin: 0px; padding: 0px;
+}
+ul#topMnu {
+    list-style: none; margin: 0px; padding: 0px;
+}
+a.minyx {
+    width: 130px; height: 23px; text-indent: -9000em; float: left; display: block; background-image: url("images/minyx_lite.gif"); background-repeat: no-repeat;}
+div#header h1 small {
+    margin: 10px 0px 0px; color: rgb(102, 102, 102); text-transform: uppercase; letter-spacing: -1px; font-size: 12px; display: block;
+}
+ul#menu {
+    line-height: 20px; float: right;
+}
+ul#menu li {
+    background-position: 0px 1px; margin: 0px; padding: 28px 0px; font-size: 11px; float: left; display: inline; background-image: url("images/mnuSep.gif"); background-repeat: no-repeat;
+}
+ul#menu li a {
+    padding: 30px 15px; text-transform: uppercase; font-weight: bold;
+}
+ul#menu li a:link {
+    color: rgb(49, 54, 62);
+}
+ul#menu li a:visited {
+    color: rgb(49, 54, 62);
+}
+ul#menu li a:hover {
+    color: rgb(255, 102, 51);
+}

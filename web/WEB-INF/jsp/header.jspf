@@ -5,31 +5,11 @@
 <html>
 <head>
     <title>My Blog!!</title>
-    <style>
-        .nav {
-            display: inline-block;
-            background-color: #00B2EE;
-            border: 1px solid #000000;
-            border-width: 1px 0px;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-        .nav li {
-            list-style-type: none;
-            width: 14.28%;
-            float: left;
-        }
-        .nav a {
-            display: inline-block;
-            padding: 10px 0;
-            width: 100%;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/resources/css/site.css" />
 </head>
 <body>
 <div id="header">
+    <a class="minyx" href="http://www.spiga.com.mx/">Spiga</a>
     <ul id="navList" class="nav">
         <li></li>
         <li></li>
