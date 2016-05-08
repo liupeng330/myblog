@@ -8,17 +8,32 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/site.css" />
 </head>
 <body>
+<div id="container">
+<a class="minyx" href="http://www.spiga.com.mx/">Spiga</a>
+<ul id="topMnu">
+    <li>
+        <a href="<c:url value="/management/user/login.html"/>">登陆</a></td> &nbsp;
+    </li>
+    <li>
+        <a href="<c:url value="/blog/listAll.html"/>">管理</a></td>
+    </li>
+</ul>
 <div id="header">
-    <a class="minyx" href="http://www.spiga.com.mx/">Spiga</a>
-    <ul id="navList" class="nav">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li>
-            <a href="<c:url value="/management/user/login.html"/>">登陆</a></td> &nbsp;
-        </li>
-        <li>
-            <a href="<c:url value="/blog/listAll.html"/>">管理</a></td>
-        </li>
+    <ul id="menu">
+        <!-- 首页，当前section加上current类 -->
+        <li id="menu-home" class="current"><a id="lnkHome" href="/">
+            Home</a></li>
+        <!-- 联系 -->
+        <li id="menu-contact"><a id="lnkContact" href="">Contact</a></li>
+        <!-- 相册 -->
+        <li id="menu-gallary"><a id="lnkGallery" href="">Gallery</a></li>
+        <!-- Rss订阅 -->
+        <li id="rss"><a id="lnkRss" href="/rss">RSS</a></li>
     </ul>
+    <h1>
+        <!-- 主标题 -->
+        <a id="lnkBlogTitle" href="/">五环外的老北京</a>
+        <!-- 子标题 -->
+        <small>鸡汤在此, 请用</small>
+    </h1>
 </div>
