@@ -42,7 +42,7 @@
         </ul>
     </div>
     <div class="latestBlogs">
-        <h3>阅读排行榜</h3>
+        <h2>阅读排行榜</h2>
         <ul class="bullet">
             <% int blogIndexForViewCount = 0; %>
             <c:forEach var="blog" items="${topTenViewCountBlogs}">

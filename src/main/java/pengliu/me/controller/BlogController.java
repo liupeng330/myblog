@@ -261,7 +261,7 @@ public class BlogController extends BaseController
 //        {
 //            blogVo.setContent(new MarkdownProcessor().markdown(blogVo.getContent()));
 //        }
-
+        this.addTopTenBlogToModelAndView(modelAndView);
         modelAndView.setViewName("blogDisplay");
         this.getBlogService().plusBlogViewCount(id);
         return modelAndView;

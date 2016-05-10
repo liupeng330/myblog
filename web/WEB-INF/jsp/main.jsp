@@ -4,7 +4,7 @@
 <%--<tr>--%>
 <%--<td valign="top">--%>
 <div id="wrapper">
-    <div id="content" style="width: 780px;">
+    <div id="content">
         <c:if test="${!empty category}">
             <h1>分类： ${category.name}</h1>
         </c:if>
