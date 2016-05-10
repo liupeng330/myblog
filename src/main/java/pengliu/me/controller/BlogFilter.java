@@ -39,7 +39,7 @@ public class BlogFilter implements Filter
             User userContext = getSessionUser(httpRequest);
 
             // 3 用户未登录, 且当前URI资源需要登录才能访问
-            if (userContext == null && isURINeedToLogin(httpRequest.getRequestURI(), httpRequest))
+            if ((userContext == null || !isAdminUser(userContext)) && isURINeedToLogin(httpRequest.getRequestURI(), httpRequest))
             {
                 String toUrl = httpRequest.getRequestURL().toString();
                 if (!StringUtils.isEmpty(httpRequest.getQueryString()))
@@ -86,6 +86,11 @@ public class BlogFilter implements Filter
     protected User getSessionUser(HttpServletRequest request)
     {
         return (User) request.getSession().getAttribute(CommonConstant.USER_CONTEXT);
+    }
+
+    private Boolean isAdminUser(User user)
+    {
+        return user.getName().equals(CommonConstant.ADMIN_USER_NAME);
     }
 
     public void destroy()

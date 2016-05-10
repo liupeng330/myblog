@@ -72,4 +72,14 @@ public class UserController
         }
         return modelAndView;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        request.getSession().removeAttribute(CommonConstant.USER_CONTEXT);
+        modelAndView.setViewName("redirect:" + CommonConstant.DEFAULT_URL);
+
+        return modelAndView;
+    }
 }

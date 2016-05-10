@@ -47,8 +47,13 @@ div#wrapper {
     margin: 15px 0px; width: 100%; overflow: auto;
 }
 div#content {
-    margin-right: 465px; float: left;
+    margin-right: 465px; float: left; width: 60%;
 }
+/*@media screen and (min-width: 1280px) {*/
+    /*div#content {*/
+        /*margin-right: 465px; float: left; width: 60%;*/
+    /*}*/
+/*}*/
 div#sidebar {
     width: 455px; margin-left: -455px; float: left;
 }
