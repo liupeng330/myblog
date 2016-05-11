@@ -62,6 +62,25 @@ public class BlogController extends BaseController
         return modelAndView;
     }
 
+    @RequestMapping(value = "/search")
+    public ModelAndView searchPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
+                                   @RequestParam(value = "search", required = true) String searchTitle)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        if(pageNo == null)
+        {
+            pageNo = 1;
+        }
+        Page<BlogVo> publishedBlogs = this.getBlogService().getAllPagedPublishedBlogsByTitle(searchTitle, pageNo, CommonConstant.PAGE_SIZE);
+        modelAndView.addObject("pageResult", publishedBlogs);
+        modelAndView.addObject("searchContent", searchTitle);
+
+        addAllTagAndCategoriesToModelAndView(modelAndView);
+        addTopTenBlogToModelAndView(modelAndView);
+        modelAndView.setViewName("main");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView goToCreateBlogPage()
     {

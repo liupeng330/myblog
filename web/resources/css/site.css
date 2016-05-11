@@ -632,11 +632,11 @@ div#sidebar div ul li a.mini_rss:hover {
 div#sidebar div#side-book-recommendation img {
     width: 100px;
 }
-#mySearchWrapper {
-    margin: 10px auto; border: 2px solid rgb(51, 51, 51); border-image: none; background-color: rgb(68, 68, 68);
-}
+/*#mySearchWrapper {*/
+    /*margin: 10px auto; border: 2px solid rgb(51, 51, 51); border-image: none; background-color: rgb(68, 68, 68);*/
+/*}*/
 #mySearch {
-    padding: 5px 0px; border: 1px solid rgb(86, 86, 86); border-image: none; text-align: center;
+    padding: 5px 0px; border: 1px solid rgb(86, 86, 86); border-image: none; text-align: center; background-color: rgb(68, 68, 68);
 }
 .lb_search {
     background-position: 0px 0px; padding: 2px 0px 10px 25px; height: 14px; text-indent: -9000em; background-image: url("images/icon_search.gif"); background-repeat: no-repeat;

@@ -17,9 +17,16 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
         return this.findAll();
     }
 
-    private Page<Blog> getAllPagedBlogsByStatus(BlogStatus status, int pageNo, int pageSize)
+    private Page<Blog> getAllPagedBlogsByStatus(BlogStatus status, String searchValue, int pageNo, int pageSize)
     {
-        return this.getPagedOrderedList("status", status, "createTime", true, pageNo, pageSize);
+        if(searchValue == null)
+        {
+            return this.getPagedOrderedList("status", status, "createTime", true, pageNo, pageSize);
+        }
+        else
+        {
+            return this.getPagedOrderedList("status", status, "title", searchValue, "createTime", true, pageNo, pageSize);
+        }
     }
 
     public List<Blog> getTopTenLatestPublicBLog()
@@ -43,7 +50,12 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
 
     public Page<Blog> getAllPagedPublishedBlogs(int pageNo, int pageSize)
     {
-        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, pageNo, pageSize);
+        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, null, pageNo, pageSize);
+    }
+
+    public Page<Blog> getAllPagedPublishedBlogs(String searchValue, int pageNo, int pageSize)
+    {
+        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, searchValue, pageNo, pageSize);
     }
 
     public void deleteBlogById(Integer id)

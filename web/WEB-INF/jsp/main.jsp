@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jspf" %>
-<%--<table width="100%">--%>
-<%--<tr>--%>
-<%--<td valign="top">--%>
 <div id="wrapper">
     <div id="content">
         <c:if test="${!empty category}">
@@ -10,6 +7,9 @@
         </c:if>
         <c:if test="${!empty tag}">
             <h1>标签： ${tag.name}</h1>
+        </c:if>
+        <c:if test="${!empty searchContent}">
+            <h1>搜索内容： ${searchContent}</h1>
         </c:if>
         <c:forEach var="blog" items="${pageResult.currentPageData}">
             <div class="post">
@@ -31,7 +31,6 @@
                 </ul>
             </div>
         </c:forEach>
-        <%--</td>--%>
         <div id="pager">
             <p align="center">
                 <c:if test="${!empty category}">
@@ -40,6 +39,9 @@
                 <c:if test="${!empty tag}">
                     <myblog:PageBar pageUrl="/tag/${tag.id}.html" pageAttrKey="pageResult"/>
                 </c:if>
+                <c:if test="${!empty searchContent}">
+                    <myblog:PageBar pageUrl="/blog/searchTitle.html?searchTitle=${searchContent}" pageAttrKey="pageResult"/>
+                </c:if>
                 <c:if test="${empty tag and empty category}">
                     <myblog:PageBar pageUrl="/blog.html" pageAttrKey="pageResult"/>
                 </c:if>
@@ -47,11 +49,7 @@
         </div>
     </div>
     <div id="sidebar">
-        <%--<td valign="top" width="20%">--%>
         <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}"/>
     </div>
-    <%--</td>--%>
-    <%--</tr>--%>
-    <%--</table>--%>
 </div>
 <%@ include file="footer.jspf" %>

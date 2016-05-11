@@ -88,6 +88,24 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
         return this.pagedQuery(hql, pageNo, pageSize, columnValue);
     }
 
+    public Page<T> getPagedOrderedList(String columnName,
+                                       Serializable columnValue,
+                                       String searchColumnName,
+                                       Serializable searchValue,
+                                       String orderByColumnName,
+                                       boolean desc,
+                                       int pageNo,
+                                       int pageSize)
+    {
+        String hql = "from " + this.getEntityClass().getSimpleName() + " en where en." + columnName + "=? and en." + searchColumnName + " like ? order by en." + orderByColumnName;
+        if(desc)
+        {
+            hql += " desc";
+        }
+
+        return this.pagedQuery(hql, pageNo, pageSize, columnValue, "%" + searchValue + "%");
+    }
+
     public <U> List<T> getList(String columnName, List<U> columnValues)
     {
         return this.findByList("from " + getEntityClass().getSimpleName() + " en where en." + columnName + " in (:lst)", "lst", columnValues);

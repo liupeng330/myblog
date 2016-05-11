@@ -6,6 +6,16 @@
 <%@ attribute name="topTenBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="topTenViewCountBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 
+<div id="mySearchWrapper">
+    <form action="<c:url value="/blog/search.html"/>" method="post">
+        <div id="mySearch">
+            <input type="image" src="/resources/css/images/btnsearch.gif" id="btnZzk" class="submit">
+            <label class="lb_search">
+                <input type="text" id="q" name="search" class="keyword">
+            </label>
+        </div>
+    </form>
+</div>
 <div id="sideLeft">
     <div class="side-recent-posts">
         <h2>最近的博客</h2>
