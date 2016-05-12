@@ -40,9 +40,9 @@
                     <myblog:PageBar pageUrl="/tag/${tag.id}.html" pageAttrKey="pageResult"/>
                 </c:if>
                 <c:if test="${!empty searchContent}">
-                    <myblog:PageBar pageUrl="/blog/searchTitle.html?searchTitle=${searchContent}" pageAttrKey="pageResult"/>
+                    <myblog:PageBar pageUrl="/blog/search.html?search=${searchContent}" pageAttrKey="pageResult"/>
                 </c:if>
-                <c:if test="${empty tag and empty category}">
+                <c:if test="${empty tag and empty category and empty searchContent}">
                     <myblog:PageBar pageUrl="/blog.html" pageAttrKey="pageResult"/>
                 </c:if>
             </p>

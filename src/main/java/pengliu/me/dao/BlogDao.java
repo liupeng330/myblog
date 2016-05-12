@@ -17,7 +17,7 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
         return this.findAll();
     }
 
-    private Page<Blog> getAllPagedBlogsByStatus(BlogStatus status, String searchValue, int pageNo, int pageSize)
+    private Page<Blog> getAllPagedBlogsByStatus(BlogStatus status, String searchColumn, String searchValue, int pageNo, int pageSize)
     {
         if(searchValue == null)
         {
@@ -25,7 +25,7 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
         }
         else
         {
-            return this.getPagedOrderedList("status", status, "title", searchValue, "createTime", true, pageNo, pageSize);
+            return this.getPagedOrderedList("status", status, searchColumn, searchValue, "createTime", true, pageNo, pageSize);
         }
     }
 
@@ -50,12 +50,12 @@ public class BlogDao extends BaseDaoHibernate4<Blog>
 
     public Page<Blog> getAllPagedPublishedBlogs(int pageNo, int pageSize)
     {
-        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, null, pageNo, pageSize);
+        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, null, null, pageNo, pageSize);
     }
 
     public Page<Blog> getAllPagedPublishedBlogs(String searchValue, int pageNo, int pageSize)
     {
-        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, searchValue, pageNo, pageSize);
+        return this.getAllPagedBlogsByStatus(BlogStatus.PUBLISHED, "content", searchValue, pageNo, pageSize);
     }
 
     public void deleteBlogById(Integer id)

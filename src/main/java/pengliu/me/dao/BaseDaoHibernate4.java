@@ -4,11 +4,15 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,8 +92,23 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
         return this.pagedQuery(hql, pageNo, pageSize, columnValue);
     }
 
+//    public Page<T> getPagedOrderedList(String columnName,
+//                                       Serializable columnValue,
+//                                       String searchColumnName,
+//                                       Serializable searchValue,
+//                                       String orderByColumnName,
+//                                       boolean desc,
+//                                       int pageNo,
+//                                       int pageSize)
+//    {
+//        Map<String, Serializable> searchKV = new HashMap<String, Serializable>();
+//        searchKV.put(searchColumnName, searchValue);
+//        return getPagedOrderedList(columnName, columnValue, searchKV, orderByColumnName, desc, pageNo, pageSize);
+//    }
+
     public Page<T> getPagedOrderedList(String columnName,
                                        Serializable columnValue,
+//                                       Map<String, Serializable> searchKV,
                                        String searchColumnName,
                                        Serializable searchValue,
                                        String orderByColumnName,
@@ -97,13 +116,41 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
                                        int pageNo,
                                        int pageSize)
     {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("from " + this.getEntityClass().getSimpleName() + " en where en." + columnName + "=? and (");
+//        for(Map.Entry<String, Serializable> kv: searchKV.entrySet())
+//        {
+//            sb.append("en." + kv.getKey() + " like ? or ");
+//        }
+//
+//        if(searchKV.size() >= 1)
+//        {
+//            sb.replace(sb.length()-4, sb.length(), "");
+//        }
+//        sb.append(") order by en." + orderByColumnName);
+//
+//        if(desc)
+//        {
+//            sb.append(" desc");
+//        }
+//
+//
+//
+//        List<String> searchValueList = new ArrayList<String>();
+//        searchValueList.add(columnValue.toString());
+//        for(Serializable value: searchKV.values())
+//        {
+//            searchValueList.add("%" + value + "%");
+//        }
+//        return this.pagedQuery(sb.toString(), pageNo, pageSize, searchValueList.toArray(new Serializable[0]));
+
         String hql = "from " + this.getEntityClass().getSimpleName() + " en where en." + columnName + "=? and en." + searchColumnName + " like ? order by en." + orderByColumnName;
         if(desc)
         {
             hql += " desc";
         }
 
-        return this.pagedQuery(hql, pageNo, pageSize, columnValue, "%" + searchValue + "%");
+        return  this.pagedQuery(hql, pageNo, pageSize, columnValue, "%" + searchValue + "%");
     }
 
     public <U> List<T> getList(String columnName, List<U> columnValues)

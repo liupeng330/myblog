@@ -75,9 +75,9 @@ public class BlogServiceImpl implements BlogService
         return this.populateAllPagedBlogsPoToVo(this.blogDao.getAllPagedPublishedBlogs(pageNo, pageSize));
     }
 
-    public Page<BlogVo> getAllPagedPublishedBlogsByTitle(String title, int pageNo, int pageSize)
+    public Page<BlogVo> getAllPagedPublishedBlogsByContent(String content, int pageNo, int pageSize)
     {
-        return this.populateAllPagedBlogsPoToVo(this.blogDao.getAllPagedPublishedBlogs(title, pageNo, pageSize));
+        return this.populateAllPagedBlogsPoToVo(this.blogDao.getAllPagedPublishedBlogs(content, pageNo, pageSize));
     }
 
     public List<Blog> getTopTenLatestPublicBLog()

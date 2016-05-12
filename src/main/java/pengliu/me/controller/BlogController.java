@@ -1,10 +1,8 @@
 package pengliu.me.controller;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOExceptionWithCause;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.dao.Page;
-import pengliu.me.domain.Blog;
 import pengliu.me.domain.Category;
 import pengliu.me.domain.Tag;
 import pengliu.me.exception.BlogNotExistException;
@@ -29,7 +26,6 @@ import pengliu.me.vo.TagVo;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -64,16 +60,16 @@ public class BlogController extends BaseController
 
     @RequestMapping(value = "/search")
     public ModelAndView searchPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
-                                   @RequestParam(value = "search", required = true) String searchTitle)
+                                   @RequestParam(value = "search", required = true) String searchContent)
     {
         ModelAndView modelAndView = new ModelAndView();
         if(pageNo == null)
         {
             pageNo = 1;
         }
-        Page<BlogVo> publishedBlogs = this.getBlogService().getAllPagedPublishedBlogsByTitle(searchTitle, pageNo, CommonConstant.PAGE_SIZE);
+        Page<BlogVo> publishedBlogs = this.getBlogService().getAllPagedPublishedBlogsByContent(searchContent, pageNo, CommonConstant.PAGE_SIZE);
         modelAndView.addObject("pageResult", publishedBlogs);
-        modelAndView.addObject("searchContent", searchTitle);
+        modelAndView.addObject("searchContent", searchContent);
 
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);

@@ -21,7 +21,7 @@ public interface BlogService
     void updateBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
     BlogVo getBlogById(Integer id) throws BlogNotExistException;
     Page<BlogVo> getAllPagedPublishedBlogs(int pageNo, int pageSize);
-    Page<BlogVo> getAllPagedPublishedBlogsByTitle(String title, int pageNo, int pageSize);
+    Page<BlogVo> getAllPagedPublishedBlogsByContent(String title, int pageNo, int pageSize);
     List<Blog> getTopTenLatestPublicBLog();
     List<Blog> getTopTenViewCountPublicBLog();
     List<BlogVo> getAllBlogs();
