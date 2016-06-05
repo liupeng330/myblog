@@ -22,10 +22,10 @@ public class DaoTest
             tx = session.beginTransaction();
 
             User user = new User();
-            user.setLastLoginTime(CommonUtil.getTimeStampNow());
+//            user.setLastLoginTime(CommonUtil.getTimeStampNow());
             user.setName("liupeng");
             user.setPassword("123");
-            user.setStatus(UserStatus.ACTIVE);
+//            user.setStatus(UserStatus.ACTIVE);
             session.save(user);
 
             tx.commit();

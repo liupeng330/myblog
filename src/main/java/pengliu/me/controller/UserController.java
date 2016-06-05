@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.domain.User;
@@ -13,73 +14,26 @@ import pengliu.me.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by peng on 16-4-13.
- */
 @Controller
-@RequestMapping("/management/user")
+@RequestMapping("/")
 public class UserController
 {
     private Logger logger = Logger.getLogger(UserController.class);
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView showLoginPage()
+    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+                              @RequestParam(value = "logout", required = false) String logout)
     {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("user", new User());
-        modelAndView.setViewName("login");
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(HttpServletRequest request, User user)
-    {
-        ModelAndView modelAndView = new ModelAndView();
-
-        if(this.userService.canLogin(user))
+        ModelAndView model = new ModelAndView();
+        if (error != null)
         {
-            try
-            {
-                this.userService.updateLoginTime(user.getName());
-            }
-            catch (UserNotExistException ex)
-            {
-                this.logger.error("");
-                modelAndView.addObject("errorMsg", ex.getMessage());
-                modelAndView.setViewName("login");
-                return modelAndView;
-            }
-
-            this.logger.info(String.format("将user'%s'加入到session中", user.getName()));
-            request.getSession().setAttribute(CommonConstant.USER_CONTEXT, user);
-
-            Object targetUrlBeforeLogin = request.getSession().getAttribute(CommonConstant.LOGIN_TO_URL);
-            request.getSession().removeAttribute(CommonConstant.LOGIN_TO_URL);
-
-            String target = targetUrlBeforeLogin==null ? CommonConstant.DEFAULT_URL : targetUrlBeforeLogin.toString();
-            this.logger.info(String.format("跳转页面为'%s'", target));
-            modelAndView.setViewName("redirect:" + target);
+            model.addObject("error", "Invalid username and password!");
         }
-        else
+        if (logout != null)
         {
-            this.logger.error(String.format("用户'%s'登陆失败", user.getName()));
-            modelAndView.addObject("errorMsg", "登陆失败，请重试");
-            modelAndView.setViewName("login");
+            model.addObject("msg", "You've been logged out successfully.");
         }
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView logout(HttpServletRequest request)
-    {
-        ModelAndView modelAndView = new ModelAndView();
-        request.getSession().removeAttribute(CommonConstant.USER_CONTEXT);
-        modelAndView.setViewName("redirect:" + CommonConstant.DEFAULT_URL);
-
-        return modelAndView;
+        model.setViewName("login");
+        return model;
     }
 }

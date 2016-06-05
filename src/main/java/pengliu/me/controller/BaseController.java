@@ -12,9 +12,6 @@ import pengliu.me.vo.TagVo;
 import javax.servlet.ServletContext;
 import java.util.List;
 
-/**
- * Created by peng on 4/22/16.
- */
 public class BaseController
 {
     @Autowired

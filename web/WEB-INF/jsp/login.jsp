@@ -2,27 +2,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <%@ include file="header.jspf" %>
 
-<c:if test="${!empty errorMsg}">
-    <div style="color:red">${errorMsg}</div>
-</c:if>
+    <c:if test="${not empty error}">
+        <div class="error">${error}</div>
+    </c:if>
+    <c:if test="${not empty msg}">
+        <div class="msg">${msg}</div>
+    </c:if>
 
-<form:form method="POST" commandName="user" action="/management/user/login.html">
-<table border="1px">
-        <tr>
-            <td width="20%">用户名</td>
-            <td width="80%"><form:input path="name" /></td>
-        </tr>
-        <tr>
-            <td width="20%">密码</td>
-            <td width="80%"><form:input path="password" type="password" /></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="登录">
-                <input type="reset" value="重置">
-            </td>
-        </tr>
-    </table>
-</form:form>
+    <form name='loginForm'
+          action="<c:url value='/auth/login_check?targetUrl=${targetUrl}' />"
+          method='POST'>
+        <table>
+            <tr>
+                <td>User:</td>
+                <td><input type='text' name='username'></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='password' /></td>
+            </tr>
+            <tr>
+                <td colspan='2'><input name="submit" type="submit"
+                                       value="submit" /></td>
+            </tr>
+        </table>
+    </form>
 
 <%@ include file="footer.jspf" %>

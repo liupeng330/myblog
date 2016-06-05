@@ -21,9 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by peng on 16-4-14.
- */
 @Controller
 @RequestMapping
 public class TagController extends BaseController

@@ -29,9 +29,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by peng on 16-4-14.
- */
 @Controller
 @RequestMapping("/blog")
 public class BlogController extends BaseController

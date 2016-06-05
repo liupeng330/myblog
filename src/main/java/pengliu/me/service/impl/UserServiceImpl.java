@@ -9,37 +9,34 @@ import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.UserService;
 import pengliu.me.utils.CommonUtil;
 
-/**
- * Created by peng on 16-4-13.
- */
 @Service
 public class UserServiceImpl implements UserService
 {
     @Autowired
     private UserDao userDao;
 
-    public boolean canLogin(User user)
-    {
-        User returnedUser = userDao.findUserByName(user.getName());
-        if(returnedUser == null)
-        {
-            return false;
-        }
-
-        return returnedUser.getPassword().equals(user.getPassword());
-    }
-
-    public void updateLoginTime(String name) throws UserNotExistException
-    {
-        User returnedUser = userDao.findUserByName(name);
-        if(returnedUser != null)
-        {
-            returnedUser.setLastLoginTime(CommonUtil.getTimeStampNow());
-            this.userDao.persist(returnedUser);
-            return;
-        }
-        throw new UserNotExistException("Can not find user by name: " + name);
-    }
+//    public boolean canLogin(User user)
+//    {
+//        User returnedUser = userDao.findUserByName(user.getName());
+//        if(returnedUser == null)
+//        {
+//            return false;
+//        }
+//
+//        return returnedUser.getPassword().equals(user.getPassword());
+//    }
+//
+//    public void updateLoginTime(String name) throws UserNotExistException
+//    {
+//        User returnedUser = userDao.findUserByName(name);
+//        if(returnedUser != null)
+//        {
+//            returnedUser.setLastLoginTime(CommonUtil.getTimeStampNow());
+//            this.userDao.persist(returnedUser);
+//            return;
+//        }
+//        throw new UserNotExistException("Can not find user by name: " + name);
+//    }
 
     public User getAdminUser() throws UserNotExistException
     {

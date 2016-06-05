@@ -21,9 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by peng on 4/12/16.
- */
 @Controller
 @RequestMapping
 public class CategoryController extends BaseController

@@ -8,9 +8,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * Created by peng on 16-4-14.
- */
 public class BlogFilter implements Filter
 {
     private static final String FILTERED_REQUEST = "@@session_context_filtered_request";

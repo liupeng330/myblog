@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  */
 public interface UserService
 {
-    boolean canLogin(User user);
-    void updateLoginTime(String name) throws UserNotExistException;
+//    boolean canLogin(User user);
+//    void updateLoginTime(String name) throws UserNotExistException;
     User getAdminUser() throws UserNotExistException;
 }

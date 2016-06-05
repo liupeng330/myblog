@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework.version>3.2.11.RELEASE</org.springframework.version>
+        <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <org.hibernate.version>4.2.2.Final</org.hibernate.version>
         <org.unitils.version>3.4.2</org.unitils.version>
     </properties>
@@ -129,6 +130,26 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
             <type>jar</type>
+        </dependency>
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- Spring Security JSP Taglib -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <!-- for test -->

@@ -176,7 +176,7 @@ public class Blog
     }
 
     @ManyToOne(fetch = FetchType.LAZY)//, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_name", nullable = false)
     public User getUser()
     {
         return user;
