@@ -9,7 +9,7 @@
 <div id="mySearchWrapper">
     <form action="<c:url value="/blog/search.html"/>" method="post">
         <div id="mySearch">
-            <input type="image" src="/resources/css/images/btnsearch.gif" id="btnZzk" class="submit">
+            <input type="image" src="${pageContext.request.contextPath}/resources/css/images/btnsearch.gif" id="btnZzk" class="submit">
             <label class="lb_search">
                 <input type="text" id="q" name="search" class="keyword">
             </label>
