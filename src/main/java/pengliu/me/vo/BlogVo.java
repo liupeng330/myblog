@@ -21,6 +21,7 @@ public class BlogVo
     private String status;
     private CategoryVo categoryVo;
     private String format;
+    private String url;
     private Set<TagVo> tagVos = new HashSet<TagVo>();
 
     public Integer getId()
@@ -135,5 +136,13 @@ public class BlogVo
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

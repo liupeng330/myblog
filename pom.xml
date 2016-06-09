@@ -152,6 +152,13 @@
             <version>${spring.security.version}</version>
         </dependency>
 
+        <!-- RSS -->
+        <dependency>
+            <groupId>net.java.dev.rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- for test -->
         <!--<dependency>-->
             <!--<groupId>org.unitils</groupId>-->

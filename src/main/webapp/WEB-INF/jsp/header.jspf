@@ -34,7 +34,7 @@
             <!-- 相册 -->
             <li id="menu-gallary"><a id="lnkGallery" href="">Gallery</a></li>
             <!-- Rss订阅 -->
-            <li id="rss"><a id="lnkRss" href="/rss">RSS</a></li>
+            <li id="rss"><a id="lnkRss" href="<c:url value="/rssfeed.html"/>">RSS</a></li>
         </ul>
         <h1>
             <!-- 主标题 -->

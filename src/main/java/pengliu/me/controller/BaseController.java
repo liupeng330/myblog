@@ -62,4 +62,9 @@ public class BaseController
     {
         return this.context.getRealPath(CommonConstant.UPLOAD_PATH);
     }
+
+    protected String getContextPath()
+    {
+        return this.context.getContextPath();
+    }
 }
