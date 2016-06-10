@@ -10,6 +10,7 @@ import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class BaseController
@@ -63,8 +64,12 @@ public class BaseController
         return this.context.getRealPath(CommonConstant.UPLOAD_PATH);
     }
 
-    protected String getContextPath()
+    protected String getFullURIPath(HttpServletRequest request)
     {
-        return this.context.getContextPath();
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();  // includes leading forward slash
+        return scheme + "://" + serverName + ":" + serverPort + contextPath;
     }
 }

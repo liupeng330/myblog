@@ -22,7 +22,7 @@ public class RssController extends BaseController
 		List<BlogVo> blogVos = this.getBlogService().getAllBlogs();
 		for(BlogVo blogVo: blogVos)
 		{
-			blogVo.setUrl(request.getContextPath() + "/blog/show/" + blogVo.getId() + ".html");
+			blogVo.setUrl(this.getFullURIPath(request) + "/blog/show/" + blogVo.getId() + ".html");
 			blogVosForRss.add(blogVo);
 		}
 
