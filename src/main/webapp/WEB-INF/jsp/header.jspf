@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>My Blog!!</title>
+    <title>Peng's blog</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/site.css" />
 </head>
 <body>
@@ -40,6 +40,6 @@
             <!-- 主标题 -->
             <a id="lnkBlogTitle" href="<c:url value="/blog.html"/>">五环外的老北京</a>
             <!-- 子标题 -->
-            <small>鸡汤在此, 请用</small>
+            <small>Do the right thing, Wait to get fired</small>
         </h1>
     </div>
