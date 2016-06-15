@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
-mvn_bin_path=/home/peng/apache-maven-3.3.3/bin/mvn
+mvn_bin_path=/opt/app/maven/bin/mvn
 war_file_name=myblog-1.0-SNAPSHOT.war
-tomcat_home_path=/home/peng/apache-tomcat-8.0.24
+tomcat_home_path=/opt/app/tomcat-myblog
 tomcat_bin_path=$tomcat_home_path/bin/catalina.sh
 webapp_name=myblog
+
+echo "Update codes to latest"
+cd /root/myblog
+git pull
 
 echo "Deleting 'out' and 'target' folder."
 rm -rf out target
