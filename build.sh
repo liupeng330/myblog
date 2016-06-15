@@ -6,12 +6,19 @@ tomcat_home_path=/opt/app/tomcat-myblog
 tomcat_bin_path=$tomcat_home_path/bin/catalina.sh
 webapp_name=myblog
 
-echo "Update codes to latest"
+echo "Updating codes to latest"
 cd /root/myblog
 git pull
 
 echo "Deleting 'out' and 'target' folder."
 rm -rf out target
+
+echo "Backing up blog image files to ~/resources."
+rm -rf ../resources
+rsync -av -progress $tomcat_home_path/webapps/myblog/resources ~/resources --exclude css
+
+echo "Changing database connection password."
+sed -i -e "s/\(jdbc.password=\).*/\11qaz841125!QAZ/" src/main/resources/jdbc.properties
 
 echo "Running 'mvn clean package' to build codes."
 $mvn_bin_path clean package -Dmaven.test.skip=true
@@ -41,4 +48,9 @@ cp target/$war_file_name $tomcat_home_path/webapps/$webapp_name.war
 echo "Starting to startup tomcat service."
 $tomcat_bin_path start
 
+echo "Copy backing up files back to website."
+sleep 10
+cp -r ../resources/* $tomcat_home_path/webapps/myblog/resources/
+
+cd ~
 echo "Done for deploy!!"
