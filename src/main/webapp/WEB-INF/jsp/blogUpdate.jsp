@@ -15,7 +15,7 @@
             opt = options[i];
 
             if (opt.selected) {
-                result = result + "<img src=\"/resources/" + opt.text + "\" height=\"" + imgHeight + "%\" />" + "<br/>";
+                result = result + "<img src=\"${pageContext.request.contextPath}/resources/" + opt.text + "\" height=\"" + imgHeight + "%\" />" + "<br/>";
             }
         }
         return result;
