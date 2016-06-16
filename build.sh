@@ -5,6 +5,7 @@ war_file_name=myblog-1.0-SNAPSHOT.war
 tomcat_home_path=/opt/app/tomcat-myblog
 tomcat_bin_path=$tomcat_home_path/bin/catalina.sh
 webapp_name=myblog
+backup_folder=/root/backup
 
 echo "Updating codes to latest"
 cd /root/myblog
@@ -13,9 +14,11 @@ git pull
 echo "Deleting 'out' and 'target' folder."
 rm -rf out target
 
-echo "Backing up blog image files to ~/resources."
-rm -rf ../resources
-rsync -av -progress $tomcat_home_path/webapps/myblog/resources ~/resources --exclude css
+echo "Removing files in $backup_folder"
+rm -rf $backup_folder
+
+echo "Backing up blog image files to $backup_folder"
+rsync -av -progress $tomcat_home_path/webapps/myblog/resources $backup_folder --exclude css
 
 echo "Changing database connection password."
 sed -i -e "s/\(jdbc.password=\).*/\11qaz841125!QAZ/" src/main/resources/jdbc.properties
@@ -50,7 +53,7 @@ $tomcat_bin_path start
 
 echo "Copy backing up files back to website."
 sleep 10
-cp -r ../resources/* $tomcat_home_path/webapps/myblog/resources/
+cp -r $backup_folder/resources/* $tomcat_home_path/webapps/myblog/resources/
 
 cd ~
 echo "Done for deploy!!"

@@ -17,6 +17,7 @@ import pengliu.me.service.CategoryService;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
@@ -103,7 +104,7 @@ public class CategoryController extends BaseController
     }
 
     @RequestMapping(value = "/management/category/delete/{id}", method = RequestMethod.GET)
-    public void deleteCategory(HttpServletResponse response, @PathVariable Integer id)
+    public void deleteCategory(HttpServletRequest request, HttpServletResponse response, @PathVariable Integer id)
     {
         String target = "/management/category/listAll.html";
         try
@@ -118,7 +119,7 @@ public class CategoryController extends BaseController
         this.logger.info("Redirect to " + target);
         try
         {
-            response.sendRedirect(target);
+            response.sendRedirect(request.getContextPath() + target);
         }
         catch (IOException ex)
         {

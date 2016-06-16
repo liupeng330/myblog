@@ -103,7 +103,7 @@ public class TagController extends BaseController
     }
 
     @RequestMapping(value = "/management/tag/delete/{id}", method = RequestMethod.GET)
-    public void deleteTag(HttpServletResponse response,  @PathVariable Integer id)
+    public void deleteTag(HttpServletRequest request, HttpServletResponse response,  @PathVariable Integer id)
     {
         String target = "/management/tag/listAll.html";
         try
@@ -118,7 +118,7 @@ public class TagController extends BaseController
         this.logger.info("Redirect to " + target);
         try
         {
-            response.sendRedirect(target);
+            response.sendRedirect(request.getContextPath() + target);
         }
         catch (IOException ex)
         {
