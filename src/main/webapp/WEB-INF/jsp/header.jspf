@@ -6,6 +6,7 @@
 <head>
     <title>Peng's blog</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/lightbox.css" >
 </head>
 <body>
 <div id="container">

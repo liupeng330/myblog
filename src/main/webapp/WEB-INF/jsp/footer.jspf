@@ -3,5 +3,6 @@
     <p align="center">Copyright ©2016 五环外的老北京</p>
 </div>
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/lightbox-plus-jquery.js"></script>
 </body>
 </html>
