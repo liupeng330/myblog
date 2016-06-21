@@ -15,7 +15,7 @@
             opt = options[i];
 
             if (opt.selected) {
-                result = result + "<img src=\"${pageContext.request.contextPath}/resources/" + opt.text + "\" height=\"" + imgHeight + "%\" />" + "<br/>";
+                result = result + "<a href=\"${pageContext.request.contextPath}/resources/" + opt.text + "\" data-lightbox=\"image-1\"    data-title=\"\"><img src=\"${pageContext.request.contextPath}/resources/" + opt.text + "\" height=\"" + imgHeight + "%\" /></a>" + "<br/>";
             }
         }
         return result;
