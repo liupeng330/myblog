@@ -6,9 +6,9 @@
 <head>
     <title>Peng's blog</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/site.css" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/lightbox.css" >
-    <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/shCore.css"/>
-    <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/shThemeDefault.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/lightbox.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shCore.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shThemeDefault.css"/>
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shCore.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushJScript.js"></script>
