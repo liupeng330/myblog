@@ -1,11 +1,10 @@
 package pengliu.me.utils;
 
 import pengliu.me.common.BlogStatus;
-import pengliu.me.domain.Blog;
-import pengliu.me.domain.Category;
-import pengliu.me.domain.Tag;
+import pengliu.me.domain.*;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
+import pengliu.me.vo.CommentVo;
 import pengliu.me.vo.TagVo;
 
 import java.util.ArrayList;
@@ -121,5 +120,26 @@ public class TransferUtil
         }
 
         return categoryVos;
+    }
+
+    public static List<CommentVo> transferBlogPoToCommentVos(Blog blog)
+    {
+        List<CommentVo> commentVos = new ArrayList<CommentVo>();
+        for (Comment comment: blog.getComments())
+        {
+            CommentVo commentVo = new CommentVo();
+            commentVo.setContent(comment.getContent());
+            commentVo.setCreateTime(comment.getCreateTime());
+            CommentUser user = comment.getCommentUser();
+            if(user != null)
+            {
+                commentVo.setUserEmail(user.getEmail());
+                commentVo.setUserName(user.getName());
+                commentVo.setUserremoteIp(user.getRemoteIp());
+                commentVo.setUserUrl(user.getBlogUrl());
+            }
+        }
+
+        return commentVos;
     }
 }
