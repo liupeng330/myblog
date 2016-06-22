@@ -8,6 +8,7 @@ import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
+import pengliu.me.vo.CommentVo;
 import pengliu.me.vo.TagVo;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public interface BlogService
     void createBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
     void updateBlog(BlogVo blogVo, Category category, List<Tag> tags) throws UserNotExistException;
     BlogVo getBlogById(Integer id) throws BlogNotExistException;
+    List<CommentVo> getCommentsByBlogId(Integer id) throws BlogNotExistException;
     Page<BlogVo> getAllPagedPublishedBlogs(int pageNo, int pageSize);
     Page<BlogVo> getAllPagedPublishedBlogsByContent(String title, int pageNo, int pageSize);
     List<Blog> getTopTenLatestPublicBLog();

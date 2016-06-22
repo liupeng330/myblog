@@ -21,11 +21,13 @@ import pengliu.me.service.*;
 import pengliu.me.utils.markdown.MarkdownProcessor;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
+import pengliu.me.vo.CommentVo;
 import pengliu.me.vo.TagVo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -160,6 +162,18 @@ public class BlogController extends BaseController
                 tagVo.setChecked(true);
             }
         }
+
+        List<CommentVo> commentVos = new ArrayList<CommentVo>();
+        try
+        {
+            commentVos = this.getBlogService().getCommentsByBlogId(id);
+        }
+        catch (BlogNotExistException ex)
+        {
+            this.logger.error(ex.getMessage() + "--" + ex.getCause());
+        }
+        modelAndView.addObject("comments", commentVos);
+
         List<String> fileNamesSortedByModifiedTime = this.fileService.getAllImageNamesFromServer(this.getUploadImageRealPath());
         modelAndView.addObject("fileNames", fileNamesSortedByModifiedTime);
 

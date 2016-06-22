@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pengliu.me.dao.BlogDao;
 import pengliu.me.dao.Page;
-import pengliu.me.domain.Blog;
-import pengliu.me.domain.Category;
-import pengliu.me.domain.Tag;
-import pengliu.me.domain.User;
+import pengliu.me.domain.*;
 import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.BlogService;
@@ -16,10 +13,12 @@ import pengliu.me.service.UserService;
 import pengliu.me.utils.CommonUtil;
 import pengliu.me.utils.TransferUtil;
 import pengliu.me.vo.BlogVo;
+import pengliu.me.vo.CommentVo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by peng on 16-4-15.
@@ -99,6 +98,17 @@ public class BlogServiceImpl implements BlogService
         }
 
         return TransferUtil.transferBlogPoToVo(blog);
+    }
+
+    public List<CommentVo> getCommentsByBlogId(Integer id) throws BlogNotExistException
+    {
+        Blog blog = this.blogDao.get(id);
+        if(blog == null)
+        {
+            throw new BlogNotExistException("Blog for id " + id + " doesn't exist!!!");
+        }
+
+        return TransferUtil.transferBlogPoToCommentVos(blog);
     }
 
     public List<BlogVo> getAllBlogs()

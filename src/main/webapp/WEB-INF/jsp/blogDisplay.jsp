@@ -47,6 +47,25 @@
                 </li>
             </ul>
         </div>
+        <ol class="commentList" id="commentList">
+            <c:forEach var="comment" items="${comments}">
+                <li class="commentItem" style="display:list-item;">
+                    <div class="userInfo">
+                        <a class="avatar" href="" target="_blank" rel="nofollow">
+                            <img src="" alt="${comment.userName}">
+                        </a>
+                        <br>
+                        <span class="ipaddress">${comment.userremoteIp}</span>
+                    </div>
+                    <h4>
+                        <a href="" target="_blank" rel="nofollow">${comment.userName}</a>
+                        <span class="time">${comment.createTime}</span>
+                    </h4>
+                    <div class="commentContent"><p>${comment.content}</p></div>
+                    <div class="clear" title="post-610"></div>
+                </li>
+            </c:forEach>
+        </ol>
     </div>
     <div id="sidebar">
         <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}"/>

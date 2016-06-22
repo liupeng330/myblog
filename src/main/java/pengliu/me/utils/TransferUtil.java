@@ -138,6 +138,7 @@ public class TransferUtil
                 commentVo.setUserremoteIp(user.getRemoteIp());
                 commentVo.setUserUrl(user.getBlogUrl());
             }
+            commentVos.add(commentVo);
         }
 
         return commentVos;
