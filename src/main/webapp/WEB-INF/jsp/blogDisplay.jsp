@@ -47,6 +47,12 @@
                 </li>
             </ul>
         </div>
+        <a name="comments"></a>
+        <a class="addcomment" href="#add-comment">Add your comment</a>
+        <h3 id="commentCount">
+            ${commentsCount} 条回复
+        </h3>
+        <div class="clear"></div>
         <ol class="commentList" id="commentList">
             <c:forEach var="comment" items="${comments}">
                 <li class="commentItem" style="display:list-item;">

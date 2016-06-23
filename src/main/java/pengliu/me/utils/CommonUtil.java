@@ -5,6 +5,7 @@ import pengliu.me.common.BlogStatus;
 import pengliu.me.dao.Page;
 import pengliu.me.domain.Blog;
 import pengliu.me.vo.BlogVo;
+import pengliu.me.vo.CommentVo;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -67,5 +68,26 @@ public class CommonUtil
             }
         });
         return blogVos;
+    }
+
+    public static List<CommentVo> sortCommentVosByCreateTimeDesc(List<CommentVo> commentVos)
+    {
+        Collections.sort(commentVos, new Comparator<CommentVo>()
+        {
+            public int compare(CommentVo o1, CommentVo o2)
+            {
+                int ret = o1.getCreateTime().compareTo(o2.getCreateTime());
+                if(ret > 0)
+                {
+                    return -1;
+                }
+                if(ret < 0)
+                {
+                    return 1;
+                }
+                return ret;
+            }
+        });
+        return commentVos;
     }
 }

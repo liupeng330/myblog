@@ -18,6 +18,7 @@ import pengliu.me.domain.Tag;
 import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
 import pengliu.me.service.*;
+import pengliu.me.utils.CommonUtil;
 import pengliu.me.utils.markdown.MarkdownProcessor;
 import pengliu.me.vo.BlogVo;
 import pengliu.me.vo.CategoryVo;
@@ -172,7 +173,8 @@ public class BlogController extends BaseController
         {
             this.logger.error(ex.getMessage() + "--" + ex.getCause());
         }
-        modelAndView.addObject("comments", commentVos);
+        modelAndView.addObject("comments", CommonUtil.sortCommentVosByCreateTimeDesc(commentVos));
+        modelAndView.addObject("commentsCount", commentVos.size());
 
         List<String> fileNamesSortedByModifiedTime = this.fileService.getAllImageNamesFromServer(this.getUploadImageRealPath());
         modelAndView.addObject("fileNames", fileNamesSortedByModifiedTime);

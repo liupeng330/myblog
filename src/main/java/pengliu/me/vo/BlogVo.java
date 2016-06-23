@@ -22,6 +22,7 @@ public class BlogVo
     private CategoryVo categoryVo;
     private String format;
     private String url;
+    private Integer commentCount;
     private Set<TagVo> tagVos = new HashSet<TagVo>();
 
     public Integer getId()
@@ -144,5 +145,13 @@ public class BlogVo
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
     }
 }

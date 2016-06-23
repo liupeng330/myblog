@@ -33,6 +33,7 @@ public class TransferUtil
                 TransferUtil.transferCategoryPoToVo(blog.getCategory()));
         blogVo.setTagVos(TransferUtil.transferTagSetPoToVo(blog.getTags()));
         blogVo.setFormat(blog.getFormat());
+        blogVo.setCommentCount(blog.getComments().size());
 
         return blogVo;
     }

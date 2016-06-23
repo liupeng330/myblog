@@ -19,6 +19,11 @@
                     <strong>摘要： </strong> ${blog.summary}&nbsp;&nbsp;<a href="<c:url value="/blog/show/${blog.id}.html"/>">阅读全文</a>
                 </div>
                 <ul class="postmetadata">
+                    <li class="icon_comment icon_r">
+                        <a href="<c:url value="/blog/show/${blog.id}.html#comments"/>">
+                            ${blog.commentCount} Comments
+                        </a>
+                    </li>
                     <li class="icon_cat">
                         <strong>Categories: </strong><a href="<c:url value="/category/${blog.categoryVo.id}.html"/>">${blog.categoryVo.name}</a>
                     </li>
