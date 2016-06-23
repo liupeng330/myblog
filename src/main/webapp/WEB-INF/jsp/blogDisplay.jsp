@@ -51,9 +51,9 @@
             <c:forEach var="comment" items="${comments}">
                 <li class="commentItem" style="display:list-item;">
                     <div class="userInfo">
-                        <a class="avatar" href="${pageContext.request.contextPath}/resources/profile.gif" target="_blank" rel="nofollow">
-                            <img src="" alt="${comment.userName}">
-                        </a>
+                        <a class="avatar" href="" target="_blank" rel="nofollow">
+                            <img src="${pageContext.request.contextPath}/resources/profile.gif" alt="${comment.userName}">
+                        </a>kkk
                         <br>
                         <span class="ipaddress">${comment.userremoteIp}</span>
                     </div>
