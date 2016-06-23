@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>郊区老北京的博客</title>
+    <title>五环外的老北京</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/site.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/lightbox.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shCore.css"/>
