@@ -25,11 +25,11 @@ public class CommentUserDao extends BaseDaoHibernate4<CommentUser>
 
     public CommentUser findCommentUserByEmail(String email)
     {
-        List<CommentUser> ret = this.getList("email", email);
-        if(ret.size() > 0)
-        {
-            return ret.get(0);
-        }
-        return null;
+        return this.get("email", email);
+    }
+
+    public CommentUser findCommentUserByNickName(String nickName)
+    {
+        return this.get("name", nickName);
     }
 }

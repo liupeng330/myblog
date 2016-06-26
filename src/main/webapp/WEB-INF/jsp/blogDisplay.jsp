@@ -73,6 +73,8 @@
                 <script></script>
             </c:forEach>
         </ol>
+        <a name="add-comment"></a>
+        <h3 id="respond">发表回复</h3>
     </div>
     <div id="sidebar">
         <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}"/>
