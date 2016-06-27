@@ -15,6 +15,15 @@ public class CommentVo
     private String userremoteIp;
     private String content;
     private Timestamp createTime;
+    private Integer blogId;
+
+    public Integer getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(Integer blogId) {
+        this.blogId = blogId;
+    }
 
     public String getUserName() {
         return userName;

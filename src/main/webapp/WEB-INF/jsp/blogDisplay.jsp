@@ -75,6 +75,21 @@
         </ol>
         <a name="add-comment"></a>
         <h3 id="respond">发表回复</h3>
+        <form:form class="commentform" action="/comment/create.html" method="post" id="commentForm" modelAttribute="commentForm">
+            <p>
+                昵称：<form:input path="userName" type="text" class="author" value="" maxlength="20"/>（必填）
+            </p>
+            <p>
+                邮箱：<form:input path="userEmail" type="text" class="email" value="" maxlength="50"/>（必填）
+            </p>
+            <p>
+                主页：<form:input path="userUrl" class="website" type="text" value="" maxlength="50"/>（可选）
+            </p>
+            <p class="content">评论内容（大于5个字符）：</p>
+            <form:textarea path="content" rows="30" cols="20" style="width:100%;"></form:textarea><br/>
+            <form:input path="blogId" type="hidden" value="${blog.id}"/>
+            <input type="submit" value="Submit"/>
+        </form:form>
     </div>
     <div id="sidebar">
         <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}"/>

@@ -2,6 +2,7 @@ package pengliu.me.service.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pengliu.me.dao.BlogDao;
 import pengliu.me.dao.CommentDao;
 import pengliu.me.dao.CommentUserDao;
@@ -18,6 +19,7 @@ import pengliu.me.vo.CommentVo;
 /**
  * Created by peng on 6/26/16.
  */
+@Service
 public class CommentServiceImpl implements CommentService
 {
     private Logger logger = Logger.getLogger(CommentServiceImpl.class);
@@ -31,13 +33,12 @@ public class CommentServiceImpl implements CommentService
     @Autowired
     private BlogDao blogDao;
 
-    public void createComment(CommentVo commentVo, Integer blogId) throws BlogNotExistException, CommentUserHasExistException
+    public void createComment(CommentVo commentVo) throws BlogNotExistException, CommentUserHasExistException
     {
         //Verify if comment user has been exist
         CommentUser userFindByEmail = this.commentUserDao.findCommentUserByEmail(commentVo.getUserEmail());
         CommentUser userFindByNickName = this.commentUserDao.findCommentUserByNickName(commentVo.getUserName());
 
-        StringBuffer sb = new StringBuffer();
         if(userFindByEmail != null && userFindByNickName != null)
         {
             if(!userFindByEmail.equals(userFindByNickName))
@@ -57,16 +58,26 @@ public class CommentServiceImpl implements CommentService
             commentUser.setUpdateTime(CommonUtil.getTimeStampNow());
             this.commentUserDao.persist(commentUser);
         }
+        if(userFindByEmail != null)
+        {
+            throw new CommentUserHasExistException(
+                    String.format("邮箱'%s'已经有人使用了，请换一个吧", commentVo.getUserEmail()));
+        }
+        if(userFindByNickName != null)
+        {
+            throw new CommentUserHasExistException(
+                    String.format("昵称'%s'已经有人使用了，请换一个吧", commentVo.getUserName()));
+        }
 
         //save comment to db
         Comment comment = new Comment();
         comment.setCreateTime(CommonUtil.getTimeStampNow());
         comment.setContent(commentVo.getContent());
         comment.setCommentUser(userFindByEmail);
-        Blog blog = this.blogDao.get(blogId);
+        Blog blog = this.blogDao.get(commentVo.getBlogId());
         if(blog == null)
         {
-            throw new BlogNotExistException(String.format("Blog doesn't exist for blog id %s!!", blogId));
+            throw new BlogNotExistException(String.format("Blog doesn't exist for blog id %s!!", commentVo.getBlogId()));
         }
         comment.setBlog(blog);
         this.commentDao.persist(comment);
