@@ -105,8 +105,6 @@ public class CommentUser
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (blogUrl != null ? !blogUrl.equals(that.blogUrl) : that.blogUrl != null) return false;
-        if (remoteIp != null ? !remoteIp.equals(that.remoteIp) : that.remoteIp != null) return false;
-        if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
 
         return true;
     }
