@@ -40,7 +40,7 @@ public class CommentController extends BaseController
         }
         catch (Exception ex)
         {
-
+            return String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), ex.getMessage());
         }
 
         return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());

@@ -281,7 +281,7 @@ public class BlogController extends BaseController
     }
 
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    public ModelAndView showBlog(@PathVariable Integer id)
+    public ModelAndView showBlog(@PathVariable Integer id, @RequestParam(value = "errorMsg", required = false) String errorMsg)
     {
         ModelAndView modelAndView = this.goToUpdateBlogPage(id);
 //        BlogVo blogVo = (BlogVo) modelAndView.getModel().get("blog");
@@ -291,6 +291,7 @@ public class BlogController extends BaseController
 //        }
         this.addTopTenBlogToModelAndView(modelAndView);
         modelAndView.addObject("commentForm", new CommentVo());
+        modelAndView.addObject("errorMsg", errorMsg);
         modelAndView.setViewName("blogDisplay");
         this.getBlogService().plusBlogViewCount(id);
         return modelAndView;

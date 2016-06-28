@@ -75,6 +75,9 @@
         </ol>
         <a name="add-comment"></a>
         <h3 id="respond">发表回复</h3>
+        <c:if test="${!empty errorMsg}">
+            <div style="color:red">${errorMsg}</div>
+        </c:if>
         <form:form class="commentform" action="/comment/create.html" method="post" id="commentForm" modelAttribute="commentForm">
             <p>
                 昵称：<form:input path="userName" type="text" class="author" value="" maxlength="20"/>（必填）
