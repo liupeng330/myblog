@@ -24,7 +24,7 @@ public class CommentController extends BaseController
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView createComment(HttpServletRequest request, @ModelAttribute("commentForm") CommentVo commentVo)
+    public String createComment(HttpServletRequest request, @ModelAttribute("commentForm") CommentVo commentVo)
     {
         //is client behind something?
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
@@ -43,6 +43,7 @@ public class CommentController extends BaseController
 
         }
 
-        return null;
+        return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
+
     }
 }

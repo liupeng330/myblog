@@ -35,45 +35,14 @@ public class CommentServiceImpl implements CommentService
 
     public void createComment(CommentVo commentVo) throws BlogNotExistException, CommentUserHasExistException
     {
-        //Verify if comment user has been exist
-        CommentUser userFindByEmail = this.commentUserDao.findCommentUserByEmail(commentVo.getUserEmail());
-        CommentUser userFindByNickName = this.commentUserDao.findCommentUserByNickName(commentVo.getUserName());
-
-        if(userFindByEmail != null && userFindByNickName != null)
-        {
-            if(!userFindByEmail.equals(userFindByNickName))
-            {
-                throw new CommentUserHasExistException(
-                        String.format("昵称'%s'和邮箱'%s'已经有人使用了，请换一个吧", commentVo.getUserName(), commentVo.getUserEmail()));
-            }
-        }
-        //save comment user to db
-        if(userFindByEmail == null && userFindByNickName == null)
-        {
-            CommentUser commentUser = new CommentUser();
-            commentUser.setEmail(commentVo.getUserEmail());
-            commentUser.setName(commentVo.getUserName());
-            commentUser.setRemoteIp(commentVo.getUserremoteIp());
-            commentUser.setBlogUrl(commentVo.getUserUrl());
-            commentUser.setUpdateTime(CommonUtil.getTimeStampNow());
-            this.commentUserDao.persist(commentUser);
-        }
-        if(userFindByEmail != null)
-        {
-            throw new CommentUserHasExistException(
-                    String.format("邮箱'%s'已经有人使用了，请换一个吧", commentVo.getUserEmail()));
-        }
-        if(userFindByNickName != null)
-        {
-            throw new CommentUserHasExistException(
-                    String.format("昵称'%s'已经有人使用了，请换一个吧", commentVo.getUserName()));
-        }
+        //get exist comment user or create a new one
+        CommentUser commentUser = createOrGetCommentUser(commentVo);
 
         //save comment to db
         Comment comment = new Comment();
         comment.setCreateTime(CommonUtil.getTimeStampNow());
         comment.setContent(commentVo.getContent());
-        comment.setCommentUser(userFindByEmail);
+        comment.setCommentUser(commentUser);
         Blog blog = this.blogDao.get(commentVo.getBlogId());
         if(blog == null)
         {
@@ -81,5 +50,39 @@ public class CommentServiceImpl implements CommentService
         }
         comment.setBlog(blog);
         this.commentDao.persist(comment);
+    }
+
+    private CommentUser createOrGetCommentUser(CommentVo commentVo) throws CommentUserHasExistException
+    {
+        //Verify if comment user has been exist
+        CommentUser userFindByEmail = this.commentUserDao.findCommentUserByEmail(commentVo.getUserEmail());
+        CommentUser userFindByNickName = this.commentUserDao.findCommentUserByNickName(commentVo.getUserName());
+
+        if(userFindByEmail != null && userFindByNickName != null)
+        {
+            if(userFindByEmail.equals(userFindByNickName))
+            {
+                return userFindByEmail;
+            }
+            else
+            {
+                throw new CommentUserHasExistException(
+                        String.format("昵称'%s'和邮箱'%s'已经有人使用了，请换一个吧", commentVo.getUserName(), commentVo.getUserEmail()));
+            }
+        }
+
+        //save comment user to db
+        if(userFindByEmail == null && userFindByNickName == null)
+        {
+            this.commentUserDao.createCommentUser(commentVo.getUserName(), commentVo.getUserEmail(), commentVo.getUserUrl(), commentVo.getUserremoteIp());
+            return this.commentUserDao.findCommentUserByEmail(commentVo.getUserEmail());
+        }
+        if(userFindByEmail == null)
+        {
+            throw new CommentUserHasExistException(
+                    String.format("昵称'%s'已经有人使用了，请换一个吧", commentVo.getUserName()));
+        }
+        throw new CommentUserHasExistException(
+                String.format("邮箱'%s'已经有人使用了，请换一个吧", commentVo.getUserEmail()));
     }
 }
