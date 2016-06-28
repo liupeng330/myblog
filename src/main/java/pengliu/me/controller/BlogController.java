@@ -28,6 +28,8 @@ import pengliu.me.vo.TagVo;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -291,6 +293,17 @@ public class BlogController extends BaseController
 //        }
         this.addTopTenBlogToModelAndView(modelAndView);
         modelAndView.addObject("commentForm", new CommentVo());
+        if(!StringUtils.isEmpty(errorMsg))
+        {
+            try
+            {
+                errorMsg = URLDecoder.decode(errorMsg, "UTF-8");
+            }
+            catch (UnsupportedEncodingException ex)
+            {
+                this.logger.error(ex.getMessage());
+            }
+        }
         modelAndView.addObject("errorMsg", errorMsg);
         modelAndView.setViewName("blogDisplay");
         this.getBlogService().plusBlogViewCount(id);

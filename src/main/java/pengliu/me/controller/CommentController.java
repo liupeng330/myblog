@@ -12,6 +12,8 @@ import pengliu.me.service.CommentService;
 import pengliu.me.vo.CommentVo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/comment")
@@ -40,7 +42,17 @@ public class CommentController extends BaseController
         }
         catch (Exception ex)
         {
-            return String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), ex.getMessage());
+            String message = null;
+            try
+            {
+                message = URLEncoder.encode(ex.getMessage(), "UTF-8");
+            }
+            catch (UnsupportedEncodingException e)
+            {
+                this.logger.error("Fail to encode message of " + e.getMessage());
+            }
+            String target = String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), message);
+            return target;
         }
 
         return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
