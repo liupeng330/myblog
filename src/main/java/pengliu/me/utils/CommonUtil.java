@@ -90,4 +90,14 @@ public class CommonUtil
         });
         return commentVos;
     }
+
+    public static String obscureIPAddress(String ipAddress)
+    {
+        String[] ipArray = ipAddress.split("\\.");
+        if(ipArray.length == 4)
+        {
+            return ipArray[0] + "." + ipArray[1] + "." + ipArray[2] + ".*";
+        }
+        return ipAddress;
+    }
 }

@@ -129,6 +129,7 @@ public class TransferUtil
         for (Comment comment: blog.getComments())
         {
             CommentVo commentVo = new CommentVo();
+            commentVo.setId(comment.getId());
             commentVo.setContent(comment.getContent());
             commentVo.setCreateTime(comment.getCreateTime());
             CommentUser user = comment.getCommentUser();
@@ -136,7 +137,7 @@ public class TransferUtil
             {
                 commentVo.setUserEmail(user.getEmail());
                 commentVo.setUserName(user.getName());
-                commentVo.setUserremoteIp(user.getRemoteIp());
+                commentVo.setUserremoteIp(CommonUtil.obscureIPAddress(user.getRemoteIp()));
                 commentVo.setUserUrl(user.getBlogUrl());
             }
             commentVos.add(commentVo);

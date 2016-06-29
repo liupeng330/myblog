@@ -9,6 +9,7 @@ import java.sql.Timestamp;
  */
 public class CommentVo
 {
+    private Integer id;
     private String userName;
     private String userEmail;
     private String userUrl;
@@ -16,6 +17,14 @@ public class CommentVo
     private String content;
     private Timestamp createTime;
     private Integer blogId;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getBlogId() {
         return blogId;

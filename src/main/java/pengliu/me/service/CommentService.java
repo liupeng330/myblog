@@ -7,4 +7,5 @@ import pengliu.me.vo.CommentVo;
 public interface CommentService
 {
     void createComment(CommentVo commentVo) throws BlogNotExistException, CommentUserHasExistException;
+    void deleteCommentById(Integer id);
 }
