@@ -129,6 +129,7 @@ public class TransferUtil
         for (Comment comment: blog.getComments())
         {
             CommentVo commentVo = new CommentVo();
+            commentVo.setId(comment.getId());
             commentVo.setContent(comment.getContent());
             commentVo.setCreateTime(comment.getCreateTime());
             CommentUser user = comment.getCommentUser();

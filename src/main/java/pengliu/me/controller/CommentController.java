@@ -3,10 +3,7 @@ package pengliu.me.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.service.CommentService;
 import pengliu.me.vo.CommentVo;
@@ -56,6 +53,12 @@ public class CommentController extends BaseController
         }
 
         return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
+    }
 
+    @RequestMapping(value = "/delete/{blogId}/{commentId}", method = RequestMethod.GET)
+    public String deleteComment(@PathVariable Integer blogId, @PathVariable Integer commentId)
+    {
+        this.commentService.deleteCommentById(commentId);
+        return String.format("redirect:/blog/show/%d.html#comments", blogId);
     }
 }

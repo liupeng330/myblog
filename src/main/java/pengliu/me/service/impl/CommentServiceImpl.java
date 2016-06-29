@@ -52,6 +52,11 @@ public class CommentServiceImpl implements CommentService
         this.commentDao.persist(comment);
     }
 
+    public void deleteCommentById(Integer id)
+    {
+        this.commentDao.delete(id);
+    }
+
     private CommentUser createOrGetCommentUser(CommentVo commentVo) throws CommentUserHasExistException
     {
         //Verify if comment user has been exist

@@ -63,6 +63,10 @@
                         <br>
                         <span class="ipaddress">${comment.userremoteIp}</span>
                     </div>
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <a class="commentControl" href="<c:url value="/comment/delete/${blog.id}/${comment.id}.html"/>">删除</a>&nbsp;
+                        <a class="commentControl" href="">回复</a>
+                    </c:if>
                     <h4>
                         <a href="" target="_blank" rel="nofollow">${comment.userName}</a>
                         <span class="time">${comment.createTime}</span>
@@ -74,7 +78,7 @@
             </c:forEach>
         </ol>
         <a name="add-comment"></a>
-        <h3 id="respond">发表回复</h3>
+        <h3 id="respond">发表评论</h3>
         <script>
             function validate()
             {
