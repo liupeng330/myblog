@@ -136,7 +136,7 @@ public class TransferUtil
             {
                 commentVo.setUserEmail(user.getEmail());
                 commentVo.setUserName(user.getName());
-                commentVo.setUserremoteIp(user.getRemoteIp());
+                commentVo.setUserremoteIp(CommonUtil.obscureIPAddress(user.getRemoteIp()));
                 commentVo.setUserUrl(user.getBlogUrl());
             }
             commentVos.add(commentVo);
