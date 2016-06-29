@@ -6,6 +6,16 @@
 <%@ attribute name="topTenBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="topTenViewCountBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 
+<div id="about">
+    <div>
+        <h2 id="about_title">About</h2>
+        <div id="about_body">
+            <p>刘鹏，从事多年软件测试开发工作，包括自动化测试任务管理平台、Windows与Mac OSX平台的UI自动化、Web UI自动化、服务端接口业务逻辑的自动化测试。</p>
+            <p>享受测试开发工作的相对自由，不用按照PRD文档完成每个功能，不用因为多出一个弹窗或少了一个提示信息而更改代码。只需满足公司内部的使用需求，达到测试目的即可，可以选择自己喜欢的语言、框架去实现功能。</p>
+            <p>联系博主： liupengmsq@hotmail.com</p>
+        </div>
+    </div>
+</div>
 <div id="mySearchWrapper">
     <form action="<c:url value="/blog/search.html"/>" method="post">
         <div id="mySearch">
