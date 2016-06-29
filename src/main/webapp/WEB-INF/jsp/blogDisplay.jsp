@@ -59,7 +59,7 @@
                     <div class="userInfo">
                         <a class="avatar" href="" target="_blank" rel="nofollow">
                             <img src="${pageContext.request.contextPath}/resources/profile.gif" alt="${comment.userName}">
-                        </a>kkk
+                        </a>
                         <br>
                         <span class="ipaddress">${comment.userremoteIp}</span>
                     </div>
