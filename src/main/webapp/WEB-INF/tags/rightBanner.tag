@@ -91,26 +91,6 @@
                     <a href="${fl.url}" target="_blank">${fl.displayName}</a>
                 </li>
             </c:forEach>
-            <!--
-            <li>
-                <a href="http://lihao.cf" target="_blank">豪哥的博客</a>
-            </li>
-            <li>
-                <a href="http://wangheng.org" target="_blank">王恒's Blog</a>
-            </li>
-            <li>
-                <a href="http://blog.zhaojie.me/" target="_blank">老赵点滴</a>
-            </li>
-            <li>
-                <a href="http://www.ruanyifeng.com/blog/" target="_blank">阮一峰的网络日志</a>
-            </li>
-            <li>
-                <a href="http://www.ahathinking.com/" target="_blank">勇幸|Thinking</a>
-            </li>
-            <li>
-                <a href="http://coolshell.cn/" target="_blank">酷 壳 – CoolShell.cn</a>
-            </li>
-            -->
         </ul>
     </div>
 </div>

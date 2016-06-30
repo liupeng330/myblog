@@ -21,6 +21,24 @@
 
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jspf" %>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/lightbox.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shCore.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shThemeDefault.css"/>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shCore.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushJScript.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushCSharp.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushBash.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushCss.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushJava.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushPython.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushSql.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushXml.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.all()
+</script>
+
 <div id="wrapper">
     <div id="content">
         <c:if test="${!empty category}">
