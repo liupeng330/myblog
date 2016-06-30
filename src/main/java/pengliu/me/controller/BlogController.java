@@ -56,6 +56,7 @@ public class BlogController extends BaseController
 
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
+        addFriendlyLinksToModelAndView(modelAndView);
         modelAndView.setViewName("main");
         return modelAndView;
     }
@@ -75,6 +76,7 @@ public class BlogController extends BaseController
 
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
+        addFriendlyLinksToModelAndView(modelAndView);
         modelAndView.setViewName("main");
         return modelAndView;
     }
@@ -292,6 +294,7 @@ public class BlogController extends BaseController
 //            blogVo.setContent(new MarkdownProcessor().markdown(blogVo.getContent()));
 //        }
         this.addTopTenBlogToModelAndView(modelAndView);
+        this.addFriendlyLinksToModelAndView(modelAndView);
         modelAndView.addObject("commentForm", new CommentVo());
         if(!StringUtils.isEmpty(errorMsg))
         {

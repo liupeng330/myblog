@@ -5,6 +5,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.service.BlogService;
 import pengliu.me.service.CategoryService;
+import pengliu.me.service.FriendlyLinkService;
 import pengliu.me.service.TagService;
 import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
@@ -27,6 +28,9 @@ public class BaseController
     @Autowired
     private ServletContext context;
 
+    @Autowired
+    private FriendlyLinkService friendlyLinkService;
+
     protected void addAllTagAndCategoriesToModelAndView(ModelAndView modelAndView)
     {
         List<TagVo> tags = this.tagService.getAllTags();
@@ -42,6 +46,15 @@ public class BaseController
         modelAndView.addObject("topTenViewCountBlogs", this.getBlogService().getTopTenViewCountPublicBLog());
     }
 
+    protected void addFriendlyLinksToModelAndView(ModelAndView modelAndView)
+    {
+        modelAndView.addObject("allFriendlyLinks", this.getFriendlyLinkService().getAllFriendlyLinks());
+    }
+
+    protected FriendlyLinkService getFriendlyLinkService()
+    {
+        return this.friendlyLinkService;
+    }
 
     protected CategoryService getCategoryService() {
         return categoryService;

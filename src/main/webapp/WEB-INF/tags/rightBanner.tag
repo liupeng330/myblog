@@ -5,6 +5,7 @@
 <%@ attribute name="allTags" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="topTenBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="topTenViewCountBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
+<%@ attribute name="allFriendlyLinks" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 
 <div id="about">
     <div>
@@ -85,6 +86,12 @@
     <div>
         <h2>推荐博客</h2>
         <ul class="chain">
+            <c:forEach var="fl" items="${allFriendlyLinks}">
+                <li>
+                    <a href="${fl.url}" target="_blank">${fl.displayName}</a>
+                </li>
+            </c:forEach>
+            <!--
             <li>
                 <a href="http://lihao.cf" target="_blank">豪哥的博客</a>
             </li>
@@ -103,6 +110,7 @@
             <li>
                 <a href="http://coolshell.cn/" target="_blank">酷 壳 – CoolShell.cn</a>
             </li>
+            -->
         </ul>
     </div>
 </div>

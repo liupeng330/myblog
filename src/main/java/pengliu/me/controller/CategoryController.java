@@ -45,6 +45,7 @@ public class CategoryController extends BaseController
         modelAndView.addObject("pageResult", blogVos);
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
+        addFriendlyLinksToModelAndView(modelAndView);
         modelAndView.setViewName("/main");
 
         return modelAndView;

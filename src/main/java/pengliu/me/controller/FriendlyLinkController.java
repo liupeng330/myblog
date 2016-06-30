@@ -22,15 +22,12 @@ public class FriendlyLinkController extends BaseController
 {
     private Logger logger = Logger.getLogger(FriendlyLinkController.class);
 
-    @Autowired
-    private FriendlyLinkService friendlyLinkService;
-
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     public ModelAndView listAllFriendlyLinks(@RequestParam(value = "errorMsg", required = false) String errorMsg)
     {
         ModelAndView modelAndView = new ModelAndView();
 
-        List<FriendlyLink> friendlyLinks = this.friendlyLinkService.getAllFriendlyLinks();
+        List<FriendlyLink> friendlyLinks = this.getFriendlyLinkService().getAllFriendlyLinks();
         modelAndView.addObject("allFriendlyLinks", friendlyLinks);
         modelAndView.addObject("errorMsg", errorMsg);
         modelAndView.setViewName("friendlyLinkManager");
@@ -47,7 +44,7 @@ public class FriendlyLinkController extends BaseController
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createFriendlyLink(@RequestParam("url") String url, @RequestParam("linkName") String linkName)
     {
-        this.friendlyLinkService.createFriendlyLinke(url, linkName);
+        this.getFriendlyLinkService().createFriendlyLinke(url, linkName);
 
         String target = "/management/friendlyLink/listAll.html";
         this.logger.info("Redirect to " + target);
@@ -58,7 +55,7 @@ public class FriendlyLinkController extends BaseController
     @RequestMapping(value = "/delete/{id}.html", method = RequestMethod.POST)
     public String deleteFriendlyLink(@PathVariable Integer id)
     {
-        this.friendlyLinkService.deleteFriendlyLinkById(id);
+        this.getFriendlyLinkService().deleteFriendlyLinkById(id);
 
         String target = "/management/friendlyLink/listAll.html";
         this.logger.info("Redirect to " + target);

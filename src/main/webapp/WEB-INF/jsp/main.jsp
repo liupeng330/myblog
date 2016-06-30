@@ -54,7 +54,7 @@
         </div>
     </div>
     <div id="sidebar">
-        <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}"/>
+        <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}" allFriendlyLinks="${allFriendlyLinks}"/>
     </div>
 </div>
 <%@ include file="footer.jspf" %>
