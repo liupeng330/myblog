@@ -7,6 +7,7 @@
 <a href="<c:url value="/blog/create.html" />" >创建博客</a> &nbsp;
 <a href="<c:url value="/management/category/listAll.html" />" >分类管理</a> &nbsp;
 <a href="<c:url value="/management/tag/listAll.html" />" >标签管理</a> &nbsp;
+<a href="<c:url value="/management/friendlyLink/listAll.html" />" >友链管理</a> &nbsp;
 
 <table border="1px" width="100%">
     <tr>
