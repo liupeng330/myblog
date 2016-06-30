@@ -10,9 +10,19 @@
     <div>
         <h2 id="about_title">About</h2>
         <div id="about_body">
-            <p>刘鹏，从事多年软件测试开发工作，包括自动化测试任务管理平台、Windows与Mac OSX平台的UI自动化、Web UI自动化、服务端接口业务逻辑的自动化测试。</p>
+            <img src="/resources/peng.jpg" width="175px" height="175px" id="peng" />
+            <p><strong>刘鹏</strong>，从事多年软件测试开发工作，包括自动化测试任务管理平台、Windows与Mac OSX平台的UI自动化、Web UI自动化、服务端接口业务逻辑的自动化测试。</p>
             <p>享受测试开发工作的相对自由，不用按照PRD文档完成每个功能，不用因为多出一个弹窗或少了一个提示信息而更改代码。只需满足公司内部的使用需求，达到测试目的即可，可以选择自己喜欢的语言、框架去实现功能。</p>
-            <p>联系博主： liupengmsq@hotmail.com</p>
+            <p>联系博主：
+                <ul>
+                    <li>
+                        邮箱：<a href="mailto:liupengmsq@hotmail.com" target="_top">liupengmsq@hotmail.com</a>
+                    </li>
+                    <li>
+                        豆瓣主页：<a href="https://www.douban.com/people/42861656/">https://www.douban.com/people/42861656/</a>
+                    </li>
+                </ul>
+            </p>
         </div>
     </div>
 </div>
