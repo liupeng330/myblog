@@ -82,4 +82,17 @@
             </c:forEach>
         </ul>
     </div>
+    <div>
+        <h2>推荐博客</h2>
+        <ul class="chain">
+            <li>
+                <a href="http://lihao.cf" target="_blank">豪哥的博客</a>
+                <a href="http://wangheng.org" target="_blank">王恒's Blog</a>
+                <a href="http://blog.zhaojie.me/" target="_blank">老赵点滴</a>
+                <a href="http://www.ruanyifeng.com/blog/" target="_blank">阮一峰的网络日志</a>
+                <a href="http://www.ahathinking.com/" target="_blank">勇幸|Thinking</a>
+                <a href="http://coolshell.cn/" target="_blank">酷 壳 – CoolShell.cn</a>
+            </li>
+        </ul>
+    </div>
 </div>
