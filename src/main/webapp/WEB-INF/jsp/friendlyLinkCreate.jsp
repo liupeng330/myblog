@@ -5,11 +5,11 @@
     <table border="1px"  width="100%">
         <tr>
             <td width="20%">Link display name</td>
-            <td width="80%"><input  type="text" name="name"/></td>
+            <td width="80%"><input  type="text" name="linkName"/></td>
         </tr>
         <tr>
             <td width="20%">Link url</td>
-            <td width="80%"><input  type="text" name="name"/></td>
+            <td width="80%"><input  type="text" name="url"/></td>
         </tr>
         <tr>
             <td colspan="2">

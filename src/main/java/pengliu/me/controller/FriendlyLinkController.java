@@ -45,7 +45,7 @@ public class FriendlyLinkController extends BaseController
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createFriendlyLink(String url, String linkName)
+    public String createFriendlyLink(@RequestParam("url") String url, @RequestParam("linkName") String linkName)
     {
         this.friendlyLinkService.createFriendlyLinke(url, linkName);
 
