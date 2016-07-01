@@ -27,10 +27,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/shThemeDefault.css"/>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shCore.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushPlain.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushJScript.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushCSharp.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushBash.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushCss.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushJava.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushPython.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushSql.js"></script>
