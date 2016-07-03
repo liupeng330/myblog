@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pengliu.me.common.CommonConstant;
+import pengliu.me.domain.CommentUser;
 import pengliu.me.service.CommentService;
 import pengliu.me.vo.CommentVo;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -25,6 +28,16 @@ public class CommentController extends BaseController
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createComment(HttpServletRequest request, @ModelAttribute("commentForm") CommentVo commentVo)
     {
+        if(commentVo.getRememberMe())
+        {
+            CommentUser commentUser = new CommentUser();
+            commentUser.setName(commentVo.getUserName());
+            commentUser.setBlogUrl(commentVo.getUserUrl());
+            commentUser.setEmail(commentVo.getUserEmail());
+            HttpSession session = request.getSession();
+            session.setAttribute(CommonConstant.COMMENT_USER_CONTEXT, commentUser);
+        }
+
         //is client behind something?
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
         if (ipAddress == null)

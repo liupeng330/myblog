@@ -173,13 +173,17 @@
         </p>
         <form:form class="commentform" action="/comment/create.html" method="post" id="commentForm" modelAttribute="commentForm" onsubmit="return validate()">
             <p>
-                昵称：<form:input id="nickName" path="userName" type="text" class="author" value="" maxlength="20"/>（必填）
+                昵称：<form:input id="nickName" path="userName" type="text" class="author" value="${commentForm.userName}" maxlength="20"/>（必填）
             </p>
             <p>
-                邮箱：<form:input id="email" path="userEmail" type="text" class="email" value="" maxlength="50"/>（必填）
+                邮箱：<form:input id="email" path="userEmail" type="text" class="email" value="${commentForm.userEmail}" maxlength="50"/>（必填）
             </p>
             <p>
-                主页：<form:input id="blogUrl" path="userUrl" class="website" type="text" value="" maxlength="50"/>（可选）
+                主页：<form:input id="blogUrl" path="userUrl" class="website" type="text" value="${commentForm.userUrl}" maxlength="50"/>（可选）
+            </p>
+            <p>
+                <label for="rememberMe">记住我</label>
+                <form:checkbox id="rememberMe" path="rememberMe" checked="checked" value="True"/>
             </p>
             <p class="content">评论内容（大于5个字符）：</p>
             <form:textarea id="commentContent" path="content" rows="30" cols="20" style="width:100%;"></form:textarea><br/>

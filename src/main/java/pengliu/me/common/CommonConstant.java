@@ -28,4 +28,9 @@ public class CommonConstant
     public static final String ADMIN_USER_NAME = "peng";
 
     public static final String UPLOAD_PATH = "/resources";
+
+    /**
+     * 评论用户对象放到Session中的键名称
+     */
+    public static final String COMMENT_USER_CONTEXT = "COMMENT_USER_CONTEXT";
 }

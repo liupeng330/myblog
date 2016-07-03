@@ -1,5 +1,6 @@
 package pengliu.me.vo;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.util.converter.TimeStringConverter;
 
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ public class CommentVo
     private String content;
     private Timestamp createTime;
     private Integer blogId;
+    private Boolean rememberMe;
 
     public Integer getId() {
         return id;
@@ -80,5 +82,13 @@ public class CommentVo
 
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
+    }
+
+    public Boolean getRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(Boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
 import pengliu.me.dao.Page;
 import pengliu.me.domain.Category;
+import pengliu.me.domain.Comment;
+import pengliu.me.domain.CommentUser;
 import pengliu.me.domain.Tag;
 import pengliu.me.exception.BlogNotExistException;
 import pengliu.me.exception.UserNotExistException;
@@ -26,6 +28,7 @@ import pengliu.me.vo.CommentVo;
 import pengliu.me.vo.TagVo;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -285,7 +288,7 @@ public class BlogController extends BaseController
     }
 
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    public ModelAndView showBlog(@PathVariable Integer id, @RequestParam(value = "errorMsg", required = false) String errorMsg)
+    public ModelAndView showBlog(HttpServletRequest request, @PathVariable Integer id, @RequestParam(value = "errorMsg", required = false) String errorMsg)
     {
         ModelAndView modelAndView = this.goToUpdateBlogPage(id);
 //        BlogVo blogVo = (BlogVo) modelAndView.getModel().get("blog");
@@ -295,7 +298,18 @@ public class BlogController extends BaseController
 //        }
         this.addTopTenBlogToModelAndView(modelAndView);
         this.addFriendlyLinksToModelAndView(modelAndView);
-        modelAndView.addObject("commentForm", new CommentVo());
+
+        HttpSession session = request.getSession();
+        CommentUser commentUser = (CommentUser) session.getAttribute(CommonConstant.COMMENT_USER_CONTEXT);
+        CommentVo commentVo = new CommentVo();
+        if(commentUser != null)
+        {
+            commentVo.setUserName(commentUser.getName());
+            commentVo.setUserEmail(commentUser.getEmail());
+            commentVo.setUserUrl(commentUser.getBlogUrl());
+        }
+
+        modelAndView.addObject("commentForm", commentVo);
         if(!StringUtils.isEmpty(errorMsg))
         {
             try
