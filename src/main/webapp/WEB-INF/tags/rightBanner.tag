@@ -19,9 +19,6 @@
                     <li>
                         邮箱：<a href="mailto:liupengmsq@hotmail.com" target="_top">liupengmsq@hotmail.com</a>
                     </li>
-                    <li>
-                        豆瓣主页：<a href="https://www.douban.com/people/42861656/">https://www.douban.com/people/42861656/</a>
-                    </li>
                 </ul>
             </p>
         </div>
