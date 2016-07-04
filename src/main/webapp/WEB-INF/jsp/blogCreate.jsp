@@ -21,6 +21,28 @@
         }
         return result;
     }
+
+    searchBox = document.querySelector("#searchBox");
+    countries = document.querySelector("#opts");
+
+    searchBox.addEventListener("keyup", function (e) {
+        var text = e.target.value;
+        var options = countries.options;
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            var optionText = option.text;
+            var lowerOptionText = optionText.toLowerCase();
+            var lowerText = text.toLowerCase();
+            var regex = new RegExp("^" + text, "i");
+            var match = optionText.match(regex);
+            var contains = lowerOptionText.indexOf(lowerText) != -1;
+            if (match || contains) {
+                option.selected = true;
+                return;
+            }
+            searchBox.selectedIndex = 0;
+        }
+    });
 </script>
 
 <table width="100%">
@@ -75,7 +97,8 @@
             </form>
             <br/>
             <br/>
-            <select id="opts" multiple draggable="true" size="${fileNames.size()}">
+            <input type="search" id="searchBox">
+            <select id="opts" multiple draggable="true" size="50">
                 <c:forEach var="name" items="${fileNames}">
                 <option>${name}
                     </c:forEach>
