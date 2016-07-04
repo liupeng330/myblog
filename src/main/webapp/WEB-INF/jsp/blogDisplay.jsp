@@ -35,6 +35,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushPython.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushSql.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushXml.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/shBrushCpp.js"></script>
 <script type="text/javascript">
     SyntaxHighlighter.all()
 </script>
