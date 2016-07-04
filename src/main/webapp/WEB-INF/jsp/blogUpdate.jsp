@@ -20,6 +20,35 @@
         }
         return result;
     }
+
+    function searchImg()
+    {
+        searchBox = document.getElementById("searchBox");
+        countries = document.getElementById("opts");
+
+        var text = searchBox.value;
+        var options = countries.options;
+
+        //clear select first
+        for (var i = 0; i < options.length; i++) {
+            options[i].selected = false;
+        }
+
+        //search and select then
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            var optionText = option.text;
+            var lowerOptionText = optionText.toLowerCase();
+            var lowerText = text.toLowerCase();
+            var regex = new RegExp("^" + text, "i");
+            var match = optionText.match(regex);
+            var contains = lowerOptionText.indexOf(lowerText) != -1;
+            if (match || contains) {
+                option.selected = true;
+            }
+            searchBox.selectedIndex = 0;
+        }
+    }
 </script>
 
 <table width="100%">
@@ -79,13 +108,17 @@
             </form>
             <br/>
             <br/>
-            <select id="opts" multiple draggable="true" size="${fileNames.size()}">
+            <input type="search" id="searchBox">
+            <br>
+            <button id="searchButton" onclick="searchImg()">Search</button>
+            <br>
+            <select id="opts" multiple draggable="true" size="50">
                 <c:forEach var="name" items="${fileNames}">
                 <option>${name}
                     </c:forEach>
             </select>
             <input type="text" id="imgHeight" width="10px"/>%
-            <button onclick="
+            <button id="copyImagePathButton" onclick="
                   var el = document.getElementById('opts');
                   var imgHeight = document.getElementById('imgHeight').value;
                   copyToClipboard(getSelectValues(el, imgHeight));
@@ -94,4 +127,17 @@
     </tr>
 </table>
 
+<script>
+    document.getElementById("searchBox")
+            .addEventListener("keyup", function(event) {
+                console.log("start to run");
+                event.preventDefault();
+                console.log("keycode: " + event.keyCode);
+                if (event.keyCode == 13) {
+                    console.log("start to click searchButton button");
+                    document.getElementById("searchButton").click();
+                    document.getElementById("copyImagePathButton").click();
+                }
+            });
+</script>
 <%@ include file="footer.jspf" %>
