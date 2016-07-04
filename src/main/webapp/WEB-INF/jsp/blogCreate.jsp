@@ -114,7 +114,7 @@
                 <option>${name}
                     </c:forEach>
             </select>
-            <input type="text" id="imgHeight" width="10px"/>%
+            <input type="text" id="imgHeight" width="10px" value="100"/>%
             <button id="copyImagePathButton" onclick="
                   var el = document.getElementById('opts');
                   var imgHeight = document.getElementById('imgHeight').value;
