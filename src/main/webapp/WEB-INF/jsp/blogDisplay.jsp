@@ -200,7 +200,9 @@
                 topTenBlogs="${topTenBlogs}"
                 topTenViewCountBlogs="${topTenViewCountBlogs}"
                 allFriendlyLinks="${allFriendlyLinks}"
-                allBookRecommendations="${allBookRecommendations}"/>
+                allBookRecommendations="${allBookRecommendations}"
+                allPostRecommendations="${allPostRecommendations}"
+        />
     </div>
 </div>
 <%@ include file="footer.jspf" %>

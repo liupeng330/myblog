@@ -3,6 +3,7 @@ package pengliu.me.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
+import pengliu.me.domain.PostRecommendation;
 import pengliu.me.service.*;
 import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
@@ -27,6 +28,9 @@ public class BaseController
 
     @Autowired
     private FriendlyLinkService friendlyLinkService;
+
+    @Autowired
+    private PostRecommendationService postRecommendationService;
 
     @Autowired
     private BookRecommendationService bookRecommendationService;
@@ -54,6 +58,11 @@ public class BaseController
     protected void addBookRecommendationsToModelAndView(ModelAndView modelAndView)
     {
         modelAndView.addObject("allBookRecommendations", this.getBookRecommendationService().getAllBookRecommendations());
+    }
+
+    protected void addPostRecommendationsToModelAndView(ModelAndView modelAndView)
+    {
+        modelAndView.addObject("allPostRecommendations", this.getPostRecommendationService().getAllPostRecommendations());
     }
 
     protected FriendlyLinkService getFriendlyLinkService()
@@ -97,5 +106,13 @@ public class BaseController
 
     public void setBookRecommendationService(BookRecommendationService bookRecommendationService) {
         this.bookRecommendationService = bookRecommendationService;
+    }
+
+    public PostRecommendationService getPostRecommendationService() {
+        return postRecommendationService;
+    }
+
+    public void setPostRecommendationService(PostRecommendationService postRecommendationService) {
+        this.postRecommendationService = postRecommendationService;
     }
 }

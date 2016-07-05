@@ -9,6 +9,7 @@
 <%@ attribute name="topTenViewCountBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="allFriendlyLinks" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="allBookRecommendations" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
+<%@ attribute name="allPostRecommendations" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 
 <div id="about">
     <div>
@@ -56,6 +57,16 @@
             <c:forEach var="cat" items="${allCats}">
                 <li>
                     <a href="<c:url value="/category/${cat.id}.html"/>">${cat.name}</a>(${cat.blogCount})
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+    <div>
+        <h2>推荐文章</h2>
+        <ul class="chain">
+            <c:forEach var="fl" items="${allPostRecommendations}">
+                <li>
+                    <a href="${fl.url}" target="_blank">${fl.displayName}</a>
                 </li>
             </c:forEach>
         </ul>
