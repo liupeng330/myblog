@@ -187,7 +187,7 @@
                 <form:checkbox id="rememberMe" path="rememberMe" checked="checked" value="True"/>
             </p>
             <p class="content">评论内容（大于5个字符）：</p>
-            <form:textarea id="commentContent" path="content" rows="30" cols="20" style="width:100%;"></form:textarea><br/>
+            <form:textarea id="commentContent" path="content" rows="10" cols="10" style="width:100%;"></form:textarea><br/>
             <form:input path="blogId" type="hidden" value="${blog.id}"/>
             <br/>
             <input type="submit" value="提交" />
