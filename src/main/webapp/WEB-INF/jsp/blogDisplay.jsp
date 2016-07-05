@@ -194,7 +194,13 @@
         </form:form>
     </div>
     <div id="sidebar">
-        <myblog:rightBanner allCats="${allCategories}" allTags="${allTags}" topTenBlogs="${topTenBlogs}" topTenViewCountBlogs="${topTenViewCountBlogs}" allFriendlyLinks="${allFriendlyLinks}"/>
+        <myblog:rightBanner
+                allCats="${allCategories}"
+                allTags="${allTags}"
+                topTenBlogs="${topTenBlogs}"
+                topTenViewCountBlogs="${topTenViewCountBlogs}"
+                allFriendlyLinks="${allFriendlyLinks}"
+                allBookRecommendations="${allBookRecommendations}"/>
     </div>
 </div>
 <%@ include file="footer.jspf" %>

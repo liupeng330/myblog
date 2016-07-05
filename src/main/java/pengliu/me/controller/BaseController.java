@@ -3,10 +3,7 @@ package pengliu.me.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import pengliu.me.common.CommonConstant;
-import pengliu.me.service.BlogService;
-import pengliu.me.service.CategoryService;
-import pengliu.me.service.FriendlyLinkService;
-import pengliu.me.service.TagService;
+import pengliu.me.service.*;
 import pengliu.me.vo.CategoryVo;
 import pengliu.me.vo.TagVo;
 
@@ -31,6 +28,9 @@ public class BaseController
     @Autowired
     private FriendlyLinkService friendlyLinkService;
 
+    @Autowired
+    private BookRecommendationService bookRecommendationService;
+
     protected void addAllTagAndCategoriesToModelAndView(ModelAndView modelAndView)
     {
         List<TagVo> tags = this.tagService.getAllTags();
@@ -49,6 +49,11 @@ public class BaseController
     protected void addFriendlyLinksToModelAndView(ModelAndView modelAndView)
     {
         modelAndView.addObject("allFriendlyLinks", this.getFriendlyLinkService().getAllFriendlyLinks());
+    }
+
+    protected void addBookRecommendationsToModelAndView(ModelAndView modelAndView)
+    {
+        modelAndView.addObject("allBookRecommendations", this.getBookRecommendationService().getAllBookRecommendations());
     }
 
     protected FriendlyLinkService getFriendlyLinkService()
@@ -84,5 +89,13 @@ public class BaseController
         int serverPort = request.getServerPort();
         String contextPath = request.getContextPath();  // includes leading forward slash
         return scheme + "://" + serverName + ":" + serverPort + contextPath;
+    }
+
+    public BookRecommendationService getBookRecommendationService() {
+        return bookRecommendationService;
+    }
+
+    public void setBookRecommendationService(BookRecommendationService bookRecommendationService) {
+        this.bookRecommendationService = bookRecommendationService;
     }
 }

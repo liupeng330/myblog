@@ -60,6 +60,7 @@ public class BlogController extends BaseController
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
         addFriendlyLinksToModelAndView(modelAndView);
+        addBookRecommendationsToModelAndView(modelAndView);
         modelAndView.setViewName("main");
         return modelAndView;
     }
@@ -80,6 +81,7 @@ public class BlogController extends BaseController
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
         addFriendlyLinksToModelAndView(modelAndView);
+        addBookRecommendationsToModelAndView(modelAndView);
         modelAndView.setViewName("main");
         return modelAndView;
     }
@@ -298,6 +300,7 @@ public class BlogController extends BaseController
 //        }
         this.addTopTenBlogToModelAndView(modelAndView);
         this.addFriendlyLinksToModelAndView(modelAndView);
+        this.addBookRecommendationsToModelAndView(modelAndView);
 
         HttpSession session = request.getSession();
         CommentUser commentUser = (CommentUser) session.getAttribute(CommonConstant.COMMENT_USER_CONTEXT);

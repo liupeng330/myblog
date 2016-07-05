@@ -52,7 +52,7 @@ public class FriendlyLinkController extends BaseController
         return "redirect:" + target;
     }
 
-    @RequestMapping(value = "/delete/{id}.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete/{id}.html", method = RequestMethod.GET)
     public String deleteFriendlyLink(@PathVariable Integer id)
     {
         this.getFriendlyLinkService().deleteFriendlyLinkById(id);

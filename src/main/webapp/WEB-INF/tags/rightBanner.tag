@@ -1,4 +1,6 @@
 <%@ tag import="pengliu.me.domain.Blog" %>
+<%@ tag import="pengliu.me.domain.BookRecommendation" %>
+<%@ tag import="java.util.ArrayList" %>
 <%@ tag pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="allCats" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有分类" %>
@@ -6,6 +8,7 @@
 <%@ attribute name="topTenBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="topTenViewCountBlogs" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 <%@ attribute name="allFriendlyLinks" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
+<%@ attribute name="allBookRecommendations" required="true" rtexprvalue="true" type="java.util.ArrayList" description="所有的标签" %>
 
 <div id="about">
     <div>
@@ -89,5 +92,33 @@
                 </li>
             </c:forEach>
         </ul>
+    </div>
+    <div id="side-book-recommendation">
+        <h2>书籍推荐</h2>
+        <div style="">
+            <table cellspacing="0" cellpadding="4" style="">
+                <%
+                    Object[] bookRecommendations = allBookRecommendations.toArray();
+                    for(int i=0; i<bookRecommendations.length; i++)
+                    {
+                        if(i%2 == 0)
+                        {
+                            out.println("<tr align=\"center\">");
+                        }
+                        BookRecommendation br = (BookRecommendation)bookRecommendations[i];
+                        out.println("<td>");
+                        out.println("<a href=\"" + br.getUrl() + "\" title=\"" + br.getTitle() + "\" target=\"_blank\">" +
+                                "<img src=\"" + br.getImgSrc() + "\" border=\"0\">" +
+                                "</a>");
+                        out.println("</td>");
+
+                        if(i%2 != 0 || i == bookRecommendations.length - 1)
+                        {
+                            out.println("</tr>");
+                        }
+                    }
+                %>
+            </table>
+        </div>
     </div>
 </div>

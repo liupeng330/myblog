@@ -44,6 +44,7 @@ public class TagController extends BaseController
         addAllTagAndCategoriesToModelAndView(modelAndView);
         addTopTenBlogToModelAndView(modelAndView);
         addFriendlyLinksToModelAndView(modelAndView);
+        addBookRecommendationsToModelAndView(modelAndView);
         modelAndView.setViewName("/main");
 
         return modelAndView;
