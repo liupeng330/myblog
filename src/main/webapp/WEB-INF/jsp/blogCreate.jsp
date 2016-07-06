@@ -65,9 +65,9 @@
             console.log("subString: " + mySubString);
 
             myField.value = myField.value.substring(0, startPos)
-                    + startTag
-                    + mySubString
-                    + endTag
+                    + "\n" + startTag + "\n"
+                    + mySubString + "\n"
+                    + endTag + "\n"
                     + myField.value.substring(endPos, myField.value.length);
         }
     }
@@ -75,6 +75,13 @@
     function insertParagraphTag()
     {
         insertAtCursor(document.getElementById('blogContent'), '<p>', '</p>');
+    }
+
+    function insertScriptTag()
+    {
+        var lanOptions = document.getElementById('languageSelect');
+        var lan = lanOptions.options[lanOptions.selectedIndex].value;
+        insertAtCursor(document.getElementById('blogContent'), "<script type=\"syntaxhighlighter\" class=\"brush: " + lan +  "\">", "<\/script>");
     }
 
 </script>
@@ -93,7 +100,18 @@
                 <textarea rows="4" cols="20" name="summary" style="width:100%;"></textarea><br/><br/>
 
                 内容: <br/>
-                <input type="button" value="<p>...</p>" onclick="insertParagraphTag()" /><br/>
+                <input type="button" value="<p>...</p>" onclick="insertParagraphTag()" />&nbsp;
+                <select id="languageSelect">
+                    <option>c</option>
+                    <option>python</option>
+                    <option>java</option>
+                    <option>csharp</option>
+                    <option>plain</option>
+                    <option>bash</option>
+                </select>
+                <input type="button" value="<script>...</script>" onclick="insertScriptTag()" />
+
+                <br/>
                 <textarea id="blogContent" rows="30" cols="20" name="content" style="width:100%;"></textarea><br/><br/>
 
                 分类：&nbsp;
