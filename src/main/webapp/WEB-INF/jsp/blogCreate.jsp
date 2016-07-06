@@ -51,6 +51,32 @@
         }
     }
 
+    function insertAtCursor(myField, startTag, endTag)
+    {
+        if (myField.selectionStart || myField.selectionStart == '0')
+        {
+            var startPos = myField.selectionStart;
+            var endPos = myField.selectionEnd;
+
+            console.log("StartPos: " + startPos);
+            console.log("EndPos: " + endPos);
+
+            var mySubString = myField.value.substring(startPos, endPos);
+            console.log("subString: " + mySubString);
+
+            myField.value = myField.value.substring(0, startPos)
+                    + startTag
+                    + mySubString
+                    + endTag
+                    + myField.value.substring(endPos, myField.value.length);
+        }
+    }
+
+    function insertParagraphTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<p>', '</p>');
+    }
+
 </script>
 
 <table width="100%">
@@ -67,7 +93,8 @@
                 <textarea rows="4" cols="20" name="summary" style="width:100%;"></textarea><br/><br/>
 
                 内容: <br/>
-                <textarea rows="30" cols="20" name="content" style="width:100%;"></textarea><br/><br/>
+                <input type="button" value="<p>...</p>" onclick="insertParagraphTag()" /><br/>
+                <textarea id="blogContent" rows="30" cols="20" name="content" style="width:100%;"></textarea><br/><br/>
 
                 分类：&nbsp;
                 <c:forEach var="category" items="${allCategories}">
