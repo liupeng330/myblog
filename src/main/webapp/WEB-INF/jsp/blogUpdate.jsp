@@ -49,6 +49,44 @@
             searchBox.selectedIndex = 0;
         }
     }
+
+    function insertAtCursor(myField, startTag, endTag)
+    {
+        if (myField.selectionStart || myField.selectionStart == '0')
+        {
+            var startPos = myField.selectionStart;
+            var endPos = myField.selectionEnd;
+
+            console.log("StartPos: " + startPos);
+            console.log("EndPos: " + endPos);
+
+            var mySubString = myField.value.substring(startPos, endPos);
+            console.log("subString: " + mySubString);
+
+            myField.value = myField.value.substring(0, startPos)
+                    + "\n" + startTag + "\n"
+                    + mySubString + "\n"
+                    + endTag + "\n"
+                    + myField.value.substring(endPos, myField.value.length);
+        }
+    }
+
+    function insertParagraphTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<p>', '</p>');
+    }
+
+    function insertScriptTag()
+    {
+        var lanOptions = document.getElementById('languageSelect');
+        var lan = lanOptions.options[lanOptions.selectedIndex].value;
+        insertAtCursor(document.getElementById('blogContent'), "<script type=\"syntaxhighlighter\" class=\"brush: " + lan +  "\">", "<\/script>");
+    }
+
+    function insertBrTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<br/>', '');
+    }
 </script>
 
 <table width="100%">
@@ -65,7 +103,20 @@
                 <textarea rows="4" cols="20" name="summary" style="width:100%;">${blog.summary}</textarea><br/><br/>
 
                 内容: <br/>
-                <textarea rows="30" cols="20" name="content" style="width:100%;">${blog.content}</textarea><br/><br/>
+                <input type="button" value="<p>...</p>" onclick="insertParagraphTag()" />&nbsp;
+                <select id="languageSelect">
+                    <option>c</option>
+                    <option>python</option>
+                    <option>java</option>
+                    <option>csharp</option>
+                    <option>plain</option>
+                    <option>bash</option>
+                </select>
+                <input type="button" value="<script>...</script>" onclick="insertScriptTag()" />&nbsp;
+                <input type="button" value="<br/>" onclick="insertBrTag()" />
+
+                <br/>
+                <textarea id="blogContent" rows="30" cols="20" name="content" style="width:100%;">${blog.content}</textarea><br/><br/>
 
                 分类：&nbsp;
                 <c:forEach var="category" items="${allCategories}">

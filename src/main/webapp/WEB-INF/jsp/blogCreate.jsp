@@ -84,6 +84,11 @@
         insertAtCursor(document.getElementById('blogContent'), "<script type=\"syntaxhighlighter\" class=\"brush: " + lan +  "\">", "<\/script>");
     }
 
+    function insertBrTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<br/>', '');
+    }
+
 </script>
 
 <table width="100%">
@@ -109,8 +114,8 @@
                     <option>plain</option>
                     <option>bash</option>
                 </select>
-                <input type="button" value="<script>...</script>" onclick="insertScriptTag()" />
-
+                <input type="button" value="<script>...</script>" onclick="insertScriptTag()" />&nbsp;
+                <input type="button" value="<br/>" onclick="insertBrTag()" />
                 <br/>
                 <textarea id="blogContent" rows="30" cols="20" name="content" style="width:100%;"></textarea><br/><br/>
 
