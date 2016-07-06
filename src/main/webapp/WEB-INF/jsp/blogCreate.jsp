@@ -65,9 +65,9 @@
             console.log("subString: " + mySubString);
 
             myField.value = myField.value.substring(0, startPos)
-                    + "\n" + startTag + "\n"
-                    + mySubString + "\n"
-                    + endTag + "\n"
+                    + startTag
+                    + mySubString
+                    + endTag
                     + myField.value.substring(endPos, myField.value.length);
         }
     }
@@ -89,6 +89,17 @@
         insertAtCursor(document.getElementById('blogContent'), '<br/>', '');
     }
 
+    function insertStrongTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<strong>', '</strong>');
+    }
+
+    function insertTitleLevelTag()
+    {
+        var titleLevelOptions = document.getElementById('titleLevel');
+        var title = titleLevelOptions.options[titleLevelOptions.selectedIndex].value;
+        insertAtCursor(document.getElementById('blogContent'), '<' + title + '>', '</' + title + '>');
+    }
 </script>
 
 <table width="100%">
@@ -115,7 +126,14 @@
                     <option>bash</option>
                 </select>
                 <input type="button" value="<script>...</script>" onclick="insertScriptTag()" />&nbsp;
-                <input type="button" value="<br/>" onclick="insertBrTag()" />
+                <input type="button" value="<br/>" onclick="insertBrTag()" />&nbsp;
+                <input type="button" value="<strong>...</strong>" onclick="insertStrongTag()" />&nbsp;
+                <select id="titleLevel">
+                    <option>h1</option>
+                    <option>h2</option>
+                    <option>h3</option>
+                </select>
+                <input type="button" value="<h..>...</h..>" onclick="insertTitleLevelTag()" />&nbsp;
                 <br/>
                 <textarea id="blogContent" rows="30" cols="20" name="content" style="width:100%;"></textarea><br/><br/>
 
