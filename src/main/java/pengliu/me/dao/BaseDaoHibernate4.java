@@ -1,7 +1,10 @@
 package pengliu.me.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -56,6 +59,23 @@ public abstract class BaseDaoHibernate4<T> implements BaseDao<T>
             return ret.get(0);
         }
         return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T findUniqueBy(String propertyName, Serializable value)
+    {
+        Criterion criterion = Restrictions.eq(propertyName, value);
+        return (T) createCriteria(new Criterion[] { criterion }).uniqueResult();
+    }
+
+    protected Criteria createCriteria(Criterion[] criterions)
+    {
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(getEntityClass());
+        for (Criterion c : criterions)
+        {
+            criteria.add(c);
+        }
+        return criteria;
     }
 
     public List<T> getList(String columnName, Serializable columnValue)

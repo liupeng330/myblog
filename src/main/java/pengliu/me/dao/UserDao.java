@@ -11,6 +11,7 @@ public class UserDao extends BaseDaoHibernate4<User>
 {
     public User findUserByName(String name)
     {
-        return this.get("name", name);
+//        return this.get("name", name);
+        return this.findUniqueBy("name", name);
     }
 }
