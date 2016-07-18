@@ -124,6 +124,7 @@
                     <option>csharp</option>
                     <option>plain</option>
                     <option>bash</option>
+                    <option>xml</option>
                 </select>
                 <input type="button" value="<script>...</script>" onclick="insertScriptTag()" />&nbsp;
                 <input type="button" value="<br/>" onclick="insertBrTag()" />&nbsp;
