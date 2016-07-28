@@ -94,6 +94,21 @@
         insertAtCursor(document.getElementById('blogContent'), '<strong>', '</strong>');
     }
 
+    function insertOlTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<ol>', '</ol>');
+    }
+
+    function insertUlTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<ul>', '</ul>');
+    }
+
+    function insertLiTag()
+    {
+        insertAtCursor(document.getElementById('blogContent'), '<li>', '</li>');
+    }
+
     function insertTitleLevelTag()
     {
         var titleLevelOptions = document.getElementById('titleLevel');
@@ -135,8 +150,35 @@
                     <option>h3</option>
                 </select>
                 <input type="button" value="<h..>...</h..>" onclick="insertTitleLevelTag()" />&nbsp;
+                <input type="button" value="<ol>...</ol>" onclick="insertOlTag()" />&nbsp;
+                <input type="button" value="<ul>...</ul>" onclick="insertUlTag()" />&nbsp;
+                <input type="button" value="<li>...</li>" onclick="insertLiTag()" />&nbsp;
                 <br/>
                 <textarea id="blogContent" rows="30" cols="20" name="content" style="width:100%;"></textarea><br/><br/>
+                <br/>
+                <input type="button" value="<p>...</p>" onclick="insertParagraphTag()" />&nbsp;
+                <select id="languageSelect">
+                    <option>c</option>
+                    <option>python</option>
+                    <option>java</option>
+                    <option>csharp</option>
+                    <option>plain</option>
+                    <option>bash</option>
+                    <option>xml</option>
+                </select>
+                <input type="button" value="<script>...</script>" onclick="insertScriptTag()" />&nbsp;
+                <input type="button" value="<br/>" onclick="insertBrTag()" />&nbsp;
+                <input type="button" value="<strong>...</strong>" onclick="insertStrongTag()" />&nbsp;
+                <select id="titleLevel">
+                    <option>h1</option>
+                    <option>h2</option>
+                    <option>h3</option>
+                </select>
+                <input type="button" value="<h..>...</h..>" onclick="insertTitleLevelTag()" />&nbsp;
+                <input type="button" value="<ol>...</ol>" onclick="insertOlTag()" />&nbsp;
+                <input type="button" value="<ul>...</ul>" onclick="insertUlTag()" />&nbsp;
+                <input type="button" value="<li>...</li>" onclick="insertLiTag()" />&nbsp;
+                <br/>
 
                 分类：&nbsp;
                 <c:forEach var="category" items="${allCategories}">
