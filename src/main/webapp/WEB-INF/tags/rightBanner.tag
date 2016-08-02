@@ -35,7 +35,7 @@
                     本博客的代码地址：<a href="https://github.com/liupengmsq/blog" target="_top">https://github.com/liupengmsq/blog</a>
                 </li>
                 <li>
-                    使用Robot Framework实现的测试代码：<a href="https://github.com/liupengmsq/robot_framework" target="_top">https://github.com/liupengmsq/robot_framework</a>
+                    Robot Framework测试代码：<a href="https://github.com/liupengmsq/robot_framework" target="_top">https://github.com/liupengmsq/robot_framework</a>
                 </li>
             </ul>
             </p>
