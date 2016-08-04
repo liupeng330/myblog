@@ -16,10 +16,6 @@ import java.sql.Timestamp;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-/**
- * Created by peng on 16-8-4.
- */
-
 //使用mockito去mock service依赖的dao对象，来测试service层的业务逻辑
 @SpringApplicationContext({"applicationContext.xml"})
 public class MockDaoToTestService extends UnitilsJUnit4
