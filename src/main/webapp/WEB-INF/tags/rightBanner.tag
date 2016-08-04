@@ -35,7 +35,10 @@
                     本博客的代码地址：<a href="https://github.com/liupengmsq/blog" target="_top">https://github.com/liupengmsq/blog</a>
                 </li>
                 <li>
-                    Robot Framework测试代码：<a href="https://github.com/liupengmsq/robot_framework" target="_top">https://github.com/liupengmsq/robot_framework</a>
+                    RF测试代码：<a href="https://github.com/liupengmsq/robot_framework" target="_top">https://github.com/liupengmsq/robot_framework</a>
+                </li>
+                <li>
+                    Java测试代码：<a href="https://github.com/liupengmsq/heika_test" target="_top">https://github.com/liupengmsq/heika_test</a>
                 </li>
             </ul>
             </p>
