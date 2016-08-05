@@ -43,6 +43,6 @@
             <!-- 主标题 -->
             <a id="lnkBlogTitle" href="<c:url value="/blog.html"/>">五环外的老北京</a>
             <!-- 子标题 -->
-            <small>Do the right thing, Wait to get fired</small>
+            <small>Happy-Go-Lucky</small>
         </h1>
     </div>
