@@ -16,10 +16,6 @@ import java.sql.Timestamp;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-/**
- * Created by peng on 16-8-4.
- */
-
 //使用mockito去mock service依赖的dao对象，来测试service层的业务逻辑
 @SpringApplicationContext({"applicationContext.xml"})
 public class MockDaoToTestService extends UnitilsJUnit4
@@ -56,6 +52,9 @@ public class MockDaoToTestService extends UnitilsJUnit4
         assertEquals("The create time of category is incorrect!!", category.getCreateTime(), needToVerifyCategoryVo.getCreateTime());
         assertEquals("The update time of category is incorrect!!", category.getUpdateTime(), needToVerifyCategoryVo.getUpdateTime());
         assertEquals("The id of category is incorrect!!", category.getId(), needToVerifyCategoryVo.getId());
+
+        // 验证mock的dao被调用了一次
+        verify(mockedCategoryDao, atLeastOnce()).get(1);
     }
 }
 
