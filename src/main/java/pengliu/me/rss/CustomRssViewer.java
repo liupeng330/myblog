@@ -20,7 +20,7 @@ public class CustomRssViewer extends AbstractRssFeedView
 	{
 		feed.setTitle("五环外的老北京");
 		feed.setDescription("五环外的老北京");
-		feed.setLink("http://192.168.199.248:8081/myblog/");
+		feed.setLink("http://pengliu.cf/");
 		
 		super.buildFeedMetadata(model, feed, request);
 	}
