@@ -33,4 +33,6 @@ public class CommonConstant
      * 评论用户对象放到Session中的键名称
      */
     public static final String COMMENT_USER_CONTEXT = "COMMENT_USER_CONTEXT";
+
+    public static final String LOCALHOST_IP = "127.0.0.1";
 }

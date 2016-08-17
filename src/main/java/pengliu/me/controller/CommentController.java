@@ -26,10 +26,8 @@ public class CommentController extends BaseController
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createComment(HttpServletRequest request, @ModelAttribute("commentForm") CommentVo commentVo)
-    {
-        if(commentVo.getRememberMe())
-        {
+    public String createComment(HttpServletRequest request, @ModelAttribute("commentForm") CommentVo commentVo) {
+        if (commentVo.getRememberMe()) {
             CommentUser commentUser = new CommentUser();
             commentUser.setName(commentVo.getUserName());
             commentUser.setBlogUrl(commentVo.getUserUrl());
@@ -46,23 +44,22 @@ public class CommentController extends BaseController
         }
         commentVo.setUserremoteIp(ipAddress);
 
-        try
+        if (!ipAddress.equals(CommonConstant.LOCALHOST_IP))
         {
-            this.commentService.createComment(commentVo);
-        }
-        catch (Exception ex)
-        {
-            String message = null;
             try
             {
-                message = URLEncoder.encode(ex.getMessage(), "UTF-8");
-            }
-            catch (UnsupportedEncodingException e)
+                this.commentService.createComment(commentVo);
+            } catch (Exception ex)
             {
-                this.logger.error("Fail to encode message of " + e.getMessage());
+                String message = null;
+                try {
+                    message = URLEncoder.encode(ex.getMessage(), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    this.logger.error("Fail to encode message of " + e.getMessage());
+                }
+                String target = String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), message);
+                return target;
             }
-            String target = String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), message);
-            return target;
         }
 
         return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
