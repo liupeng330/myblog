@@ -44,6 +44,7 @@ public class CommentController extends BaseController
             ipAddress = request.getRemoteAddr();
         }
         commentVo.setUserremoteIp(ipAddress);
+        this.logger.info("Creating comment: IpAddress from remote is " + ipAddress);
 
         if (!ipAddress.equals(CommonConstant.LOCALHOST_IP))
         {
@@ -63,6 +64,10 @@ public class CommentController extends BaseController
                 String target = String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), message);
                 return target;
             }
+        }
+        else
+        {
+            this.logger.info("Ignore creating comment.");
         }
 
         return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
