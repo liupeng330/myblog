@@ -38,6 +38,7 @@ public class CommentController extends BaseController
 
         //is client behind something?
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        this.logger.info("Creating comment: IpAddress from remote is " + ipAddress);
         if (ipAddress == null)
         {
             ipAddress = request.getRemoteAddr();
@@ -48,6 +49,7 @@ public class CommentController extends BaseController
         {
             try
             {
+                this.logger.info("Start to create comment.");
                 this.commentService.createComment(commentVo);
             } catch (Exception ex)
             {
@@ -57,6 +59,7 @@ public class CommentController extends BaseController
                 } catch (UnsupportedEncodingException e) {
                     this.logger.error("Fail to encode message of " + e.getMessage());
                 }
+                this.logger.error("Error happened when creating comment!! " + ex.getMessage());
                 String target = String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), message);
                 return target;
             }
