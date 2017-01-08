@@ -11,4 +11,7 @@
 
     <!--登陆安全配置 -->
     <import resource="classpath:/myblog-security.xml" />
+
+    <!--验证码相关配置 -->
+    <import resource="classpath:/myblog-verificationCode.xml" />
 </beans>

@@ -190,6 +190,11 @@
             <form:textarea id="commentContent" path="content" rows="10" cols="10" style="width:100%;"></form:textarea><br/>
             <form:input path="blogId" type="hidden" value="${blog.id}"/>
             <br/>
+            <img src="/kaptcha/haha.html" width="200" id="kaptchaImage"/>
+            <br/>
+            <label>验证码: </label><input type="text" name="kaptcha" value="" />
+            <br/>
+            <br/>
             <input type="submit" value="提交" />
         </form:form>
     </div>

@@ -50,14 +50,27 @@ public class CommentController extends BaseController
         {
             try
             {
+                //用户输入的验证码的值
+                String kaptchaExpected = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+                String kaptchaRecived = request.getParameter("kaptcha");
+                //校验验证码是否正确
+                if (kaptchaExpected == null || !kaptchaRecived.equals(kaptchaExpected))
+                {
+                    return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
+                }
+
                 this.logger.info("Start to create comment.");
                 this.commentService.createComment(commentVo);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 String message = null;
-                try {
+                try
+                {
                     message = URLEncoder.encode(ex.getMessage(), "UTF-8");
-                } catch (UnsupportedEncodingException e) {
+                }
+                catch (UnsupportedEncodingException e)
+                {
                     this.logger.error("Fail to encode message of " + e.getMessage());
                 }
                 this.logger.error("Error happened when creating comment!! " + ex.getMessage());
