@@ -46,8 +46,8 @@ public class CommentController extends BaseController
         commentVo.setUserremoteIp(ipAddress);
         this.logger.info("Creating comment: IpAddress from remote is " + ipAddress);
 
-        if (!ipAddress.equals(CommonConstant.LOCALHOST_IP))
-        {
+//        if (!ipAddress.equals(CommonConstant.LOCALHOST_IP))
+//        {
             try
             {
                 //用户输入的验证码的值
@@ -56,7 +56,9 @@ public class CommentController extends BaseController
                 //校验验证码是否正确
                 if (kaptchaExpected == null || !kaptchaRecived.equals(kaptchaExpected))
                 {
-                    return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
+                    return String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments",
+                            commentVo.getBlogId(),
+                            URLEncoder.encode("验证码错误!!", "UTF-8"));
                 }
 
                 this.logger.info("Start to create comment.");
@@ -77,11 +79,11 @@ public class CommentController extends BaseController
                 String target = String.format("redirect:/blog/show/%d.html?errorMsg=%s#comments", commentVo.getBlogId(), message);
                 return target;
             }
-        }
-        else
-        {
-            this.logger.info("Ignore creating comment.");
-        }
+//        }
+//        else
+//        {
+//            this.logger.info("Ignore creating comment.");
+//        }
 
         return String.format("redirect:/blog/show/%d.html#comments", commentVo.getBlogId());
     }
