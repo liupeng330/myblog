@@ -80,7 +80,8 @@
                             <img src="${pageContext.request.contextPath}/resources/profile.gif" alt="${comment.userName}">
                         </a>
                         <br>
-                        <span class="ipaddress">${comment.userremoteIp}</span>
+                        <%--<span class="ipaddress">${comment.userremoteIp}</span>--%>
+                        <span class="ipaddress"></span>
                     </div>
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <a class="commentControl" href="<c:url value="/comment/delete/${blog.id}/${comment.id}.html"/>">删除</a>&nbsp;
