@@ -192,9 +192,11 @@
             <form:input path="blogId" type="hidden" value="${blog.id}"/>
             <br/>
             <img src="/kaptcha/haha.html" width="200" id="kaptchaImage"/>
+            <a href="javascript:;"
+               title="刷新"
+               onclick="document.getElementById('kaptchaImage').src = '/kaptcha/haha.html?' + Math.random();  return false">刷新</a>
             <br/>
             <label>验证码: </label><input type="text" name="kaptcha" value="" />
-            <br/>
             <br/>
             <input type="submit" value="提交" />
         </form:form>
